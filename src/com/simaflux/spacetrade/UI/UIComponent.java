@@ -41,7 +41,7 @@ public abstract class UIComponent {
 	}
 
 	public Vector2f getGlpos() {
-		if(parent == null) return new Vector2f();
+		if(parent == null) return glpos;
 		return glpos.add(parent.getGlpos());
 	}
 
@@ -50,7 +50,7 @@ public abstract class UIComponent {
 	}
 
 	public Vector2f getPos() {
-		if(parent == null) return new Vector2f();
+		if(parent == null) return pos;
 		return pos.add(parent.getPos());
 	}
 
@@ -60,12 +60,12 @@ public abstract class UIComponent {
 	
 	public void setPos(Vector2f pos) {
 		this.pos = new Vector2f(pos.x, pos.y);
-		this.glpos = new Vector2f(pos.x / Vars.WIDTH * 2 - 1, ((pos.y + size.y) / Vars.HEIGHT * 2 - 1) * -1);
+		this.glpos = new Vector2f(pos.x / Vars.WIDTH * 2.0f, (pos.y / Vars.HEIGHT * 2.0f) * - 1);
 	}
 	
 	public void setPos(float x, float y) {
 		this.pos = new Vector2f(x, y);
-		this.glpos = new Vector2f(x / Vars.WIDTH * 2 - 1, ((y + size.y) / Vars.HEIGHT * 2 - 1) * -1);
+		this.glpos = new Vector2f(x / Vars.WIDTH * 2.0f, (y / Vars.HEIGHT * 2.0f) * - 1);
 	}
 	
 	public void setSize(Vector2f size) {

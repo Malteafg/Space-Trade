@@ -26,6 +26,11 @@ public class Button extends UIComponent implements MouseListener {
 		setBox(new RenderBox(this));
 		
 		Input.addButton(this);
+		
+		if(isEnabled()) {
+			glpos.print();
+			parent.getGlpos().print();
+		}
 	}
 
 	@Override

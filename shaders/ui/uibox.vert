@@ -15,10 +15,10 @@ void main()  {
 
 	gl_Position = transformationMatrix * vec4(position, 0.0, 1.0);
 
-	if(position.y > 0) {
-		vs_out.c = vec4(color.xyz, 1.0);
-	} else {
+	if(position.y < 0) {
 		vs_out.c = vec4(color.xyz * 0.6, 1.0);
+	} else {
+		vs_out.c = vec4(color.xyz, 1.0);
 	}
 
 }

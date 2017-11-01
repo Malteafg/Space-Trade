@@ -157,4 +157,8 @@ public class Vector2f implements Serializable {
     	this.y = y;
     }
 
+    public void print() {
+    	System.out.println(x + " " + y);
+    }
+    
 }

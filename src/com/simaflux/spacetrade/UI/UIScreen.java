@@ -9,6 +9,7 @@ import com.simaflux.spacetrade.UI.panels.PauseMenu;
 import com.simaflux.spacetrade.UI.panels.ResourceTab;
 import com.simaflux.spacetrade.UI.panels.TopBar;
 import com.simaflux.spacetrade.utils.Vars;
+import com.simaflux.spacetrade.utils.math.Vector2f;
 
 public class UIScreen extends UIComponent {
 	
@@ -16,6 +17,8 @@ public class UIScreen extends UIComponent {
 
 	public UIScreen() {
 		super(null, 0, 0, Vars.WIDTH, Vars.HEIGHT, true);
+		
+		glpos = new Vector2f(-1, 1);
 		
 		panels.put("ResourceTab", new ResourceTab(this, false));
 		panels.put("BuildingStore", new BuildingStore(this, false));

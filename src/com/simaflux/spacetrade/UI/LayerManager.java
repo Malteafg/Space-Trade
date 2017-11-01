@@ -11,7 +11,7 @@ import com.simaflux.spacetrade.models.RawModel;
 
 public class LayerManager {
 
-	private static final float[] POSITIONS = { 0, 0, 0, 1, 1, 0, 1, 1 };
+	private static final float[] POSITIONS = { 0, 0, 0, - 1, 1, 0, 1, - 1 };
 	public static RawModel box;
 	
 	public static final List<Layer> layers = new ArrayList<>();
