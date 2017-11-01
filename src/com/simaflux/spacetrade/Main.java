@@ -34,7 +34,7 @@ public class Main implements Runnable {
 			System.err.println("Could not initialize GLFW!");
 			return;
 		}
-		
+		//---------
 		// creating window
 		long monitor = glfwGetPrimaryMonitor();
 		GLFWVidMode vidmode = glfwGetVideoMode(monitor);
