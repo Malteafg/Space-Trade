@@ -38,8 +38,13 @@ public class Input {
 					if(GameHandler.game == null) {
 						System.exit(0);
 					} else {
-						Interface.enablePanel("PauseMenu");
-						GameHandler.pause();
+						if(!GameHandler.paused) {
+							Interface.enablePanel("PauseMenu");
+							GameHandler.pause();
+						} else {
+							Interface.disablePanel("PauseMenu");
+							GameHandler.unpause();
+						}
 					}
 				}
 				
