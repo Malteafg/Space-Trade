@@ -1,0 +1,7 @@
+Gas giants 10%
+
+Naturally habitable 30% No resources, Organic resource bonus, higher population
+Terrestrial planet 40% Lots of metals, lower population
+
+Lava planet 10%
+Ice planet 10%
