@@ -2,9 +2,13 @@ package com.simaflux.spacetrade.UI;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Interface {
 
 	public static UIScreen screen;
+	public static final List<UIComponent> components = new ArrayList<>();
 
 	public static void init() {
 		LayerManager.init();
@@ -27,6 +31,14 @@ public abstract class Interface {
 	public static void toggleUI() {
 		if (screen.isEnabled()) screen.disable();
 		else if (!screen.isEnabled()) screen.enable();
+	}
+	
+	public static void update() {
+		for(UIComponent c : components) {
+			if(c.isEnabled()) {
+				c.update();
+			}
+		}
 	}
 
 	public static void render() {

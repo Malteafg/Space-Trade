@@ -23,6 +23,8 @@ public abstract class UIComponent {
 		this.active = active;
 		
 		box = null;
+		
+		Interface.components.add(this);
 	}
 	
 	public abstract void update();

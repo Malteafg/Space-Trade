@@ -123,6 +123,7 @@ public class Main implements Runnable {
 
 	private void gameUpdate() {
 		GameHandler.update();
+		Interface.update();
 		Input.update();
 		glfwPollEvents();
 	}
