@@ -38,14 +38,17 @@ public class Input {
 					if(GameHandler.game == null) {
 						System.exit(0);
 					} else {
-						if(!GameHandler.paused) {
-							Interface.enablePanel("PauseMenu");
-							GameHandler.pause();
-						} else {
+						if(GameHandler.paused) {
 							Interface.disablePanel("PauseMenu");
 							GameHandler.unpause();
+						} else {
+							Interface.enablePanel("PauseMenu");
+							GameHandler.pause();
 						}
 					}
+				}
+				if(keys[GLFW.GLFW_KEY_F1]) {
+					Interface.toggleUI();
 				}
 				
 				/*

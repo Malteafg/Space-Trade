@@ -24,6 +24,11 @@ public abstract class Interface {
 		return screen.panels.get(panel);
 	}
 	
+	public static void toggleUI() {
+		if(screen.isEnabled()) screen.disable();
+		if(!screen.isEnabled()) screen.enable();
+	}
+	
 	public static void render() {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
