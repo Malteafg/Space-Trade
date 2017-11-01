@@ -14,13 +14,13 @@ public abstract class UIComponent {
 	
 	protected RenderBox box;
 
-	protected UIComponent(UIComponent parentComponent, float x, float y, float width, float height) {
+	protected UIComponent(UIComponent parentComponent, float x, float y, float width, float height, boolean active) {
 		this.parent = parentComponent;
 
 		setSize(width, height);
 		setPos(x, y);
 		
-		active = true;
+		this.active = active;
 		
 		box = null;
 	}

@@ -10,18 +10,20 @@ import com.simaflux.spacetrade.utils.Vars;
 
 public class TopBar extends UIPanel {
 
-	public TopBar(UIComponent parentComponent) {
-		super(parentComponent, 5, 5, Vars.WIDTH - 10, 30);
+	public TopBar(UIComponent parentComponent, boolean active) {
+		super(parentComponent, 5, 5, Vars.WIDTH - 10, 30, active);
 
 		DecimalFormat df = new DecimalFormat();
 		df.setMaximumFractionDigits(2);
 		
-		new Text(this, "", 5, 5, 20, Vars.SERIF, 1, false) {
+		new Text(this, "", 5, 5, 20, Vars.SERIF, 1, false, active) {
 			@Override
 			public void update() {
 				text.setText(df.format(GameHandler.game.getUser().getCash()));
 			}
 		};
+		
+		System.out.println(active);
 	}
 
 	@Override

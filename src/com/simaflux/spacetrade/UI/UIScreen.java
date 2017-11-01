@@ -15,18 +15,16 @@ public class UIScreen extends UIComponent {
 	public Map<String, UIPanel> panels = new HashMap<>();
 
 	public UIScreen() {
-		super(null, 0, 0, Vars.WIDTH, Vars.HEIGHT);
+		super(null, 0, 0, Vars.WIDTH, Vars.HEIGHT, true);
 		
-		panels.put("ResourceTab", new ResourceTab(this));
-		panels.put("BuildingStore", new BuildingStore(this));
-		panels.put("TopBar", new TopBar(this));
+		panels.put("ResourceTab", new ResourceTab(this, false));
+		panels.put("BuildingStore", new BuildingStore(this, false));
+		panels.put("TopBar", new TopBar(this, false));
 		
 //		panels.put("PlanetInfo", new PlanetInfo(this));
 		
-		panels.put("MainMenu", new MainMenu(this));
-		panels.put("PauseMenu", new PauseMenu(this));
-		
-		enablePanel("MainMenu");
+		panels.put("MainMenu", new MainMenu(this, true));
+		panels.put("PauseMenu", new PauseMenu(this, false));
 	}
 	
 	public void enablePanel(String panel) {

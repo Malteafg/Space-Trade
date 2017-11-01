@@ -14,8 +14,8 @@ public class Button extends UIComponent implements MouseListener {
 	private Vector3f color;
 	private boolean down;
 
-	public Button(UIComponent parentComponent, float x, float y, float width, float height) {
-		super(parentComponent, x, y, width, height);
+	public Button(UIComponent parentComponent, float x, float y, float width, float height, boolean active) {
+		super(parentComponent, x, y, width, height, active);
 		
 		text = null;
 		icon = null;

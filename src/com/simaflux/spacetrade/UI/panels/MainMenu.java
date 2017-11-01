@@ -10,44 +10,44 @@ import com.simaflux.spacetrade.utils.Vars;
 
 public class MainMenu extends UIPanel {
 
-	public MainMenu(UIComponent parentComponent) {
-		super(parentComponent, 760, 100, 400, 800);
+	public MainMenu(UIComponent parentComponent, boolean active) {
+		super(parentComponent, 760, 100, 400, 800, active);
 		
-		Button newgame = new Button(this, 50, 50, 300, 50) {
+		Button newgame = new Button(this, 50, 50, 300, 50, active) {
 			@Override
 			public void click() {
 				GameHandler.startNewGame();
 				Interface.disablePanel("MainMenu");
 			}
 		};
-		newgame.addText(new Text(this, "New Game", newgame.getSize().x * 0.5f, newgame.getSize().y * 0.2f, 20, Vars.SERIF, 1, true));
+		newgame.addText(new Text(this, "New Game", newgame.getSize().x * 0.5f, newgame.getSize().y * 0.2f, 20, Vars.SERIF, 1, true, active));
 //		newgame.getText().setColor(1, 0, 0);
 		
-		Button loadgame = new Button(this, 50, 150, 300, 50) {
+		Button loadgame = new Button(this, 50, 150, 300, 50, active) {
 			@Override
 			public void click() {
 				GameHandler.loadGame();
 				Interface.disablePanel("MainMenu");
 			}
 		};
-		loadgame.addText(new Text(this, "Load Game", loadgame.getSize().x * 0.5f , loadgame.getSize().y * 0.2f, 20, Vars.SERIF, 1, true));
+		loadgame.addText(new Text(this, "Load Game", loadgame.getSize().x * 0.5f , loadgame.getSize().y * 0.2f, 20, Vars.SERIF, 1, true, active));
 //		loadgame.getText().setColor(1, 0, 0);
 		
-		Button settings = new Button(this, 50, 250, 300, 50) {
+		Button settings = new Button(this, 50, 250, 300, 50, active) {
 			@Override
 			public void click() {
 			}
 		};
-		settings.addText(new Text(this, "Settings", settings.getSize().x * 0.5f , settings.getSize().y * 0.2f, 20, Vars.SERIF, 1, true));
+		settings.addText(new Text(this, "Settings", settings.getSize().x * 0.5f , settings.getSize().y * 0.2f, 20, Vars.SERIF, 1, true, active));
 //		settings.getText().setColor(1, 0, 0);
 		
-		Button exit = new Button(this, 50, 350, 300, 50) {
+		Button exit = new Button(this, 50, 350, 300, 50, active) {
 			@Override
 			public void click() {
 				System.exit(0);
 			}
 		};
-		exit.addText(new Text(this, "Exit Game", exit.getSize().x * 0.5f , exit.getSize().y * 0.2f, 20, Vars.SERIF, 1, true));
+		exit.addText(new Text(this, "Exit Game", exit.getSize().x * 0.5f , exit.getSize().y * 0.2f, 20, Vars.SERIF, 1, true, active));
 //		exit.getText().setColor(1, 0, 0);
 	}
 

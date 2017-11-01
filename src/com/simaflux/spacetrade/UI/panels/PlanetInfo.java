@@ -14,8 +14,8 @@ public class PlanetInfo extends UIPanel {
 	private RenderText name;
 	private List<RenderText> resources;
 	
-	public PlanetInfo(UIComponent parentComponent) {
-		super(parentComponent, 5, 775, 450, 300);
+	public PlanetInfo(UIComponent parentComponent, boolean active) {
+		super(parentComponent, 5, 775, 450, 300, active);
 		
 //		name = new RenderText(this, this, "", 30, Vars.SERIF, size.x / 2f, 5, 1, true, layer + 1);
 		resources = new ArrayList<>();

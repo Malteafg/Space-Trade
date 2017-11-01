@@ -7,8 +7,8 @@ public class Icon extends UIComponent {
 	
 	private final RenderIcon icon;
 
-	public Icon(UIComponent parentComponent, float x, float y, float width, float height, RenderIcon icon) {
-		super(parentComponent, x, y, width, height);
+	public Icon(UIComponent parentComponent, float x, float y, float width, float height, RenderIcon icon, boolean active) {
+		super(parentComponent, x, y, width, height, active);
 		
 		this.icon = icon;
 	}

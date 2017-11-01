@@ -4,8 +4,8 @@ import com.simaflux.spacetrade.UI.UIComponent;
 
 public class Scrollbar extends UIComponent {
 
-	public Scrollbar(UIComponent parentComponent, float x, float y, float width, float height) {
-		super(parentComponent, x, y, width, height);
+	public Scrollbar(UIComponent parentComponent, float x, float y, float width, float height, boolean active) {
+		super(parentComponent, x, y, width, height, active);
 	}
 
 	@Override

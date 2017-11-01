@@ -7,10 +7,10 @@ public class SwitchButton extends UIComponent {
 	private Button button1, button2;
 	private int state;
 
-	public SwitchButton(UIComponent parentComponent, float x, float y, float width, float height) {
-		super(parentComponent, x, y, width, height);
+	public SwitchButton(UIComponent parentComponent, float x, float y, float width, float height, boolean active) {
+		super(parentComponent, x, y, width, height, active);
 		
-		button1 = new Button(this, x, y, width / 2, height) {
+		button1 = new Button(this, x, y, width / 2, height, active) {
 			@Override
 			public void click() {
 				
@@ -31,7 +31,7 @@ public class SwitchButton extends UIComponent {
 				}
 			}
 		};
-		button2 = new Button(this, x + width / 2, y, width / 2, height) {
+		button2 = new Button(this, x + width / 2, y, width / 2, height, active) {
 			@Override
 			public void click() {
 				switch(state) {
