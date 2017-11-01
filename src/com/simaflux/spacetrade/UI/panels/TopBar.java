@@ -23,7 +23,6 @@ public class TopBar extends UIPanel {
 			}
 		};
 		
-		System.out.println(active);
 	}
 
 	@Override

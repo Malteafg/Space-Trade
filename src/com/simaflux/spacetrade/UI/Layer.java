@@ -19,6 +19,7 @@ import com.simaflux.spacetrade.loader.Memory;
 import com.simaflux.spacetrade.loader.ModelLoader;
 import com.simaflux.spacetrade.utils.Vars;
 import com.simaflux.spacetrade.utils.math.Matrix4f;
+import com.simaflux.spacetrade.utils.math.Vector2f;
 
 public class Layer {
 	
@@ -41,7 +42,6 @@ public class Layer {
 	}
 	
 	public void addText(RenderText text) {
-		System.out.println(text.getTextString());
 		FontType font = text.getFont();
 		TextMeshData data = font.loadText(text);
 		int vao = ModelLoader.loadToVAO(data.getVertexPositions(), data.getTextureCoords());
@@ -83,7 +83,7 @@ public class Layer {
 					glEnableVertexAttribArray(0);
 					glEnableVertexAttribArray(1);
 					Memory.getShader("font").loadUniformVec3f("textcolor", text.getColor());
-					Memory.getShader("font").loadUniformVec2f("translation", text.getGlpos());
+					Memory.getShader("font").loadUniformVec2f("translation", new Vector2f(text.getGlpos().x, (1 - text.getGlpos().y) / 2.0f));
 					glDrawArrays(GL_TRIANGLES, 0, text.getVertexCount());
 					glDisableVertexAttribArray(0);
 					glDisableVertexAttribArray(1);

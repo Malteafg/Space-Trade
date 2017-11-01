@@ -69,7 +69,7 @@ public class TextMeshCreator {
 			}
 			for (Word word : line.getWords()) {
 				for (Character letter : word.getCharacters()) {
-					addVerticesForCharacter(curserX, curserY, letter, text.getFontSize(), vertices);
+					addVerticesForCharacter(curserX, curserY, letter, text.getFontSize(), vertices, text.getLayer());
 					addTexCoords(textureCoords, letter.getxTextureCoord(), letter.getyTextureCoord(),
 							letter.getXMaxTextureCoord(), letter.getYMaxTextureCoord());
 					curserX += letter.getxAdvance() * text.getFontSize();
@@ -83,7 +83,7 @@ public class TextMeshCreator {
 	}
 
 	private void addVerticesForCharacter(double curserX, double curserY, Character character, double fontSize,
-			List<Float> vertices) {
+			List<Float> vertices, int layer) {
 		double x = curserX + (character.getxOffset() * fontSize);
 		double y = curserY + (character.getyOffset() * fontSize);
 		double maxX = x + (character.getSizeX() * fontSize);
@@ -92,22 +92,28 @@ public class TextMeshCreator {
 		double properY = (-2 * y) + 1;
 		double properMaxX = (2 * maxX) - 1;
 		double properMaxY = (-2 * maxY) + 1;
-		addVertices(vertices, properX, properY, properMaxX, properMaxY);
+		addVertices(vertices, properX, properY, properMaxX, properMaxY, layer);
 	}
 
-	private static void addVertices(List<Float> vertices, double x, double y, double maxX, double maxY) {
+	private static void addVertices(List<Float> vertices, double x, double y, double maxX, double maxY, int layer) {
 		vertices.add((float) x);
 		vertices.add((float) y);
+		vertices.add((float) layer);
 		vertices.add((float) x);
 		vertices.add((float) maxY);
+		vertices.add((float) layer);
 		vertices.add((float) maxX);
 		vertices.add((float) maxY);
+		vertices.add((float) layer);
 		vertices.add((float) maxX);
 		vertices.add((float) maxY);
+		vertices.add((float) layer);
 		vertices.add((float) maxX);
 		vertices.add((float) y);
+		vertices.add((float) layer);
 		vertices.add((float) x);
 		vertices.add((float) y);
+		vertices.add((float) layer);
 	}
 
 	private static void addTexCoords(List<Float> texCoords, double x, double y, double maxX, double maxY) {
