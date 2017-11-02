@@ -23,33 +23,24 @@ public class TopBar extends UIPanel {
 			}
 		};
 		
+		new Text(this, "Date", size.x - 70, 3, 15, Vars.SERIF, 1, false, true) {
+			@Override
+			public void update() {
+				text.setText(GameHandler.game.dm.getDay() + "/" + GameHandler.game.dm.getMonth() + "/" + GameHandler.game.dm.getYear());
+			}
+		};
 	}
 
 	@Override
 	public void update() {}
 
 	@Override
-	public void click() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void click() {}
 	@Override
-	public void release() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void release() {}
 	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void enter() {}
 	@Override
-	public void exit() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void exit() {}
 
 }
