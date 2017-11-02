@@ -62,7 +62,7 @@ public class RenderText extends RenderComponent {
 		this.font = font;
 		this.lineMaxSize = maxLineLength;
 		this.centerText = centered;
-		this.color = Vars.FONT_COLOR.copy();
+		this.color = new Vector3f(1, 1, 1);
 		
 		LayerManager.addText(this);
 	}

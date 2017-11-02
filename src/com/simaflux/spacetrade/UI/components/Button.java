@@ -2,6 +2,7 @@ package com.simaflux.spacetrade.UI.components;
 
 import com.simaflux.spacetrade.UI.UIComponent;
 import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
+import com.simaflux.spacetrade.UI.renderComponents.RenderText;
 import com.simaflux.spacetrade.input.Input;
 import com.simaflux.spacetrade.input.MouseListener;
 import com.simaflux.spacetrade.utils.Vars;
@@ -32,8 +33,12 @@ public class Button extends UIComponent implements MouseListener {
 	@Override
 	public void update() {}
 	
-	public Text getText() {
+	public Text UIText() {
 		return text;
+	}
+	
+	public RenderText text() {
+		return text.text();
 	}
 	
 	public void addText(Text text) {

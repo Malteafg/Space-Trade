@@ -16,10 +16,10 @@ public class TopBar extends UIPanel {
 		DecimalFormat df = new DecimalFormat();
 		df.setMaximumFractionDigits(2);
 		
-		new Text(this, "Cash", 5, 5, 20, Vars.SERIF, 1, true, true) {
+		new Text(this, "Cash", 10, 3, 15, Vars.SERIF, 1, false, true) {
 			@Override
 			public void update() {
-				text.setText(df.format(GameHandler.game.getUser().getCash()));
+				text.setText("Cash: " + df.format(GameHandler.game.getUser().getCash()));
 			}
 		};
 		

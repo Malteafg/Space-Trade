@@ -21,7 +21,6 @@ public class MainMenu extends UIPanel {
 			}
 		};
 		newgame.addText(new Text(newgame, "New Game", newgame.getSize().x * 0.5f, newgame.getSize().y * 0.1f, 20, Vars.SERIF, 1, true, active));
-//		newgame.getText().setColor(1, 0, 0);
 		
 		Button loadgame = new Button(this, 50, 150, 300, 50, active) {
 			@Override
@@ -31,7 +30,6 @@ public class MainMenu extends UIPanel {
 			}
 		};
 		loadgame.addText(new Text(loadgame, "Load Game", loadgame.getSize().x * 0.5f , loadgame.getSize().y * 0.1f, 20, Vars.SERIF, 1, true, active));
-//		loadgame.getText().setColor(1, 0, 0);
 		
 		Button settings = new Button(this, 50, 250, 300, 50, active) {
 			@Override
@@ -39,7 +37,6 @@ public class MainMenu extends UIPanel {
 			}
 		};
 		settings.addText(new Text(settings, "Settings", settings.getSize().x * 0.5f , settings.getSize().y * 0.1f, 20, Vars.SERIF, 1, true, active));
-//		settings.getText().setColor(1, 0, 0);
 		
 		Button exit = new Button(this, 50, 350, 300, 50, active) {
 			@Override
@@ -48,7 +45,6 @@ public class MainMenu extends UIPanel {
 			}
 		};
 		exit.addText(new Text(exit, "Exit Game", exit.getSize().x * 0.5f , exit.getSize().y * 0.1f, 20, Vars.SERIF, 1, true, active));
-//		exit.getText().setColor(1, 0, 0);
 	}
 
 	@Override

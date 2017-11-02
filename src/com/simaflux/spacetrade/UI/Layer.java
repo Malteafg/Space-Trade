@@ -83,7 +83,7 @@ public class Layer {
 					glEnableVertexAttribArray(0);
 					glEnableVertexAttribArray(1);
 					Memory.getShader("font").loadUniformVec3f("textcolor", text.getColor());
-					Memory.getShader("font").loadUniformVec2f("translation", new Vector2f(text.getGlpos().x, (1 - text.getGlpos().y) / 2.0f));
+					Memory.getShader("font").loadUniformVec2f("translation", new Vector2f(text.getGlpos().x / 2.0f, (1 - text.getGlpos().y) / 2.0f));
 					glDrawArrays(GL_TRIANGLES, 0, text.getVertexCount());
 					glDisableVertexAttribArray(0);
 					glDisableVertexAttribArray(1);
