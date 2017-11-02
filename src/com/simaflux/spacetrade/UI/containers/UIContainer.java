@@ -16,17 +16,17 @@ public class UIContainer extends UIComponent {
 	
 	public void addComponent(UIComponent c, int nx, int ny) {
 		components[nx][ny] = c;
+		pack();
 	}
-
-	@Override
-	public void update() {
+	
+	public void pack() {
 		float l = 0;
 		for(int y = 0; y < components[0].length; y++) {
 			float maxH = 0;
 			
 			for(int x = 0; x < components.length; x++) {
 				if(components[x][y] != null) {
-					if(components[x][y].isEnabled()) {
+					if(components[x][y].isRelEnabled()) {
 						components[x][y].setPos(components[x][y].getRelPos().x, l);
 						if(components[x][y].getSize().y > maxH) maxH = components[x][y].getSize().y;
 					}
@@ -39,27 +39,15 @@ public class UIContainer extends UIComponent {
 	}
 
 	@Override
-	public void click() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void update() {}
 
 	@Override
-	public void release() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void click() {}
 	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void release() {}
 	@Override
-	public void exit() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void enter() {}
+	@Override
+	public void exit() {}
 
 }

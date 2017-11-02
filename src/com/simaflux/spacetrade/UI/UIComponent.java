@@ -36,6 +36,10 @@ public abstract class UIComponent implements MouseListener {
 		if(parent == null) return active;
 		return parent.isEnabled() && active;
 	}
+	
+	public boolean isRelEnabled() {
+		return active;
+	}
 
 	public void enable() {
 		active = true;

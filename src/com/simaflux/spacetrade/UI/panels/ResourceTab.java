@@ -79,6 +79,8 @@ public class ResourceTab extends UIPanel {
 		@Override
 		public void click() {
 			button.enable();
+			pack();
+			container.pack();
 		}
 		
 	}
@@ -87,7 +89,9 @@ public class ResourceTab extends UIPanel {
 	public void click() {
 		for(ResourceContainer c : resources) {
 			c.closeButton();
+			c.pack();
 		}
+		container.pack();
 	}
 	
 	@Override
