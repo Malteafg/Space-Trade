@@ -55,6 +55,10 @@ public abstract class UIComponent {
 		if(parent == null) return pos;
 		return pos.add(parent.getPos());
 	}
+	
+	public Vector2f getRelPos() {
+		return pos;
+	}
 
 	public Vector2f getSize() {
 		return size;
