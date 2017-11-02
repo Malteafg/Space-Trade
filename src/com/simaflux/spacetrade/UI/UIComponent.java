@@ -1,10 +1,12 @@
 package com.simaflux.spacetrade.UI;
 
 import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
+import com.simaflux.spacetrade.input.Input;
+import com.simaflux.spacetrade.input.MouseListener;
 import com.simaflux.spacetrade.utils.Vars;
 import com.simaflux.spacetrade.utils.math.Vector2f;
 
-public abstract class UIComponent {
+public abstract class UIComponent implements MouseListener {
 	
 	protected UIComponent parent;
 	protected boolean active;
@@ -25,6 +27,7 @@ public abstract class UIComponent {
 		box = null;
 		
 		Interface.components.add(this);
+		Input.addButton(this);
 	}
 	
 	public abstract void update();
@@ -94,6 +97,10 @@ public abstract class UIComponent {
 	
 	public int getParentAmount() {
 		return parent.getParentAmount() + 1;
+	}
+	
+	public void makeClickable() {
+		Input.addButton(this);
 	}
 	
 }

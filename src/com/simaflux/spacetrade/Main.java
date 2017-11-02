@@ -59,6 +59,9 @@ public class Main implements Runnable {
 		glfwShowWindow(window);
 		
 		GL.createCapabilities();
+
+		// initting vars
+		Vars.init();
 		
 		// setting graphics
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);

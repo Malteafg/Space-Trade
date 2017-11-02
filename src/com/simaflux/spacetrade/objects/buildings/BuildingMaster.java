@@ -34,11 +34,6 @@ public abstract class BuildingMaster {
 		templates.put("Aluminum Mine", new BuildingTemplate(new StaticResource[] {
 				new StaticResource("Steel", 5)
 				}));
-		
-		
-		
-		
-		
 	}
 	
 	public static Building createBuilding(String tag, Planet planet, Player owner) {

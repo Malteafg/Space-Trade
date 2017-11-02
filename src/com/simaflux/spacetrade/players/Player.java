@@ -31,7 +31,6 @@ public abstract class Player implements Serializable {
 	
 	public void tick() {
 		rm.tick();
-		cash--;
 	}
 	
 	/*

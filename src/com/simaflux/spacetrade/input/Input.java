@@ -12,7 +12,7 @@ import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
 import com.simaflux.spacetrade.UI.Interface;
-import com.simaflux.spacetrade.UI.components.Button;
+import com.simaflux.spacetrade.UI.UIComponent;
 import com.simaflux.spacetrade.game.GameHandler;
 import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.math.Vector2f;
@@ -28,7 +28,7 @@ public class Input {
 	
 	public static int scroll, prevScroll, scrollD;
 	
-	public static List<Button> uibuttons = new ArrayList<>();
+	public static List<UIComponent> uibuttons = new ArrayList<>();
 	
 	public static void update() {
 		// keyboard input
@@ -85,7 +85,7 @@ public class Input {
 		for(int i = 0; i < buttons.length; i++) {
 			if(!prevButtons[i] && buttons[i]) {
 				// interface
-				for(Button button : uibuttons) {
+				for(UIComponent button : uibuttons) {
 					if(button.isEnabled()) {
 						if(Maths.containsMouse(button.getPos(), button.getSize())) {
 							button.click();
@@ -104,7 +104,7 @@ public class Input {
 		}
 	}
 	
-	public static void addButton(Button b) {
+	public static void addButton(UIComponent b) {
 		uibuttons.add(b);
 	}
 	

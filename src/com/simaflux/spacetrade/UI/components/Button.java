@@ -3,12 +3,10 @@ package com.simaflux.spacetrade.UI.components;
 import com.simaflux.spacetrade.UI.UIComponent;
 import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
 import com.simaflux.spacetrade.UI.renderComponents.RenderText;
-import com.simaflux.spacetrade.input.Input;
-import com.simaflux.spacetrade.input.MouseListener;
 import com.simaflux.spacetrade.utils.Vars;
 import com.simaflux.spacetrade.utils.math.Vector3f;
 
-public class Button extends UIComponent implements MouseListener {
+public class Button extends UIComponent {
 
 	private Text text;
 	private Icon icon;
@@ -26,8 +24,7 @@ public class Button extends UIComponent implements MouseListener {
 		
 		setBox(new RenderBox(this));
 		
-		Input.addButton(this);
-		
+		makeClickable();
 	}
 
 	@Override
@@ -75,12 +72,27 @@ public class Button extends UIComponent implements MouseListener {
 	}
 
 	@Override
-	public void click() {}
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
-	public void release() {}
+	public void release() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
-	public void enter() {}
+	public void enter() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
-	public void exit() {}
+	public void exit() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

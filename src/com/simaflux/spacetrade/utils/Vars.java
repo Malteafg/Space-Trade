@@ -1,6 +1,7 @@
 package com.simaflux.spacetrade.utils;
 
 import java.io.File;
+import java.text.DecimalFormat;
 
 import com.simaflux.spacetrade.graphics.fontengine.FontType;
 import com.simaflux.spacetrade.loader.TextureLoader;
@@ -56,5 +57,12 @@ public abstract class Vars {
 			TERRESTRIAL = "Terrestrial",
 			ICE = "Ice",
 			LAVA = "Lava";
+	
+	// Decimal format
+	public static final DecimalFormat df2 = new DecimalFormat();
+	
+	public static void init() {
+		df2.setMaximumFractionDigits(2);
+	}
 	
 }

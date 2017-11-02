@@ -34,6 +34,32 @@ public class UIContainer extends UIComponent {
 			}
 			l += maxH + (maxH == 0 ? 0 : space);
 		}
+		
+		setSize(size.x, l);
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void release() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void enter() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exit() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
