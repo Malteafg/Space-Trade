@@ -1,0 +1,138 @@
+Iron Mine
+Steel
+5
+PowerConsumer:
+2
+ProducedResource:
+Iron
+3
+***
+Carbon Extractor
+Steel;Oil
+5;1
+PowerConsumer:
+4
+ProducedResource:
+Carbon
+2
+***
+Oil Pump
+Steel;Plastic;Iron
+3;2;1
+PowerConsumer:
+4
+ProducedResource:
+Oil
+2
+***
+Gold Mine
+Steel
+5
+PowerConsumer:
+3
+ProducedResource:
+Gold
+2
+***
+Aluminum Mine
+Steel
+5
+PowerConsumer:
+3
+ProducedResource:
+Aluminum
+2
+***					EXTRACTORS UP				FACTORIES DOWN
+Steel Factory
+Steel;Plastic;Iron
+4;2;3
+PowerConsumer:
+6
+ConsumedResource:
+Iron;Carbon
+3;1
+ProducedResource:
+Steel
+3
+***
+Oil Refinery
+Steel;Plastic;Iron
+5;4;1
+PowerConsumer:
+6
+ConsumedResource:
+Oil
+3
+ProducedResource:
+Plastic
+2
+***
+Electronics Factory
+Steel;Plastic;Iron
+3;6;3
+PowerConsumer:
+6
+ConsumedResource:
+Iron;Plastic;Gold
+2;2;1
+ProducedResource:
+Electronics
+3
+***
+Computer Factory
+Steel;Plastic;Iron;Aluminum
+4;5;3;1
+PowerConsumer:
+8
+ConsumedResource:
+Electronics;Plastic
+2;2
+ProducedResource:
+Computer
+2
+***
+Spaceship Factory
+Steel;Plastic;Iron;Aluminum
+6;2;3;5
+PowerConsumer:
+10
+ConsumedResource:
+Aluminum;Computer;Electronics
+5;3;5
+ProducedResource:
+Spaceship
+1
+***
+Fuel Factory
+Steel;Plastic;Iron
+2;4;2
+PowerConsumer:
+6
+ConsumedResource:
+Oil
+3
+ProducedResource:
+Fuel
+1
+***					FACTORIES UP				POWER PLANTS DOWN
+Solar Power Plant
+Steel;Aluminum;Carbon
+3;6;3
+PowerProducer:
+10
+***
+Oil Power Plant
+Steel;Plastic
+7;3
+ConsumedResource:
+Oil
+2
+PowerProducer:
+30
+***
+Nuclear Power Plant
+Steel;Carbon;Plastic
+10;4;8
+PowerProducer:
+50
+***

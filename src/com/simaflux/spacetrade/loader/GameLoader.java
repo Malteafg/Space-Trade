@@ -64,5 +64,14 @@ public class GameLoader {
 		
 		return s;
 	}
+	
+	/*
+	 * BUILDING NAME LOADING
+	 */
+	public static final String[] buildingNames = new String[]{
+		"Iron Mine",
+		"Aluminum Mine", 
+		"Oil Pump"
+	};
 
 }

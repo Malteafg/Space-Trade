@@ -16,7 +16,6 @@ import com.simaflux.spacetrade.input.Input.MouseInput;
 import com.simaflux.spacetrade.input.Input.MousePos;
 import com.simaflux.spacetrade.input.Input.MouseScroll;
 import com.simaflux.spacetrade.loader.Loader;
-import com.simaflux.spacetrade.objects.buildings.BuildingMaster;
 import com.simaflux.spacetrade.utils.Vars;
 
 public class Main implements Runnable {
@@ -70,8 +69,6 @@ public class Main implements Runnable {
 		System.out.println("OpenGL: " + glGetString(GL_VERSION));
 		
 		Loader.load();
-		
-		BuildingMaster.initBuildings();
 		
 		Interface.init();
 	}

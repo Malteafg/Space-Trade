@@ -9,6 +9,7 @@ public class Loader {
 		loadAllShaders();
 		loadAllModels();
 		loadAllTextures();
+		
 		GameLoader.loadResources();
 	}
 	

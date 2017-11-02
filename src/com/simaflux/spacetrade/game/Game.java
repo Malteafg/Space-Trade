@@ -16,6 +16,7 @@ import com.simaflux.spacetrade.graphics.Camera;
 import com.simaflux.spacetrade.input.MousePicker;
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.loader.Memory;
+import com.simaflux.spacetrade.objects.buildings.BuildingMarket;
 import com.simaflux.spacetrade.objects.space.AstronomicalObject;
 import com.simaflux.spacetrade.objects.space.Galaxy;
 import com.simaflux.spacetrade.objects.space.Planet;
@@ -35,6 +36,7 @@ public class Game implements Serializable {
 	
 	public DateManager dm;
 	public Market market;
+	public BuildingMarket buildingMarket;
 	
 	public Camera camera;
 	
@@ -46,6 +48,7 @@ public class Game implements Serializable {
 	
 	public Game() {
 		market = new Market();
+		buildingMarket = new BuildingMarket();
 		
 		time = System.currentTimeMillis();
 		marketTime = System.currentTimeMillis();

@@ -23,7 +23,7 @@ public class TopBar extends UIPanel {
 			}
 		};
 		
-		new Text(this, "Date", size.x - 70, 3, 15, Vars.SERIF, 1, false, true) {
+		new Text(this, "Date", size.x - 90, 3, 15, Vars.SERIF, 1, false, true) {
 			@Override
 			public void update() {
 				text.setText(GameHandler.game.dm.getDay() + "/" + GameHandler.game.dm.getMonth() + "/" + GameHandler.game.dm.getYear());

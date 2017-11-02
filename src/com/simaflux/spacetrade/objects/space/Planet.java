@@ -1,9 +1,7 @@
 package com.simaflux.spacetrade.objects.space;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.resources.StaticResource;
@@ -22,7 +20,7 @@ public class Planet extends AstronomicalObject {
 	private final Vector3f starPos;
 	
 	private List<StaticResource> resources;
-	private Map<String, Building> buildings;
+	private List<Building> buildings;
 	
 	private String type;
 	
@@ -32,7 +30,7 @@ public class Planet extends AstronomicalObject {
 		this.starPos = starPos;
 		
 		resources = new ArrayList<>();
-		buildings = new HashMap<>();
+		buildings = new ArrayList<>();
 		
 		float typedice = Maths.random();
 		if(typedice > 0.9) {
@@ -74,9 +72,6 @@ public class Planet extends AstronomicalObject {
 	}
 
 	public void tick() {
-		for(String s : buildings.keySet()) {
-			buildings.get(s).tick();
-		}
 	}
 	
 	public void update() {
@@ -95,10 +90,6 @@ public class Planet extends AstronomicalObject {
 	
 	public void addResource(StaticResource r) {
 		resources.add(r);
-	}
-	
-	public void addBuilding(Building b) {
-		buildings.put(b.getName(), b);
 	}
 
 	public String getPlanetType() {

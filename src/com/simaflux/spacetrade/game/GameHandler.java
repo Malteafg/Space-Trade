@@ -28,6 +28,7 @@ public abstract class GameHandler {
 	
 	public static void startNewGame() {
 		GameLoader.loadNames();
+		GameLoader.loadResources();
 		game = new Game();
 		
 		initGame();

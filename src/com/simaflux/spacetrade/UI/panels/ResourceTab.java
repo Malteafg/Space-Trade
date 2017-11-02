@@ -29,11 +29,6 @@ public class ResourceTab extends UIPanel {
 			container.addComponent(resources.get(i), 0, i);
 		}
 	}
-
-	@Override
-	public void update() {
-		
-	}
 	
 	private class ResourceContainer extends UIContainer {
 		
@@ -82,6 +77,11 @@ public class ResourceTab extends UIPanel {
 			pack();
 			container.pack();
 		}
+		
+	}
+
+	@Override
+	public void update() {
 		
 	}
 
