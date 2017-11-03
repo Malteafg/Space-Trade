@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.resources.StaticResource;
+import com.simaflux.spacetrade.players.Player;
 import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.Vars;
 import com.simaflux.spacetrade.utils.math.Vector3f;
@@ -72,6 +73,9 @@ public class Planet extends AstronomicalObject {
 	}
 
 	public void tick() {
+		for(Building b : buildings) {
+			b.tick();
+		}
 	}
 	
 	public void update() {
@@ -94,6 +98,10 @@ public class Planet extends AstronomicalObject {
 
 	public String getPlanetType() {
 		return type;
+	}
+	
+	public void addBuilding(Player p, String building) {
+		buildings.add(new Building(p, building));
 	}
 
 }

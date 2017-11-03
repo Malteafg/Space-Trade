@@ -1,7 +1,6 @@
 package com.simaflux.spacetrade.UI;
 
 import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
-import com.simaflux.spacetrade.input.Input;
 import com.simaflux.spacetrade.input.MouseListener;
 import com.simaflux.spacetrade.utils.Vars;
 import com.simaflux.spacetrade.utils.math.Vector2f;
@@ -27,7 +26,6 @@ public abstract class UIComponent implements MouseListener {
 		box = null;
 		
 		Interface.components.add(this);
-		Input.addButton(this);
 	}
 	
 	public abstract void update();
@@ -104,7 +102,7 @@ public abstract class UIComponent implements MouseListener {
 	}
 	
 	public void makeClickable() {
-		Input.addButton(this);
+		LayerManager.addButton(this);
 	}
 	
 }

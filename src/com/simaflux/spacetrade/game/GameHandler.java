@@ -39,6 +39,8 @@ public abstract class GameHandler {
 		if(paused = true) unpause();
 		Interface.disablePanel("TopBar");
 		Interface.disablePanel("ResourceTab");
+		Interface.disablePanel("BuildingStore");
+		Interface.disablePanel("PlanetInfo");
 	}
 	
 	public static void save() {

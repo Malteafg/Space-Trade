@@ -26,7 +26,7 @@ public abstract class Player implements Serializable {
 		
 		rm = new ResourceManager(this);
 		
-		cash = 1000;
+		cash = 100000;
 	}
 	
 	public void tick() {

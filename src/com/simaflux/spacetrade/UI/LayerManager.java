@@ -35,6 +35,11 @@ public class LayerManager {
 		layers.get(text.getLayer()).addText(text);
 	}
 	
+	public static void addButton(UIComponent button) {
+		createLayer(button.getParentAmount());
+		layers.get(button.getParentAmount()).addButton(button);
+	}
+	
 	private static void createLayer(int layer) {
 		if(layer >= layers.size()) {
 			layers.add(new Layer());

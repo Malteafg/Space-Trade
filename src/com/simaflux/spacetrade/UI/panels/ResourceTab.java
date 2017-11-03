@@ -21,11 +21,20 @@ public class ResourceTab extends UIPanel {
 	public ResourceTab(UIComponent parentComponent, boolean active) {
 		super(parentComponent, 5, 40, 200, Vars.HEIGHT - 350, active);
 		
-		container = new UIContainer(this, 5, 5, size.x - 10, size.y - 10, true, 1, GameLoader.playerResources.length, 10);
+		container = new UIContainer(this, 5, 5, size.x - 10, size.y - 10, true, 1, GameLoader.playerResources.length, 10) {
+			@Override
+			public void click() {
+				for(ResourceContainer c : resources) {
+					c.closeButton();
+					c.pack();
+				}
+				container.pack();
+			}
+		};
 		resources = new ArrayList<>();
 		
 		for(int i = 0; i < GameLoader.playerResources.length; i++) {
-			resources.add(new ResourceContainer(this, GameLoader.playerResources[i].getName()));
+			resources.add(new ResourceContainer(container, GameLoader.playerResources[i].getName()));
 			container.addComponent(resources.get(i), 0, i);
 		}
 	}
@@ -73,6 +82,7 @@ public class ResourceTab extends UIPanel {
 		
 		@Override
 		public void click() {
+			super.click();
 			button.enable();
 			pack();
 			container.pack();
@@ -86,14 +96,7 @@ public class ResourceTab extends UIPanel {
 	}
 
 	@Override
-	public void click() {
-		for(ResourceContainer c : resources) {
-			c.closeButton();
-			c.pack();
-		}
-		container.pack();
-	}
-	
+	public void click() {}	
 	@Override
 	public void release() {}
 	@Override

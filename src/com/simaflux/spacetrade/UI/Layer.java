@@ -26,6 +26,8 @@ public class Layer {
 	private List<RenderBox> boxes;
 	private List<RenderIcon> icons;
 	private Map<FontType, List<RenderText>> texts;
+
+	private List<UIComponent> uibuttons = new ArrayList<>();
 	
 	public Layer() {
 		boxes = new ArrayList<>();
@@ -52,6 +54,14 @@ public class Layer {
 			texts.put(font, textBatch);
 		}
 		textBatch.add(text);
+	}
+	
+	public void addButton(UIComponent b) {
+		uibuttons.add(b);
+	}
+	
+	public List<UIComponent> getButtons() {
+		return uibuttons;
 	}
 	
 	public void render() {

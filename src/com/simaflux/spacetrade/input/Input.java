@@ -2,7 +2,6 @@ package com.simaflux.spacetrade.input;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.glfw.GLFW;
@@ -12,6 +11,7 @@ import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
 import com.simaflux.spacetrade.UI.Interface;
+import com.simaflux.spacetrade.UI.LayerManager;
 import com.simaflux.spacetrade.UI.UIComponent;
 import com.simaflux.spacetrade.game.GameHandler;
 import com.simaflux.spacetrade.utils.Maths;
@@ -27,8 +27,6 @@ public class Input {
 	public static Vector2f mouseD = new Vector2f();
 	
 	public static int scroll, prevScroll, scrollD;
-	
-	public static List<UIComponent> uibuttons = new ArrayList<>();
 	
 	public static void update() {
 		// keyboard input
@@ -80,21 +78,31 @@ public class Input {
 		
 		scrollD = scroll - prevScroll;
 		prevScroll = scroll;
-				
-		// Ray casting
+		
 		for(int i = 0; i < buttons.length; i++) {
 			if(!prevButtons[i] && buttons[i]) {
+				boolean b = false;
+				
 				// interface
-				for(UIComponent button : uibuttons) {
-					if(button.isEnabled()) {
-						if(Maths.containsMouse(button.getPos(), button.getSize())) {
-							button.click();
+				for(int j = LayerManager.layers.size() - 1; j >= 0; j--) {
+					
+					List<UIComponent> buttons = LayerManager.layers.get(j).getButtons();
+					
+					for(UIComponent button : buttons) {
+						if(button.isEnabled()) {
+							if(Maths.containsMouse(button.getPos(), button.getSize())) {
+								button.click();
+								b = true;
+								break;
+							}
 						}
 					}
+					
+					if(b) break;
 				}
 				
 				// 3d picking
-				if(GameHandler.game != null && !GameHandler.paused) {
+				if(GameHandler.game != null && !GameHandler.paused && !b) {
 					if(buttons[GLFW.GLFW_MOUSE_BUTTON_1]) {
 						GameHandler.game.castRay();
 					}
@@ -102,10 +110,6 @@ public class Input {
 			}
 			prevButtons[i] = buttons[i];
 		}
-	}
-	
-	public static void addButton(UIComponent b) {
-		uibuttons.add(b);
 	}
 	
 	public static final class KeyInput extends GLFWKeyCallback {

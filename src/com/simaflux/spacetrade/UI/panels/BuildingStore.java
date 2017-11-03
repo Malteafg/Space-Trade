@@ -21,11 +21,20 @@ public class BuildingStore extends UIPanel {
 	public BuildingStore(UIComponent parentComponent, boolean active) {
 		super(parentComponent, Vars.WIDTH - 205, 40, 200, Vars.HEIGHT - 350, active);
 		
-		container = new UIContainer(this, 0, 0, size.x, size.y, true, 1, GameLoader.buildingNames.length, 8);
+		container = new UIContainer(this, 0, 0, size.x, size.y, true, 1, GameLoader.buildingNames.length, 8) {
+			@Override
+			public void click() {
+				for(BuildingContainer c : buildings) {
+					c.close();
+					c.pack();
+				}
+				container.pack();
+			}
+		};
 		buildings = new ArrayList<>();
 		
 		for(int i = 0; i < GameLoader.buildingNames.length; i++) {
-			buildings.add(new BuildingContainer(this, GameLoader.buildingNames[i], GameLoader.getBuildingInfo(GameLoader.buildingNames[i]).getNcost().length + 2));
+			buildings.add(new BuildingContainer(container, GameLoader.buildingNames[i], GameLoader.getBuildingInfo(GameLoader.buildingNames[i]).getNcost().length + 2));
 			container.addComponent(buildings.get(i), 0, i);
 		}
 	}
@@ -65,10 +74,17 @@ public class BuildingStore extends UIPanel {
 				addComponent(resourceCost[i], 1, i + 1);
 			}
 			
-			buy = new Button(this, 95, 0, 70, 30, false);
+			buy = new Button(this, 95, 0, 70, 30, false) {
+				@Override
+				public void click() {
+					GameHandler.game.buyBuilding(GameHandler.game.getUser(), bname, GameHandler.game.getSelectedPlanet());
+				}
+			};
 			buy.addText(new Text(buy, "Buy", buy.getSize().x / 2, 5, 12, Vars.SERIF, 1, true, true));
 			buy.text().setColor(1, 0, 0);
 			addComponent(buy, 1, ny - 1);
+			
+			makeClickable();
 		}
 		
 		public void close() {
@@ -88,6 +104,7 @@ public class BuildingStore extends UIPanel {
 		
 		@Override
 		public void click() {
+			super.click();
 			buy.enable();
 			for(Text t : process) {
 				t.enable();
@@ -105,14 +122,7 @@ public class BuildingStore extends UIPanel {
 	public void update() {}
 
 	@Override
-	public void click() {
-		for(BuildingContainer c : buildings) {
-			c.close();
-			c.pack();
-		}
-		container.pack();
-	}
-	
+	public void click() {}	
 	@Override
 	public void release() {}
 	@Override

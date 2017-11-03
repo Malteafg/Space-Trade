@@ -92,6 +92,14 @@ public class Game implements Serializable {
 			for(Player p : players) {
 				p.tick();
 			}
+			
+			for(String system : systems.keySet()) {
+				SolarSystem s = systems.get(system);
+				for(String planet : s.getPlanets().keySet()) {
+					Planet p = s.getPlanets().get(planet);
+					p.tick();
+				}
+			}
 		}
 		
 		if((System.currentTimeMillis() - marketTime) > 400) {
@@ -226,6 +234,16 @@ public class Game implements Serializable {
 	
 	public Player getUser() {
 		return players[0];
+	}
+
+	public void buyBuilding(Player p, String building, Planet planet) {
+		double price = market.getBuildingCost(building);
+		
+		if(p.getCash() < price) return;
+		
+		p.addCash(-price);
+		
+		planet.addBuilding(p, building);
 	}
 	
 }
