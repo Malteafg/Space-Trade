@@ -10,6 +10,7 @@ import com.simaflux.spacetrade.utils.math.Vector3f;
 
 public abstract class Vars {
 	
+	// Screen size
 	public static final float WIDTH = 1920f, HEIGHT = 1080f;
 	
 	// Rendering constants
@@ -17,7 +18,7 @@ public abstract class Vars {
 	public static final Matrix4f perspectiveProjection = Matrix4f.perspective(FOV, WIDTH / HEIGHT, NEAR_PLANE, FAR_PLANE);
 	public static final Matrix4f uiProjection = Matrix4f.orthographic(0, WIDTH, HEIGHT, 0, 10, 0);
 
-	// Input sensetivty
+	// Input sensitivity
 	public static final float
 			MOUSE_SCROLL = 2f;
 	
@@ -64,5 +65,16 @@ public abstract class Vars {
 	public static void init() {
 		df2.setMaximumFractionDigits(2);
 	}
+	
+	// Resources
+	public static final String
+			IRON = "Iron", CARBON = "Carbon", OIL = "Oil", ALUMINUM = "Aluminum", GOLD = "Gold", 
+			PLASTIC = "Plastic", STEEL = "Steel", ELECTRONICS = "Electronics", COMPUTER = "Computer",
+			SPACESHIP = "Spaceship", FUEL = "Fuel";
+	
+	// Buildings
+	public static final String 
+			IRON_MINE = "Iron Mine", CARBON_EXTRACTOR = "Carbon Extractor", ALUMINUM_MINE = "Aluminum Mine",
+			STEEL_FACTORY = "Steel Factory";
 	
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.simaflux.spacetrade.loader.GameLoader;
+import com.simaflux.spacetrade.objects.buildings.BuildingTemplate;
 import com.simaflux.spacetrade.objects.resources.MarketResource;
 
 public class Market implements Serializable {
@@ -57,6 +58,15 @@ public class Market implements Serializable {
 
 	public MarketResource[] getAllResources() {
 		return resources;
+	}
+	
+	public double getBuildingCost(String name) {
+		double p = 0;
+		BuildingTemplate t = GameLoader.getBuildingInfo(name);
+		for(int i = 0; i < t.getNcost().length; i++) {
+			p += t.getVcost()[i] * getPrice(t.getNcost()[i]);
+		}
+		return p;
 	}
 
 }

@@ -1,9 +1,10 @@
 package com.simaflux.spacetrade.objects.buildings;
 
+import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.objects.resources.StaticResource;
 import com.simaflux.spacetrade.players.Player;
 
-public abstract class Building {
+public class Building {
 	
 	protected final StaticResource[] consumed, produced;
 	
@@ -11,10 +12,23 @@ public abstract class Building {
 	
 	protected int level;
 	
-	public Building(Player player, int consumed, int produced) {
+	protected String name;
+	
+	public Building(Player player, String name) {
+		this.name = name;
 		setPlayer(player);
-		this.consumed = new StaticResource[consumed];
-		this.produced = new StaticResource[produced];
+		
+		BuildingTemplate t = GameLoader.getBuildingInfo(name);
+		
+		consumed = new StaticResource[t.getNconsumed().length];
+		for(int i = 0; i < consumed.length; i++) {
+			consumed[i] = new StaticResource(t.getNconsumed()[i], t.getVconsumed()[i]);
+		}
+		
+		produced = new StaticResource[t.getNproduced().length];
+		for(int i = 0; i < produced.length; i++) {
+			produced[i] = new StaticResource(t.getNproduced()[i], t.getVproduced()[i]);
+		}
 		
 		level = 1;
 	}

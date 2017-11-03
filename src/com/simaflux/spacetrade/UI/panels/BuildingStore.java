@@ -25,7 +25,7 @@ public class BuildingStore extends UIPanel {
 		buildings = new ArrayList<>();
 		
 		for(int i = 0; i < GameLoader.buildingNames.length; i++) {
-			buildings.add(new BuildingContainer(this, GameLoader.buildingNames[i]));
+			buildings.add(new BuildingContainer(this, GameLoader.buildingNames[i], GameLoader.getBuildingInfo(GameLoader.buildingNames[i]).getNcost().length + 2));
 			container.addComponent(buildings.get(i), 0, i);
 		}
 	}
@@ -39,8 +39,8 @@ public class BuildingStore extends UIPanel {
 		
 		private String bname;
 
-		public BuildingContainer(UIComponent parentComponent, String bname) {
-			super(parentComponent, 5, 0, parentComponent.getSize().x - 10, parentComponent.getGlsize().y, true, 2, 7, 5);
+		public BuildingContainer(UIComponent parentComponent, String bname, int ny) {
+			super(parentComponent, 5, 0, parentComponent.getSize().x - 10, parentComponent.getGlsize().y, true, 2, ny, 5);
 			
 			this.bname = bname;
 			
@@ -50,20 +50,25 @@ public class BuildingStore extends UIPanel {
 			addComponent(name, 0, 0);
 			addComponent(cash, 1, 0);
 			
-			process = new Text[6];
+			process = new Text[ny - 1];
 			for(int i = 0; i < process.length; i++) {
 				process[i] = new Text(this, "", 5, 0, 12, Vars.SERIF, 1, false, false);
 				addComponent(process[i], 0, i + 1);
 			}
 			
-			resourceCost = new Button[5];
+			resourceCost = new Button[ny - 2];
 			for(int i = 0; i < resourceCost.length; i++) {
 				resourceCost[i] = new Button(this, 95, 0, 70, 30, false);
+				resourceCost[i].addText(new Text(resourceCost[i], 
+						GameLoader.getBuildingInfo(bname).getNcost()[i] + ": " + GameLoader.getBuildingInfo(bname).getVcost()[i], 
+						resourceCost[i].getSize().x / 2, 5, 12, Vars.SERIF, 1, true, true));
 				addComponent(resourceCost[i], 1, i + 1);
 			}
 			
 			buy = new Button(this, 95, 0, 70, 30, false);
-			addComponent(buy, 1, 6);
+			buy.addText(new Text(buy, "Buy", buy.getSize().x / 2, 5, 12, Vars.SERIF, 1, true, true));
+			buy.text().setColor(1, 0, 0);
+			addComponent(buy, 1, ny - 1);
 		}
 		
 		public void close() {
@@ -78,7 +83,7 @@ public class BuildingStore extends UIPanel {
 		
 		@Override
 		public void update() {
-			cash.text().setText("Price: " + Vars.df2.format(GameHandler.game.buildingMarket.getCost(bname)));
+			cash.text().setText("Price: " + Vars.df2.format(GameHandler.game.market.getBuildingCost(bname)));
 		}
 		
 		@Override

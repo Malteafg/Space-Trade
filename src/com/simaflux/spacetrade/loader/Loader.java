@@ -11,6 +11,7 @@ public class Loader {
 		loadAllTextures();
 		
 		GameLoader.loadResources();
+		GameLoader.loadBuildings();
 	}
 	
 	private static void loadAllShaders() {
