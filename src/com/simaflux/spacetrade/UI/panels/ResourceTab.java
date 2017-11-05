@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.simaflux.spacetrade.UI.UIComponent;
 import com.simaflux.spacetrade.UI.UIPanel;
-import com.simaflux.spacetrade.UI.components.SwitchButton;
+import com.simaflux.spacetrade.UI.components.AmountPicker;
 import com.simaflux.spacetrade.UI.components.Text;
 import com.simaflux.spacetrade.UI.containers.UIContainer;
 import com.simaflux.spacetrade.game.GameHandler;
@@ -41,7 +41,7 @@ public class ResourceTab extends UIPanel {
 	private class ResourceContainer extends UIContainer {
 		
 		private Text name, amount, price, course;
-		private SwitchButton button;
+		private AmountPicker button;
 		
 		private String rname;
 
@@ -55,9 +55,7 @@ public class ResourceTab extends UIPanel {
 			price = new Text(this, "", 85, 0, 12, Vars.SERIF, 1, false, true);
 			course = new Text(this, "", 85, 0, 12, Vars.SERIF, 1, false, true);
 			
-			button = new SwitchButton(this, 2, 0, 100, 30, false);
-			button.getButton1().addText(new Text(button.getButton1(), "IM", button.getButton1().getSize().x / 2, 0, 15, Vars.SERIF, 1, true, true));
-			button.getButton2().addText(new Text(button.getButton2(), "EX", button.getButton2().getSize().x / 2, 0, 15, Vars.SERIF, 1, true, true));
+			button = new AmountPicker(this, 2, 0, 100, 30, false);
 			
 			addComponent(name, 0, 0);
 			addComponent(amount, 0, 1);
