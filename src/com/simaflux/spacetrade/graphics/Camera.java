@@ -38,8 +38,11 @@ public class Camera {
 		
 		// Camera movement
 		if(moving) {
-			tempPos = tempPos.add(boundObject.getPosition().subtract(tempPos).divide(time));
-			relRot.z += dScroll;
+			
+			float speed = (float) ((startTime / 2.0 - Math.sqrt(Math.pow(time - startTime / 2.0, 2))) / startTime * 4);
+			
+			tempPos = tempPos.add(dPos.scale(speed));
+			relRot.z += dScroll * speed;
 			
 			time--;
 			if(time == 0) {
@@ -116,7 +119,7 @@ public class Camera {
 		boundObject = object;
 		
 		rotation = rotation.mod(Maths.PI * 2).cent(Maths.PI * 2);
-//		dPos = boundObject.getPosition().subtract(tempPos).divide(time / 4f);
+		dPos = boundObject.getExpectedPos(time).subtract(tempPos).divide(time);
 		dScroll = (scroll - relRot.z) / time;
 		
 		viewMatrix = Matrix4f.createViewMatrix(this);

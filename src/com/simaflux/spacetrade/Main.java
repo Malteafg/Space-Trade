@@ -110,6 +110,7 @@ public class Main implements Runnable {
 				frames = f;
 				
 				System.out.println("UPS: " + updates + "  FPS: " + frames);
+				if(updates < 15 || updates > 100) System.exit(0);
 				
 				u = 0;
 				f = 0;

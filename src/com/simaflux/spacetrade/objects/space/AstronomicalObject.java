@@ -42,6 +42,10 @@ public abstract class AstronomicalObject implements Serializable {
 		return position;
 	}
 
+	public Vector3f getExpectedPos(int time) {
+		return position;
+	}
+	
 	public Vector3f getRotation() {
 		return rotation;
 	}

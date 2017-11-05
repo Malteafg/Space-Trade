@@ -84,6 +84,12 @@ public class Planet extends AstronomicalObject {
     	position.set(Maths.cos(angle) * starDist + starPos.x, starPos.y, Maths.sin(angle) * starDist + starPos.z);
 	}
 
+	@Override
+	public Vector3f getExpectedPos(int time) {
+		float a = angle + speed * time;
+		return new Vector3f(Maths.cos(a) * starDist + starPos.x, starPos.y, Maths.sin(a) * starDist + starPos.z);
+	}
+	
 	public Vector3f getColor() {
 		return color;
 	}

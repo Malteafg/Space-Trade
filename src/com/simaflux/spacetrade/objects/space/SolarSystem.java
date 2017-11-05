@@ -31,7 +31,7 @@ public class SolarSystem implements Serializable {
 		
 		for(int i = 0; i < num; i++) {
 			String name = GameLoader.getName(GameLoader.planetNames);
-			planets.put(name, new Planet(this, name, star.getPosition(), (int) (Math.pow(Maths.random(), 2) * 10 * i + 30)));
+			planets.put(name, new Planet(this, name, star.getPosition(), (float) (Math.pow(Maths.random(), 2) * 3 + 20 * i + 30)));
 		}
 	}
 	

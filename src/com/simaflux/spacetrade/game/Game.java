@@ -65,9 +65,9 @@ public class Game implements Serializable {
 	
 	private void generateSystems(int arms, int stars) {
 		float a = 0.3f;
-		float f = 60;
+		float f = 80;
 		int dist = 300;
-		int cDist = 200;
+		int cDist = 300;
 		
 		for(int i = 0; i < stars / arms; i++) {
 			for(int s = 0; s < arms; s++) {
