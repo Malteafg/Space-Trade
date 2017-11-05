@@ -24,7 +24,7 @@ public class Camera {
 	
 	public Camera() {
 		position = new Vector3f();
-		rotation = new Vector3f();
+		rotation = new Vector3f(10, 0, 0);
 		relRot = new Vector3f(0, 0, 10);
 		
 		tempPos = new Vector3f();
@@ -71,7 +71,7 @@ public class Camera {
 			relPos.y = Maths.sin(relRot.x) * relRot.z;
 			
 			rotation.y = relRot.y + Maths.PI * 1.5f;
-			rotation.x = relRot.x;
+			rotation.x = relRot.x + 0.05f;
 			
 			if(moving) {
 				position = tempPos.add(relPos);

@@ -42,10 +42,7 @@ public class UIContainer extends UIComponent {
 	public void update() {}
 
 	@Override
-	public void click() {
-		parent.click();
-	}
-	
+	public void click() {}	
 	@Override
 	public void release() {}
 	@Override

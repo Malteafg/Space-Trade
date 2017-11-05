@@ -3,14 +3,11 @@ package com.simaflux.spacetrade.UI.components;
 import com.simaflux.spacetrade.UI.UIComponent;
 import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
 import com.simaflux.spacetrade.UI.renderComponents.RenderText;
-import com.simaflux.spacetrade.utils.Vars;
-import com.simaflux.spacetrade.utils.math.Vector3f;
 
 public class Button extends UIComponent {
 
 	private Text text;
 	private Icon icon;
-	private Vector3f color;
 	private boolean down;
 
 	public Button(UIComponent parentComponent, float x, float y, float width, float height, boolean active) {
@@ -18,7 +15,6 @@ public class Button extends UIComponent {
 		
 		text = null;
 		icon = null;
-		color = Vars.STANDARD_BLUE.copy();
 		
 		down = false;
 		
@@ -55,44 +51,23 @@ public class Button extends UIComponent {
 		this.icon = icon;
 	}
 
-	public Vector3f getColor() {
-		return color;
-	}
-
-	public void setColor(Vector3f color) {
-		this.color = color;
-	}
-
 	public boolean isDown() {
 		return down;
 	}
 
 	public void setDown(boolean down) {
+		if(down) box.darken();
+		if(!down) box.lighten();
 		this.down = down;
 	}
 
 	@Override
-	public void click() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void click() {}
 	@Override
-	public void release() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void release() {}
 	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void enter() {}
 	@Override
-	public void exit() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void exit() {}
 
 }

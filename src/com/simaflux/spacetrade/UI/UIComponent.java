@@ -4,6 +4,7 @@ import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
 import com.simaflux.spacetrade.input.MouseListener;
 import com.simaflux.spacetrade.utils.Vars;
 import com.simaflux.spacetrade.utils.math.Vector2f;
+import com.simaflux.spacetrade.utils.math.Vector4f;
 
 public abstract class UIComponent implements MouseListener {
 	
@@ -95,6 +96,7 @@ public abstract class UIComponent implements MouseListener {
 	
 	public void setBox(RenderBox box) {
 		this.box = box;
+		box.setColor(new Vector4f(Vars.STANDARD_BLUE.x, Vars.STANDARD_BLUE.y, Vars.STANDARD_BLUE.z, 0.75f));
 	}
 	
 	public int getParentAmount() {

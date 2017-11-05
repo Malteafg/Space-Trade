@@ -28,7 +28,6 @@ public class ResourceTab extends UIPanel {
 					c.closeButton();
 					c.pack();
 				}
-				container.pack();
 			}
 		};
 		resources = new ArrayList<>();
@@ -47,7 +46,7 @@ public class ResourceTab extends UIPanel {
 		private String rname;
 
 		public ResourceContainer(UIComponent parentComponent, String rname) {
-			super(parentComponent, 0, 0, parentComponent.getSize().x, 0, true, 2, 3, 5);
+			super(parentComponent, 0, 0, parentComponent.getSize().x, 0, true, 2, 3, 8);
 			
 			this.rname = rname;
 			
@@ -56,7 +55,9 @@ public class ResourceTab extends UIPanel {
 			price = new Text(this, "", 85, 0, 12, Vars.SERIF, 1, false, true);
 			course = new Text(this, "", 85, 0, 12, Vars.SERIF, 1, false, true);
 			
-			button = new SwitchButton(this, 5, 0, 100, 30, false);
+			button = new SwitchButton(this, 2, 0, 100, 30, false);
+			button.getButton1().addText(new Text(button.getButton1(), "IM", button.getButton1().getSize().x / 2, 0, 15, Vars.SERIF, 1, true, true));
+			button.getButton2().addText(new Text(button.getButton2(), "EX", button.getButton2().getSize().x / 2, 0, 15, Vars.SERIF, 1, true, true));
 			
 			addComponent(name, 0, 0);
 			addComponent(amount, 0, 1);
@@ -82,8 +83,14 @@ public class ResourceTab extends UIPanel {
 		
 		@Override
 		public void click() {
-			super.click();
-			button.enable();
+			boolean bo = button.isEnabled();
+			container.click();
+			
+			if(!bo) {
+				button.enable();
+			} else {
+				button.disable();
+			}
 			pack();
 			container.pack();
 		}

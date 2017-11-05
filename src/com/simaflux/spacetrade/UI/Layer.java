@@ -17,7 +17,6 @@ import com.simaflux.spacetrade.graphics.fontengine.FontType;
 import com.simaflux.spacetrade.graphics.fontengine.TextMeshData;
 import com.simaflux.spacetrade.loader.Memory;
 import com.simaflux.spacetrade.loader.ModelLoader;
-import com.simaflux.spacetrade.utils.Vars;
 import com.simaflux.spacetrade.utils.math.Matrix4f;
 import com.simaflux.spacetrade.utils.math.Vector2f;
 
@@ -74,7 +73,7 @@ public class Layer {
 				Memory.getShader("UIBox").loadUniformMat4f("transformationMatrix", 
 						Matrix4f.translate(b.getGlpos().x, b.getGlpos().y, 1)
 						.multiply(Matrix4f.scale(b.getGlsize().x, b.getGlsize().y, 1)));
-				Memory.getShader("UIBox").loadUniformVec3f("color", Vars.STANDARD_BLUE);
+				Memory.getShader("UIBox").loadUniformVec4f("color", b.getColor());
 				glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 			}
 		}

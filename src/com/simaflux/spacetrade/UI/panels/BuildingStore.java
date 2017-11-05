@@ -28,7 +28,6 @@ public class BuildingStore extends UIPanel {
 					c.close();
 					c.pack();
 				}
-				container.pack();
 			}
 		};
 		buildings = new ArrayList<>();
@@ -77,7 +76,7 @@ public class BuildingStore extends UIPanel {
 			buy = new Button(this, 95, 0, 70, 30, false) {
 				@Override
 				public void click() {
-					GameHandler.game.buyBuilding(GameHandler.game.getUser(), bname, GameHandler.game.getSelectedPlanet());
+					GameHandler.game.getUser().buyBuilding(bname, GameHandler.game.getSelectedPlanet());
 				}
 			};
 			buy.addText(new Text(buy, "Buy", buy.getSize().x / 2, 5, 12, Vars.SERIF, 1, true, true));
@@ -104,13 +103,24 @@ public class BuildingStore extends UIPanel {
 		
 		@Override
 		public void click() {
-			super.click();
-			buy.enable();
-			for(Text t : process) {
-				t.enable();
-			}
-			for(Button b : resourceCost) {
-				b.enable();
+			boolean bo = buy.isEnabled();
+			container.click();
+			if(!bo) {
+				buy.enable();
+				for(Text t : process) {
+					t.enable();
+				}
+				for(Button b : resourceCost) {
+					b.enable();
+				}
+			} else {
+				buy.disable();
+				for(Text t : process) {
+					t.disable();
+				}
+				for(Button b : resourceCost) {
+					b.disable();
+				}
 			}
 			pack();
 			container.pack();

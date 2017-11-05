@@ -2,8 +2,11 @@ package com.simaflux.spacetrade.players;
 
 import java.io.Serializable;
 
+import com.simaflux.spacetrade.game.GameHandler;
 import com.simaflux.spacetrade.objects.resources.PlayerResource;
+import com.simaflux.spacetrade.objects.space.Planet;
 import com.simaflux.spacetrade.players.interactions.OpinionManager;
+import com.simaflux.spacetrade.players.utils.PowerManager;
 import com.simaflux.spacetrade.players.utils.ResourceManager;
 import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.math.Vector3f;
@@ -13,6 +16,7 @@ public abstract class Player implements Serializable {
 	private static final long serialVersionUID = -2976983028306012874L;
 	
 	protected ResourceManager rm;
+	protected PowerManager pm;
 	
 	protected double cash;
 	
@@ -25,12 +29,14 @@ public abstract class Player implements Serializable {
 		color = new Vector3f(Maths.random(), Maths.random(), Maths.random());
 		
 		rm = new ResourceManager(this);
+		pm = new PowerManager(this);
 		
 		cash = 100000;
 	}
 	
 	public void tick() {
 		rm.tick();
+		pm.tick();
 	}
 	
 	/*
@@ -38,6 +44,21 @@ public abstract class Player implements Serializable {
 	 */
 	public final void setResourceState(String tag, int s) {
 		rm.getResource(tag).setResourceState(s);
+	}
+
+	public final void setPowerState(Planet currPlanet, int state) {
+		pm.setPowerState(currPlanet, state);
+	}
+
+	public void buyBuilding(String building, Planet planet) {
+		double price = GameHandler.game.market.getBuildingCost(building);
+		
+		if(cash < price) return;
+		
+		addCash(-price);
+		planet.addBuilding(this, building);
+		if(pm.getPlanetPower(planet) == null) pm.addPlanet(planet);
+		calculatePower(planet);
 	}
 	
 	/*
@@ -73,6 +94,22 @@ public abstract class Player implements Serializable {
 
 	public OpinionManager getTheirOpinions() {
 		return theirOpinions;
+	}
+
+	public final void calculatePower(Planet planet) {
+		pm.calculatePower(planet);
+	}
+
+	public final int getPowerConsumptionOfPlanet(Planet planet) {
+		return pm.getPowerConsumptionOfPlanet(planet);
+	}
+	
+	public final int getPowerProductionOfPlanet(Planet planet) {
+		return pm.getPowerProductionOfPlanet(planet);
+	}
+
+	public boolean isImportingPower(Planet planet) {
+		return pm.isImportingPower(planet);
 	}
 	
 }

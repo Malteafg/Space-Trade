@@ -75,7 +75,8 @@ public class GameLoader {
 	 */	
 	public static final String[] buildingNames = new String[] {
 		IRON_MINE, CARBON_EXTRACTOR, ALUMINUM_MINE,
-		STEEL_FACTORY
+		STEEL_FACTORY,
+		SOLAR_POWER_PLANT
 	};
 	
 	public static Map<String, BuildingTemplate> buildings = new HashMap<>();
@@ -83,19 +84,28 @@ public class GameLoader {
 	public static void loadBuildings() {
 		buildings.put(IRON_MINE, new BuildingTemplate(
 				new String[] {STEEL, ALUMINUM}, new String[] {IRON}, new String[] {}, 
-				new int[] {10, 5}, new int[] {3}, new int[] {}));
+				new int[] {10, 5}, new int[] {3}, new int[] {},
+				-2));
 
 		buildings.put(CARBON_EXTRACTOR, new BuildingTemplate(
 				new String[] {STEEL}, new String[] {CARBON}, new String[] {}, 
-				new int[] {10}, new int[] {3}, new int[] {}));
+				new int[] {10}, new int[] {3}, new int[] {},
+				-3));
 
 		buildings.put(ALUMINUM_MINE, new BuildingTemplate(
 				new String[] {STEEL, ALUMINUM}, new String[] {ALUMINUM}, new String[] {}, 
-				new int[] {10, 5}, new int[] {3}, new int[] {}));
+				new int[] {10, 5}, new int[] {3}, new int[] {},
+				-2));
 
 		buildings.put(STEEL_FACTORY, new BuildingTemplate(
 				new String[] {STEEL, ALUMINUM, IRON}, new String[] {STEEL}, new String[] {IRON, CARBON}, 
-				new int[] {15, 10, 6}, new int[] {2}, new int[] {4, 3}));
+				new int[] {15, 10, 6}, new int[] {2}, new int[] {4, 3},
+				-5));
+		
+		buildings.put(SOLAR_POWER_PLANT, new BuildingTemplate(
+				new String[] {STEEL, ALUMINUM, ELECTRONICS}, new String[] {}, new String[] {}, 
+				new int[] {12, 12, 3}, new int[] {}, new int[] {}, 
+				15));
 	}
 	
 	public static BuildingTemplate getBuildingInfo(String name) {

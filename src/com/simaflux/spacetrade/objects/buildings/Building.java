@@ -2,6 +2,7 @@ package com.simaflux.spacetrade.objects.buildings;
 
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.objects.resources.StaticResource;
+import com.simaflux.spacetrade.objects.space.Planet;
 import com.simaflux.spacetrade.players.Player;
 
 public class Building {
@@ -9,13 +10,19 @@ public class Building {
 	protected final StaticResource[] consumed, produced;
 	
 	protected Player player;
+	protected Planet planet;
 	
 	protected int level;
 	
 	protected String name;
 	
-	public Building(Player player, String name) {
+	protected boolean active;
+	
+	protected int power;
+	
+	public Building(Player player, Planet planet, String name) {
 		this.name = name;
+		this.planet = planet;
 		setPlayer(player);
 		
 		BuildingTemplate t = GameLoader.getBuildingInfo(name);
@@ -30,22 +37,35 @@ public class Building {
 			produced[i] = new StaticResource(t.getNproduced()[i], t.getVproduced()[i]);
 		}
 		
+		active = true;
+		
+		power = t.getPower();
+		
 		level = 1;
 	}
 	
 	public void tick() {
-		if(player != null) {
-			for(StaticResource r : consumed) {
-				player.addQuantity(r.getName(), -r.getAmount());
-			}
-			for(StaticResource r : produced) {
-				player.addQuantity(r.getName(), r.getAmount());
+		active = true;
+		
+		
+		if(active) {
+			if(player != null) {
+				for(StaticResource r : consumed) {
+					player.addQuantity(r.getName(), -r.getAmount());
+				}
+				for(StaticResource r : produced) {
+					player.addQuantity(r.getName(), r.getAmount());
+				}
 			}
 		}
 	}
 	
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	
+	public int getPower() {
+		return power;
 	}
 
 }

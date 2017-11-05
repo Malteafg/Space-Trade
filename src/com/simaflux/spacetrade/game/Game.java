@@ -60,7 +60,7 @@ public class Game implements Serializable {
 		systems = new HashMap<>();
 		generateSystems(5, 25);
 		
-		camera.moveTo(new Galaxy(new Vector3f()), Vars.DEF_CAM_POS, Vars.DEF_CAM_ROT);
+		camera.moveTo(new Galaxy(new Vector3f(0, 0, 0)), Vars.DEF_CAM_POS, Vars.DEF_CAM_ROT);
 	}
 	
 	private void generateSystems(int arms, int stars) {
@@ -76,7 +76,7 @@ public class Game implements Serializable {
 				String name = GameLoader.getName(GameLoader.starNames);
 				systems.put(name + " System", new SolarSystem(name, new Vector3f(
 						Maths.cos(angle) * (i * dist + cDist) + (Maths.random() * f - f / 2), 
-						Maths.random() * 100 - 50f,
+						Maths.random() * 200 - 100f,
 						Maths.sin(angle) * (i * dist + cDist) + (Maths.random() * f - f / 2)), 
 						Maths.random() * 5 + 5));
 			}
@@ -120,10 +120,10 @@ public class Game implements Serializable {
 		if(selectedSystem != null) {
 			if(selectedPlanet == null) {
 				selectedSystem = null;
-				camera.moveTo(new Galaxy(new Vector3f()), Vars.DEF_CAM_SCROLL, 30);
+				camera.moveTo(new Galaxy(new Vector3f()), Vars.DEF_CAM_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
 			} else {
 				selectedPlanet = null;
-				camera.moveTo(selectedSystem.getStar(), Vars.DEF_STAR_SCROLL, 30);
+				camera.moveTo(selectedSystem.getStar(), Vars.DEF_STAR_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
 				Interface.disablePanel("PlanetInfo");
 				Interface.disablePanel("BuildingStore");
 			}
@@ -151,10 +151,10 @@ public class Game implements Serializable {
 		if(s != null) {
 			if(selectedSystem == null) {
 				selectedSystem = s.getSystem();
-				camera.moveTo(s, Vars.DEF_STAR_SCROLL, 30);
+				camera.moveTo(s, Vars.DEF_STAR_SCROLL, Vars.CAM_MOVETIME);
 			} else {
 				selectedPlanet = selectedSystem.getPlanets().get(s.getName());
-				camera.moveTo(s, Vars.DEF_PLANET_SCROLL, 30);
+				camera.moveTo(s, Vars.DEF_PLANET_SCROLL, Vars.CAM_MOVETIME);
 				Interface.enablePanel("PlanetInfo");
 				Interface.enablePanel("BuildingStore");
 			}
@@ -234,16 +234,6 @@ public class Game implements Serializable {
 	
 	public Player getUser() {
 		return players[0];
-	}
-
-	public void buyBuilding(Player p, String building, Planet planet) {
-		double price = market.getBuildingCost(building);
-		
-		if(p.getCash() < price) return;
-		
-		p.addCash(-price);
-		
-		planet.addBuilding(p, building);
 	}
 	
 }

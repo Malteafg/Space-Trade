@@ -4,12 +4,12 @@ layout (location = 0) out vec4 color;
 
 in DATA {
 
-	vec4 c;
+	vec4 pass_color;
 
 } fs_in;
 
 void main() {
 
-	color = vec4(fs_in.c.x,fs_in.c.y,fs_in.c.z, 1.0);
+	color = fs_in.pass_color;
 
 }

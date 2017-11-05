@@ -25,6 +25,8 @@ public class Planet extends AstronomicalObject {
 	
 	private String type;
 	
+	private double powerPrice;
+	
 	public Planet(SolarSystem system, String name, Vector3f starPos, float starDist) {
 		super(system, name, new Vector3f(0, 0, 0), 1);
 		this.starDist = starDist;
@@ -66,6 +68,8 @@ public class Planet extends AstronomicalObject {
 			scale = Maths.random() * 2 + 1;
 		}
 		
+		powerPrice = 10;
+		
 		speed = Maths.random() * 0.001f + 0.0015f;
 		angle = Maths.random() * Maths.PI * 2;
 		
@@ -76,6 +80,7 @@ public class Planet extends AstronomicalObject {
 		for(Building b : buildings) {
 			b.tick();
 		}
+		powerPrice *= (Math.random() * 0.01) + 1;
 	}
 	
 	public void update() {
@@ -106,8 +111,16 @@ public class Planet extends AstronomicalObject {
 		return type;
 	}
 	
+	public double getPowerPrice() {
+		return powerPrice;
+	}
+	
+	public List<Building> getBuildings() {
+		return buildings;
+	}
+	
 	public void addBuilding(Player p, String building) {
-		buildings.add(new Building(p, building));
+		buildings.add(new Building(p, this, building));
 	}
 
 }

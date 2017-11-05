@@ -32,12 +32,15 @@ public abstract class Vars {
 	
 	// Standard camera positions
 	public static final Vector3f 
-			DEF_CAM_POS = new Vector3f(0, 2000, 2200),
-			DEF_CAM_ROT = new Vector3f(0.8f, 0, 0),
+			DEF_CAM_POS = new Vector3f(0, 2500, 2750),
+			DEF_CAM_ROT = new Vector3f(0.6f, 0, 0),
 			DEF_STARCAM_POS = new Vector3f(0, 10, 10),
 			DEF_STARCAM_ROT = new Vector3f(0.8f, 0, 0),
 			DEF_PLANETCAM_POS = new Vector3f(0, 5, 7),
 			DEF_PLANETCAM_ROT = new Vector3f(0.7f, 0, 0);
+	
+	public static final int
+			CAM_MOVETIME = 40;
 	
 	// Temporary standard font type
 	public static final FontType 
@@ -49,7 +52,7 @@ public abstract class Vars {
 	
 	// Standard UI background color
 	public static final Vector3f
-			STANDARD_BLUE = new Vector3f(0.0390625f, 0.15234375f, 0.21875f);
+			STANDARD_BLUE = new Vector3f(0.1390625f, 0.29234375f, 0.39875f);
 	
 	// Planet types
 	public static final String 
@@ -75,6 +78,7 @@ public abstract class Vars {
 	// Buildings
 	public static final String 
 			IRON_MINE = "Iron Mine", CARBON_EXTRACTOR = "Carbon Extractor", ALUMINUM_MINE = "Aluminum Mine",
-			STEEL_FACTORY = "Steel Factory";
+			STEEL_FACTORY = "Steel Factory",
+			SOLAR_POWER_PLANT = "Solar Power Plant";
 	
 }

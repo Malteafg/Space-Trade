@@ -3,11 +3,11 @@
 layout (location = 0) in vec2 position;
 
 uniform mat4 transformationMatrix;
-uniform vec3 color;
+uniform vec4 color;
 
 out DATA {
 
-	vec4 c;
+	vec4 pass_color;
 
 } vs_out;
 
@@ -16,9 +16,9 @@ void main()  {
 	gl_Position = transformationMatrix * vec4(position, 0.0, 1.0);
 
 	if(position.y < 0) {
-		vs_out.c = vec4(color.xyz * 0.6, 1.0);
+		vs_out.pass_color = vec4(color.x * 0.4, color.y * 0.7, color.z * 0.75, color.w);
 	} else {
-		vs_out.c = vec4(color.xyz, 1.0);
+		vs_out.pass_color = color;
 	}
 
 }
