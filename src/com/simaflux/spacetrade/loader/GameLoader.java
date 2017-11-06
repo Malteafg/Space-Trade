@@ -98,8 +98,8 @@ public class GameLoader {
 				-2));
 
 		buildings.put(STEEL_FACTORY, new BuildingTemplate(
-				new String[] {STEEL, ALUMINUM, IRON}, new String[] {STEEL}, new String[] {IRON, CARBON}, 
-				new int[] {15, 10, 6}, new int[] {2}, new int[] {4, 3},
+				new String[] {STEEL, ALUMINUM, IRON}, new String[] {STEEL}, new String[] {IRON}, 
+				new int[] {15, 10, 6}, new int[] {2}, new int[] {4},
 				-5));
 		
 		buildings.put(SOLAR_POWER_PLANT, new BuildingTemplate(

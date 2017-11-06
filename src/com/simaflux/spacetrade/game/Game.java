@@ -78,7 +78,7 @@ public class Game implements Serializable {
 						Maths.cos(angle) * (i * dist + cDist) + (Maths.random() * f - f / 2), 
 						Maths.random() * 200 - 100f,
 						Maths.sin(angle) * (i * dist + cDist) + (Maths.random() * f - f / 2)), 
-						Maths.random() * 5 + 5));
+						Maths.random() * 12 + 8));
 			}
 		}
 	}

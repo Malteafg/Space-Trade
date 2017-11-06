@@ -58,10 +58,25 @@ public class BuildingStore extends UIPanel {
 			addComponent(name, 0, 0);
 			addComponent(cash, 1, 0);
 			
-			process = new Text[ny - 1];
-			for(int i = 0; i < process.length; i++) {
-				process[i] = new Text(this, "", 5, 0, 12, Vars.SERIF, 1, false, false);
+			int consumedLength = 0, producedLength = 0;
+			if(GameLoader.getBuildingInfo(bname).getNconsumed().length != 0) consumedLength = GameLoader.getBuildingInfo(bname).getNconsumed().length + 1;
+			if(GameLoader.getBuildingInfo(bname).getNproduced().length != 0) producedLength = GameLoader.getBuildingInfo(bname).getNproduced().length + 1;
+			process = new Text[consumedLength + producedLength];
+			for(int i = 0; i < consumedLength; i++) {
+				if(i == 0) {
+					process[i] = new Text(this, "Consumed:", 5, 0, 12, Vars.SERIF, 1, false, false);
+				} else {
+					process[i] = new Text(this, GameLoader.getBuildingInfo(bname).getNconsumed()[i - 1] + ": " + GameLoader.getBuildingInfo(bname).getVconsumed()[i - 1], 5, 0, 12, Vars.SERIF, 1, false, false);
+				}
 				addComponent(process[i], 0, i + 1);
+			}
+			for(int i = 0; i < producedLength; i++) {
+				if(i == 0) {
+					process[i + consumedLength] = new Text(this, "Produced:", 5, 0, 12, Vars.SERIF, 1, false, false);
+				} else {
+					process[i + consumedLength] = new Text(this, GameLoader.getBuildingInfo(bname).getNproduced()[i - 1] + ": " + GameLoader.getBuildingInfo(bname).getVproduced()[i - 1], 5, 0, 12, Vars.SERIF, 1, false, false);
+				}
+				addComponent(process[i + consumedLength], 0, i + 1 + consumedLength);
 			}
 			
 			resourceCost = new Button[ny - 2];
