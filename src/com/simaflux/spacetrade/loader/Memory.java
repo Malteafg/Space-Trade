@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.simaflux.spacetrade.graphics.Shader;
+import com.simaflux.spacetrade.graphics.models.RawModel;
 import com.simaflux.spacetrade.graphics.textures.Texture;
-import com.simaflux.spacetrade.models.RawModel;
 
 public class Memory {
 	

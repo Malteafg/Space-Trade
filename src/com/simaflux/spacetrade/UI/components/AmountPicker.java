@@ -21,6 +21,7 @@ public class AmountPicker extends UIComponent {
 			@Override
 			public void click() {
 				amount--;
+				button1.getParent().click();
 			}
 		};
 		
@@ -30,6 +31,7 @@ public class AmountPicker extends UIComponent {
 			@Override
 			public void click() {
 				amount++;
+				button2.getParent().click();
 			}
 		};
 		button2.addText(new Text(button2, "+", button1.getSize().x / 2.0f, 0, 15, Vars.SERIF, 1, true, true));

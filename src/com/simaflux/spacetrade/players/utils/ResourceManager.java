@@ -25,13 +25,13 @@ public class ResourceManager implements Serializable {
 			if(r.isExporting()) {
 				player.addCash(5 * GameHandler.game.market.getResource(r.getName()).getPrice());
 				GameHandler.game.market.getResource(r.getName()).add(5);
-				r.add(-5);
+				r.add(r.getDelta());
 			}
 			
 			if(r.isImporting()) {
 				player.addCash(-5 * GameHandler.game.market.getResource(r.getName()).getPrice());
 				GameHandler.game.market.getResource(r.getName()).add(-5);
-				r.add(5);
+				r.add(r.getDelta());
 			}
 		}
 	}

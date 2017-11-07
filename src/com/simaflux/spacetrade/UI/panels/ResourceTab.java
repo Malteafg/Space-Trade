@@ -55,7 +55,12 @@ public class ResourceTab extends UIPanel {
 			price = new Text(this, "", 85, 0, 12, Vars.SERIF, 1, false, true);
 			course = new Text(this, "", 85, 0, 12, Vars.SERIF, 1, false, true);
 			
-			button = new AmountPicker(this, 2, 0, 100, 30, false);
+			button = new AmountPicker(this, 2, 0, 100, 30, false) {
+				@Override
+				public void click() {
+					GameHandler.game.getUser().setResourceState(rname, button.getAmount() == 0 ? 0 : (button.getAmount() > 0 ? -1 : 1), button.getAmount());
+				}
+			};
 			
 			addComponent(name, 0, 0);
 			addComponent(amount, 0, 1);

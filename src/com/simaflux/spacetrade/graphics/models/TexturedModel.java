@@ -1,4 +1,4 @@
-package com.simaflux.spacetrade.models;
+package com.simaflux.spacetrade.graphics.models;
 
 import com.simaflux.spacetrade.graphics.textures.ModelTexture;
 

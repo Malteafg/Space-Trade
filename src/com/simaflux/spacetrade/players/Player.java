@@ -42,8 +42,8 @@ public abstract class Player implements Serializable {
 	/*
 	 * Actions
 	 */
-	public final void setResourceState(String tag, int s) {
-		rm.getResource(tag).setResourceState(s);
+	public final void setResourceState(String tag, int s, int a) {
+		rm.getResource(tag).setResourceState(s, a);
 	}
 
 	public final void setPowerState(Planet currPlanet, int state) {

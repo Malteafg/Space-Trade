@@ -6,8 +6,8 @@ import java.util.List;
 import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
 import com.simaflux.spacetrade.UI.renderComponents.RenderIcon;
 import com.simaflux.spacetrade.UI.renderComponents.RenderText;
+import com.simaflux.spacetrade.graphics.models.RawModel;
 import com.simaflux.spacetrade.loader.ModelLoader;
-import com.simaflux.spacetrade.models.RawModel;
 
 public class LayerManager {
 

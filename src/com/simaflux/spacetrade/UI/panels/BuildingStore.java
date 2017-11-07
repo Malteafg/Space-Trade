@@ -33,7 +33,10 @@ public class BuildingStore extends UIPanel {
 		buildings = new ArrayList<>();
 		
 		for(int i = 0; i < GameLoader.buildingNames.length; i++) {
-			buildings.add(new BuildingContainer(container, GameLoader.buildingNames[i], GameLoader.getBuildingInfo(GameLoader.buildingNames[i]).getNcost().length + 2));
+			int consumedLength = 0, producedLength = 0;
+			if(GameLoader.getBuildingInfo(GameLoader.buildingNames[i]).getNconsumed().length != 0) consumedLength = GameLoader.getBuildingInfo(GameLoader.buildingNames[i]).getNconsumed().length + 1;
+			if(GameLoader.getBuildingInfo(GameLoader.buildingNames[i]).getNproduced().length != 0) producedLength = GameLoader.getBuildingInfo(GameLoader.buildingNames[i]).getNproduced().length + 1;
+			buildings.add(new BuildingContainer(container, GameLoader.buildingNames[i], GameLoader.getBuildingInfo(GameLoader.buildingNames[i]).getNcost().length + 2, consumedLength, producedLength));
 			container.addComponent(buildings.get(i), 0, i);
 		}
 	}
@@ -47,8 +50,8 @@ public class BuildingStore extends UIPanel {
 		
 		private String bname;
 
-		public BuildingContainer(UIComponent parentComponent, String bname, int ny) {
-			super(parentComponent, 5, 0, parentComponent.getSize().x - 10, parentComponent.getGlsize().y, true, 2, ny, 5);
+		public BuildingContainer(UIComponent parentComponent, String bname, int ny, int cl, int pl) {
+			super(parentComponent, 5, 0, parentComponent.getSize().x - 10, parentComponent.getGlsize().y, true, 2, (cl + pl) > ny + 1 ? (cl + pl) : ny + 1, 5);
 			
 			this.bname = bname;
 			
@@ -58,11 +61,8 @@ public class BuildingStore extends UIPanel {
 			addComponent(name, 0, 0);
 			addComponent(cash, 1, 0);
 			
-			int consumedLength = 0, producedLength = 0;
-			if(GameLoader.getBuildingInfo(bname).getNconsumed().length != 0) consumedLength = GameLoader.getBuildingInfo(bname).getNconsumed().length + 1;
-			if(GameLoader.getBuildingInfo(bname).getNproduced().length != 0) producedLength = GameLoader.getBuildingInfo(bname).getNproduced().length + 1;
-			process = new Text[consumedLength + producedLength];
-			for(int i = 0; i < consumedLength; i++) {
+			process = new Text[cl + pl];
+			for(int i = 0; i < cl; i++) {
 				if(i == 0) {
 					process[i] = new Text(this, "Consumed:", 5, 0, 12, Vars.SERIF, 1, false, false);
 				} else {
@@ -70,25 +70,25 @@ public class BuildingStore extends UIPanel {
 				}
 				addComponent(process[i], 0, i + 1);
 			}
-			for(int i = 0; i < producedLength; i++) {
+			for(int i = 0; i < pl; i++) {
 				if(i == 0) {
-					process[i + consumedLength] = new Text(this, "Produced:", 5, 0, 12, Vars.SERIF, 1, false, false);
+					process[i + cl] = new Text(this, "Produced:", 5, 0, 12, Vars.SERIF, 1, false, false);
 				} else {
-					process[i + consumedLength] = new Text(this, GameLoader.getBuildingInfo(bname).getNproduced()[i - 1] + ": " + GameLoader.getBuildingInfo(bname).getVproduced()[i - 1], 5, 0, 12, Vars.SERIF, 1, false, false);
+					process[i + cl] = new Text(this, GameLoader.getBuildingInfo(bname).getNproduced()[i - 1] + ": " + GameLoader.getBuildingInfo(bname).getVproduced()[i - 1], 5, 0, 12, Vars.SERIF, 1, false, false);
 				}
-				addComponent(process[i + consumedLength], 0, i + 1 + consumedLength);
+				addComponent(process[i + cl], 0, i + 1 + cl);
 			}
 			
 			resourceCost = new Button[ny - 2];
 			for(int i = 0; i < resourceCost.length; i++) {
-				resourceCost[i] = new Button(this, 95, 0, 70, 30, false);
+				resourceCost[i] = new Button(this, 100, 0, 85, 30, false);
 				resourceCost[i].addText(new Text(resourceCost[i], 
 						GameLoader.getBuildingInfo(bname).getNcost()[i] + ": " + GameLoader.getBuildingInfo(bname).getVcost()[i], 
 						resourceCost[i].getSize().x / 2, 5, 12, Vars.SERIF, 1, true, true));
 				addComponent(resourceCost[i], 1, i + 1);
 			}
 			
-			buy = new Button(this, 95, 0, 70, 30, false) {
+			buy = new Button(this, 100, 0, 85, 30, false) {
 				@Override
 				public void click() {
 					GameHandler.game.getUser().buyBuilding(bname, GameHandler.game.getSelectedPlanet());

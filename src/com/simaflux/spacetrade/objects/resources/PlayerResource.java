@@ -9,11 +9,14 @@ public class PlayerResource implements Serializable {
 	private String name;
 	private int amount;
 	
+	private int delta;
+	
 	private int state; // 1=export, 0=nothing, -1=import
 
 	public PlayerResource(String name) {
 		this.setName(name);
 		this.setAmount(0);
+		this.setDelta(0);
 		
 		state = 0;
 	}
@@ -30,8 +33,9 @@ public class PlayerResource implements Serializable {
 		return state == -1;
 	}
 	
-	public void setResourceState(int s) {
+	public void setResourceState(int s, int a) {
 		state = s;
+		delta = a;
 	}
 
 	public String getName() {
@@ -48,6 +52,14 @@ public class PlayerResource implements Serializable {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+	public int getDelta() {
+		return delta;
+	}
+
+	public void setDelta(int delta) {
+		this.delta = delta;
 	}
 
 }

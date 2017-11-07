@@ -1,4 +1,4 @@
-package com.simaflux.spacetrade.models;
+package com.simaflux.spacetrade.graphics.models;
 
 public class RawModel {
 	

@@ -103,6 +103,10 @@ public abstract class UIComponent implements MouseListener {
 		return parent.getParentAmount() + 1;
 	}
 	
+	public UIComponent getParent() {
+		return parent;
+	}
+	
 	public void makeClickable() {
 		LayerManager.addButton(this);
 	}

@@ -12,7 +12,7 @@ import java.util.List;
 
 import org.lwjgl.BufferUtils;
 
-import com.simaflux.spacetrade.models.RawModel;
+import com.simaflux.spacetrade.graphics.models.RawModel;
 
 public class ModelLoader {
 	
