@@ -53,8 +53,9 @@ public class Camera {
 		// Camera rotation movement
 		relRot.z -= Input.scrollD * boundObject.getScale() * Vars.MOUSE_SCROLL;
 		if(Input.buttons[1]) {
-			relRot.y += Input.mouseD.x * 0.003f;
-			relRot.x += Input.mouseD.y * 0.005f;
+			relRot.y += Input.mouseD.x * 0.0017f;
+			relRot.x = (float) Math.min(Math.max(Input.mouseD.y * 0.0023f + relRot.x, 0.0), Math.PI / 2.0);
+			
 		}
 		
 		if(!moving) {
