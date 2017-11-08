@@ -22,7 +22,6 @@ public class AmountPicker extends UIComponent {
 			public void click() {
 				amount--;
 				button1.getParent().click();
-				System.out.println("down");
 			}
 		};
 		

@@ -38,6 +38,12 @@ public class ClaimManager {
 		playerOwned += a;
 	}
 
+	public void addBuilding(Player player, Building b) {
+		for(PlayerClaim c : players) {
+			if(c.getPlayer().equals(player)) c.addBuilding(b);
+		}
+	}
+	
 	public int getNotClaimed() {
 		return notClaimed;
 	}

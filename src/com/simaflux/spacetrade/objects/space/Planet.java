@@ -137,6 +137,7 @@ public class Planet extends AstronomicalObject {
 	
 	public void addBuilding(Player p, String building) {
 		buildings.add(new Building(p, this, building));
+		cm.addBuilding(p, buildings.get(buildings.size() - 1));
 	}
 
 	public int getSize() {
