@@ -22,6 +22,7 @@ public class AmountPicker extends UIComponent {
 			public void click() {
 				amount--;
 				button1.getParent().click();
+				System.out.println("down");
 			}
 		};
 		
@@ -32,6 +33,7 @@ public class AmountPicker extends UIComponent {
 			public void click() {
 				amount++;
 				button2.getParent().click();
+				System.out.println("up");
 			}
 		};
 		button2.addText(new Text(button2, "+", button1.getSize().x / 2.0f, 0, 15, Vars.SERIF, 1, true, true));

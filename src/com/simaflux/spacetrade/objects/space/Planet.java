@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.resources.StaticResource;
+import com.simaflux.spacetrade.objects.space.utils.ClaimManager;
 import com.simaflux.spacetrade.players.Player;
 import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.Vars;
@@ -20,12 +21,16 @@ public class Planet extends AstronomicalObject {
 	private float angle;
 	private final Vector3f starPos;
 	
+	private final int size;
+	
 	private List<StaticResource> resources;
 	private List<Building> buildings;
 	
 	private String type;
 	
 	private double powerPrice;
+	
+	public ClaimManager cm;
 	
 	public Planet(SolarSystem system, String name, Vector3f starPos, float starDist) {
 		super(system, name, new Vector3f(0, 0, 0), 1);
@@ -39,9 +44,13 @@ public class Planet extends AstronomicalObject {
 		if(typedice > 0.9) {
 			type = Vars.GAS_GIANT;
 			scale = Maths.random() * 2 + 4;
+			size = (int) (scale * 10);
+			cm = new ClaimManager(size, 0);
 		} else if(typedice > 0.7) {
 			type = Vars.NATURALLY_HABITABLE;
 			scale = Maths.random() * 2 + 2;
+			size = (int) (scale * 40);
+			cm = new ClaimManager(size, (int) (size * 0.8)); 
 			
 			if(Maths.random() < 0.3) resources.add(new StaticResource("Iron", (int) (scale * 3 + Maths.random() * 4)));
 			if(Maths.random() < 0.2) resources.add(new StaticResource("Aluminum", (int) (scale * 3 + Maths.random() * 4)));
@@ -51,6 +60,8 @@ public class Planet extends AstronomicalObject {
 		} else if(typedice > 0.2) {
 			type = Vars.TERRESTRIAL;
 			scale = Maths.random() * 2 + 2;
+			size = (int) (scale * 40);
+			cm = new ClaimManager(size, (int) (size * 0.4));
 			
 			if(Maths.random() < 0.32) resources.add(new StaticResource("Iron", (int) (scale * 4 + Maths.random() * 4)));
 			if(Maths.random() < 0.25) resources.add(new StaticResource("Aluminum", (int) (scale * 4 + Maths.random() * 4)));
@@ -60,12 +71,17 @@ public class Planet extends AstronomicalObject {
 		} else if(typedice > 0.1) {
 			type = Vars.ICE;
 			scale = Maths.random() * 2 + 1;
+			size = (int) (scale * 20);
+			cm = new ClaimManager(size, (int) (size * 0.1));
+			
 			if(Maths.random() < 0.03) resources.add(new StaticResource("Iron", (int) (scale * 6 + Maths.random() * 10)));
 			if(Maths.random() < 0.02) resources.add(new StaticResource("Aluminum", (int) (scale * 5 + Maths.random() * 8)));
 			if(Maths.random() < 0.01) resources.add(new StaticResource("Gold", (int) (scale * 3 + Maths.random() * 6)));
 		} else {
 			type = Vars.LAVA;
 			scale = Maths.random() * 2 + 1;
+			size = (int) (scale * 20);
+			cm = new ClaimManager(size, 0);
 		}
 		
 		powerPrice = 10;
@@ -121,6 +137,10 @@ public class Planet extends AstronomicalObject {
 	
 	public void addBuilding(Player p, String building) {
 		buildings.add(new Building(p, this, building));
+	}
+
+	public int getSize() {
+		return size;
 	}
 
 }

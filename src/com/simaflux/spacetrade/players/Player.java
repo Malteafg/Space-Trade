@@ -61,6 +61,10 @@ public abstract class Player implements Serializable {
 		calculatePower(planet);
 	}
 	
+	public void claimLand(int a) {
+		GameHandler.game.getSelectedPlanet().cm.claimLand(this, a);
+	}
+	
 	/*
 	 * Getters and setters
 	 */	

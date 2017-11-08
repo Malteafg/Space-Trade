@@ -74,14 +74,17 @@ public class GameLoader {
 	 * BUILDING LOADING
 	 */	
 	public static final String[] buildingNames = new String[] {
-		IRON_MINE, CARBON_EXTRACTOR, ALUMINUM_MINE,
-		STEEL_FACTORY,
-		SOLAR_POWER_PLANT
+		IRON_MINE, CARBON_EXTRACTOR, ALUMINUM_MINE, OIL_PUMP, GOLD_MINE,
+		STEEL_FACTORY, OIL_REFINERY, ELECTRONICS_FACTORY, COMPUTER_FACTORY, SPACESHIP_FACTORY, FUEL_FACTORY,
+		SOLAR_POWER_PLANT, OIL_POWER_PLANT, NUCLEAR_POWER_PLANT
 	};
 	
 	public static Map<String, BuildingTemplate> buildings = new HashMap<>();
 	
 	public static void loadBuildings() {
+		/*
+		 * EXTRACTORS
+		 */
 		buildings.put(IRON_MINE, new BuildingTemplate(
 				new String[] {STEEL, ALUMINUM}, new String[] {IRON}, new String[] {}, 
 				new int[] {10, 5}, new int[] {3}, new int[] {},
@@ -97,15 +100,64 @@ public class GameLoader {
 				new int[] {10, 5}, new int[] {3}, new int[] {},
 				-2));
 
+		buildings.put(OIL_PUMP, new BuildingTemplate(
+				new String[] {STEEL, ALUMINUM, PLASTIC}, new String[] {OIL}, new String[] {}, 
+				new int[] {6, 5, 8}, new int[] {3}, new int[] {},
+				-2));
+
+		buildings.put(GOLD_MINE, new BuildingTemplate(
+				new String[] {STEEL, ALUMINUM}, new String[] {GOLD}, new String[] {}, 
+				new int[] {10, 15}, new int[] {2}, new int[] {},
+				-3));
+		
+		/*
+		 * FACTORIES
+		 */
 		buildings.put(STEEL_FACTORY, new BuildingTemplate(
 				new String[] {STEEL, ALUMINUM, IRON}, new String[] {STEEL}, new String[] {IRON, CARBON}, 
-				new int[] {15, 10, 6}, new int[] {2}, new int[] {4, 2},
+				new int[] {20, 15, 12}, new int[] {3}, new int[] {4, 2},
+				-6));
+
+		buildings.put(OIL_REFINERY, new BuildingTemplate(
+				new String[] {STEEL, ALUMINUM, PLASTIC}, new String[] {PLASTIC}, new String[] {OIL}, 
+				new int[] {15, 12, 20}, new int[] {2}, new int[] {4},
 				-5));
+
+		buildings.put(ELECTRONICS_FACTORY, new BuildingTemplate(
+				new String[] {STEEL, ALUMINUM, IRON, COMPUTER}, new String[] {ELECTRONICS}, new String[] {PLASTIC, CARBON, GOLD}, 
+				new int[] {12, 20, 6, 10}, new int[] {3}, new int[] {3, 3, 1},
+				-8));
+
+		buildings.put(COMPUTER_FACTORY, new BuildingTemplate(
+				new String[] {STEEL, ALUMINUM, COMPUTER}, new String[] {COMPUTER}, new String[] {ELECTRONICS, PLASTIC}, 
+				new int[] {18, 13, 15}, new int[] {2}, new int[] {3, 5},
+				-8));
+
+		buildings.put(SPACESHIP_FACTORY, new BuildingTemplate(
+				new String[] {STEEL, ALUMINUM, PLASTIC, COMPUTER}, new String[] {SPACESHIP}, new String[] {ALUMINUM, COMPUTER, CARBON, ELECTRONICS, FUEL}, 
+				new int[] {15, 10, 8, 15}, new int[] {1}, new int[] {3, 1, 2, 2, 2},
+				-12));
+
+		buildings.put(FUEL_FACTORY, new BuildingTemplate(
+				new String[] {STEEL, ALUMINUM, PLASTIC}, new String[] {FUEL}, new String[] {OIL}, 
+				new int[] {15, 10, 6}, new int[] {2}, new int[] {4},
+				-4));
 		
+		/*
+		 * POWER PLANTS
+		 */
 		buildings.put(SOLAR_POWER_PLANT, new BuildingTemplate(
 				new String[] {STEEL, ALUMINUM, ELECTRONICS}, new String[] {}, new String[] {}, 
 				new int[] {12, 12, 3}, new int[] {}, new int[] {}, 
 				15));
+		buildings.put(OIL_POWER_PLANT, new BuildingTemplate(
+				new String[] {STEEL, ALUMINUM}, new String[] {}, new String[] {OIL}, 
+				new int[] {12, 10}, new int[] {}, new int[] {2}, 
+				20));
+		buildings.put(NUCLEAR_POWER_PLANT, new BuildingTemplate(
+				new String[] {STEEL, ALUMINUM, ELECTRONICS, IRON, COMPUTER}, new String[] {}, new String[] {}, 
+				new int[] {30, 20, 5, 23, 2}, new int[] {}, new int[] {}, 
+				40));
 	}
 	
 	public static BuildingTemplate getBuildingInfo(String name) {

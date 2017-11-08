@@ -77,8 +77,8 @@ public abstract class Vars {
 	
 	// Buildings
 	public static final String 
-			IRON_MINE = "Iron Mine", CARBON_EXTRACTOR = "Carbon Extractor", ALUMINUM_MINE = "Aluminum Mine",
-			STEEL_FACTORY = "Steel Factory",
-			SOLAR_POWER_PLANT = "Solar Power Plant";
+			IRON_MINE = "Iron Mine", CARBON_EXTRACTOR = "Carbon Extractor", ALUMINUM_MINE = "Aluminum Mine", OIL_PUMP = "Oil Pump", GOLD_MINE = "Gold Mine",
+			STEEL_FACTORY = "Steel Factory", OIL_REFINERY = "Oil Refinery", ELECTRONICS_FACTORY = "Electronics Factory", COMPUTER_FACTORY = "Computer Factory", SPACESHIP_FACTORY = "Spaceship Factory", FUEL_FACTORY = "Fuel Factory", 
+			SOLAR_POWER_PLANT = "Solar Power Plant", OIL_POWER_PLANT = "Oil Power Plant", NUCLEAR_POWER_PLANT = "Nuclear Power Plant";
 	
 }

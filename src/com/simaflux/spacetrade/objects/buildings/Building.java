@@ -67,5 +67,9 @@ public class Building {
 	public int getPower() {
 		return power;
 	}
+	
+	public int getLevel() {
+		return level;
+	}
 
 }
