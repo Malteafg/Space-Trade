@@ -87,7 +87,7 @@ public class Camera {
 	private void setRelRot(Vector3f pos) {
 		relRot.z = pos.length();
 		relRot.x = Maths.asin(pos.y / relRot.z);
-		relRot.y = Maths.atan(pos.x, pos.z) - Maths.PI * 0.5f;
+		relRot.y = Maths.atan(pos.x, pos.z) + Maths.PI * 0.5f;
 	}
 	
 	public Matrix4f getViewMatrix() {

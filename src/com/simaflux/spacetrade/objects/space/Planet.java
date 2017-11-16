@@ -20,6 +20,7 @@ public class Planet extends AstronomicalObject {
 	private final float starDist, speed;
 	private float angle;
 	private final Vector3f starPos;
+	private Vector3f rotationNormal;
 	
 	private final int size;
 	
@@ -36,6 +37,10 @@ public class Planet extends AstronomicalObject {
 		super(system, name, new Vector3f(0, 0, 0), 1);
 		this.starDist = starDist;
 		this.starPos = starPos;
+		
+		float angleCap = 0.3f;
+		rotationNormal = new Vector3f(Maths.random() * angleCap, 1f, Maths.random() * angleCap);
+		rotationNormal = rotationNormal.normalize();
 		
 		resources = new ArrayList<>();
 		buildings = new ArrayList<>();
@@ -101,8 +106,24 @@ public class Planet extends AstronomicalObject {
 	
 	public void update() {
 		angle += speed;
+		
+		if(angle > Maths.PI * 2) angle -= Maths.PI * 2;
+		
+		Vector3f v = new Vector3f(
+				Maths.cos(angle) * rotationNormal.y, 
+    			Maths.inverse(rotationNormal.y) * Maths.cos(angle), 
+    			Maths.sin(angle));
     	
-    	position.set(Maths.cos(angle) * starDist + starPos.x, starPos.y, Maths.sin(angle) * starDist + starPos.z);
+    	float posAngle = (float) (Math.atan2(v.z, v.x) + Math.atan2(rotationNormal.z, rotationNormal.x));
+    	float posDist = Maths.sqrt(Maths.pow(v.z, 2) +  Maths.pow(v.x, 2));
+    	
+    	position.set(
+    			Maths.cos(posAngle) * posDist, 
+    			v.y, 
+    			Maths.sin(posAngle) * posDist);
+    	
+    	position = position.scale(starDist).add(starPos);
+    	
 	}
 
 	@Override

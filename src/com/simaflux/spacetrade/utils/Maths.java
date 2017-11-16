@@ -42,7 +42,11 @@ public abstract class Maths {
 	}
 	
 	public static float atan(float y, float x) {
-		return (float) Math.atan2(y, x) + Maths.PI;
+		return (float) Math.atan2(y, x);
+	}
+	
+	public static float inverse(float f) {
+		return Maths.sqrt(1f - f * f); 
 	}
 	
 }
