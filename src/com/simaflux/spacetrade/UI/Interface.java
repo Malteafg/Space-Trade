@@ -20,12 +20,32 @@ public abstract class Interface {
 		screen.panels.get(panel).enable();
 	}
 
+	public static void enablePanel(UIPanel panel) {
+		for(String s : screen.panels.keySet()) {
+			if(screen.panels.get(s).equals(panel)) {
+				screen.panels.get(s).enable();
+			}
+		}
+	}
+
 	public static void disablePanel(String panel) {
 		screen.panels.get(panel).disable();
 	}
 
+	public static void disablePanel(UIPanel panel) {
+		for(String s : screen.panels.keySet()) {
+			if(screen.panels.get(s).equals(panel)) {
+				screen.panels.get(s).disable();
+			}
+		}
+	}
+
 	public static UIPanel getPanel(String panel) {
 		return screen.panels.get(panel);
+	}
+	
+	public static void sendMessage(String panel, String message) {
+		getPanel(panel).receive(message);
 	}
 
 	public static void toggleUI() {

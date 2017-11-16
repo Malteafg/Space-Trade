@@ -3,6 +3,7 @@ package com.simaflux.spacetrade.UI;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.simaflux.spacetrade.UI.panels.BuildingInfo;
 import com.simaflux.spacetrade.UI.panels.BuildingStore;
 import com.simaflux.spacetrade.UI.panels.MainMenu;
 import com.simaflux.spacetrade.UI.panels.PauseMenu;
@@ -26,6 +27,7 @@ public class UIScreen extends UIComponent {
 		panels.put("TopBar", new TopBar(this, false));
 		
 		panels.put("PlanetInfo", new PlanetInfo(this, false));
+		panels.put("BuildingInfo", new BuildingInfo(this, false));
 		
 		panels.put("MainMenu", new MainMenu(this, true));
 		panels.put("PauseMenu", new PauseMenu(this, false));

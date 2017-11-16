@@ -41,7 +41,7 @@ public class Main implements Runnable {
 		glfwWindowHint(GLFW_GREEN_BITS, vidmode.greenBits());
 		glfwWindowHint(GLFW_BLUE_BITS, vidmode.blueBits());
 		glfwWindowHint(GLFW_REFRESH_RATE, vidmode.refreshRate());
-		window = glfwCreateWindow((int) Vars.WIDTH, (int) Vars.HEIGHT, "Space Trade Engine", NULL, NULL);
+		window = glfwCreateWindow((int) Vars.WIDTH, (int) Vars.HEIGHT, "Space Trade Engine", monitor, NULL);
 		if(window == NULL) {
 			System.err.println("Could not create GLFW window!");
 			return;

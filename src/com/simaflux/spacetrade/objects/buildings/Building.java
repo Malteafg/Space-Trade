@@ -47,7 +47,6 @@ public class Building {
 	public void tick() {
 		active = true;
 		
-		
 		if(active) {
 			if(player != null) {
 				for(StaticResource r : consumed) {
@@ -64,12 +63,20 @@ public class Building {
 		this.player = player;
 	}
 	
+	public Player owner() {
+		return player;
+	}
+	
 	public int getPower() {
 		return power;
 	}
 	
 	public int getLevel() {
 		return level;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 }
