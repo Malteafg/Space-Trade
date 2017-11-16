@@ -1,6 +1,7 @@
 package com.simaflux.spacetrade.game;
 
 import com.simaflux.spacetrade.UI.Interface;
+import com.simaflux.spacetrade.input.MousePicker;
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.utils.FileHandler;
 
@@ -11,7 +12,14 @@ public abstract class GameHandler {
 	public static boolean paused;
 	
 	public static void update() {
-		if(game != null && !paused) game.update();
+		if(game != null) {
+			if(!paused) {
+				game.update();
+			}
+			
+			game.camera.update();
+			MousePicker.update();
+		}
 	}
 	
 	public static void render() {

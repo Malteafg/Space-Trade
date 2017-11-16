@@ -3,6 +3,7 @@ package com.simaflux.spacetrade.UI.panels;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.simaflux.spacetrade.UI.Interface;
 import com.simaflux.spacetrade.UI.UIComponent;
 import com.simaflux.spacetrade.UI.UIPanel;
 import com.simaflux.spacetrade.UI.components.Button;
@@ -92,6 +93,7 @@ public class BuildingStore extends UIPanel {
 				@Override
 				public void click() {
 					GameHandler.game.getUser().buyBuilding(bname, GameHandler.game.getSelectedPlanet());
+					Interface.sendMessage("PlanetInfo", "building");
 				}
 			};
 			buy.addText(new Text(buy, "Buy", buy.getSize().x / 2, 1, 12, Vars.SERIF, 1, true, true));

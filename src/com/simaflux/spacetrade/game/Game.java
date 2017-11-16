@@ -106,10 +106,7 @@ public class Game implements Serializable {
 			marketTime = System.currentTimeMillis();
 			
 			market.tick();
-		}
-		
-		camera.update();
-		MousePicker.update();	
+		}	
 		
 		for(String s : systems.keySet()) {
 			systems.get(s).update();

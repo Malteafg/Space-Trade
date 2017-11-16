@@ -1,5 +1,8 @@
 package com.simaflux.spacetrade.UI.panels;
 
+import java.util.List;
+
+import com.simaflux.spacetrade.UI.Interface;
 import com.simaflux.spacetrade.UI.UIComponent;
 import com.simaflux.spacetrade.UI.UIPanel;
 import com.simaflux.spacetrade.UI.components.AmountPicker;
@@ -7,11 +10,12 @@ import com.simaflux.spacetrade.UI.components.Button;
 import com.simaflux.spacetrade.UI.components.Text;
 import com.simaflux.spacetrade.UI.containers.UIContainer;
 import com.simaflux.spacetrade.game.GameHandler;
+import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.utils.Vars;
 
 public class PlanetInfo extends UIPanel {
 	
-	private UIContainer container;
+	private UIContainer container, buildings;
 	
 	private Text name, powerConsumption, powerProduction, planetSize;
 	
@@ -48,6 +52,34 @@ public class PlanetInfo extends UIPanel {
 		for(int i = 0; i < resources.length; i++) {
 			resources[i] = new Text(container, "", 5, 0, 15, Vars.SERIF, 1, false, false);
 			container.addComponent(resources[i], 0, i + 3);
+		}		
+	}
+	
+	@Override
+	public void receive(String message) {
+		switch(message) {
+		case "building":
+			initBuildingList();
+			break;
+		}
+	}
+	
+	private void initBuildingList() {
+		List<Building> userBuildings = GameHandler.game.getSelectedPlanet().getBuildings(GameHandler.game.getUser());
+		buildings = new UIContainer(this, 300, 10, 100, 300, true, 1, userBuildings.size(), 4);
+		
+		for(int i = 0; i < userBuildings.size(); i++) {
+			String s = userBuildings.get(i).getName();
+			Button button = new Button(buildings, 0, 0, 90, 25, true) {
+				@Override
+				public void click() {
+					Interface.enablePanel("BuildingInfo");
+					Interface.sendMessage("BuildingInfo", s);
+				}
+			};
+			button.addText(new Text(button, userBuildings.get(i).getName(), button.getSize().x / 2, 1, 14, Vars.SERIF, 1, true, active));
+			
+			buildings.addComponent(button, 0, i);
 		}
 	}
 	

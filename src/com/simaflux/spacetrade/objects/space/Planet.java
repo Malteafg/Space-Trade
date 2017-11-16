@@ -156,6 +156,16 @@ public class Planet extends AstronomicalObject {
 		return buildings;
 	}
 	
+	public List<Building> getBuildings(Player p) {
+		List<Building> r = new ArrayList<>();
+		for(Building b : buildings) {
+			if(b.owner().equals(p)) {
+				r.add(b);
+			}
+		}
+		return r;
+	}
+	
 	public void addBuilding(Player p, String building) {
 		buildings.add(new Building(p, this, building));
 		cm.addBuilding(p, buildings.get(buildings.size() - 1));
