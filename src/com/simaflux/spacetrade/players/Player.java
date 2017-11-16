@@ -1,12 +1,16 @@
 package com.simaflux.spacetrade.players;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.simaflux.spacetrade.game.GameHandler;
+import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.resources.PlayerResource;
+import com.simaflux.spacetrade.objects.resources.StaticResource;
 import com.simaflux.spacetrade.objects.space.Planet;
-import com.simaflux.spacetrade.players.interactions.OpinionManager;
 import com.simaflux.spacetrade.players.utils.PowerManager;
+import com.simaflux.spacetrade.players.utils.PowerManager.PlanetPower;
 import com.simaflux.spacetrade.players.utils.ResourceManager;
 import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.math.Vector3f;
@@ -16,14 +20,14 @@ public abstract class Player implements Serializable {
 	private static final long serialVersionUID = -2976983028306012874L;
 	
 	protected ResourceManager rm;
-	protected PowerManager pm;
+	public PowerManager pm;
 	
 	protected double cash;
 	
 	protected String name;
 	protected Vector3f color;
-	
-	protected OpinionManager theirOpinions;
+
+	private List<Building> buildings;
 	
 	public Player(String name) {
 		color = new Vector3f(Maths.random(), Maths.random(), Maths.random());
@@ -31,12 +35,58 @@ public abstract class Player implements Serializable {
 		rm = new ResourceManager(this);
 		pm = new PowerManager(this);
 		
+		buildings = new ArrayList<>();
+		
 		cash = 100000;
 	}
 	
 	public void tick() {
 		rm.tick();
 		pm.tick();
+		
+		for(PlanetPower p : pm.getPlanets()) {
+			Planet planet = p.getPlanet();
+			
+			if(p.getState() != 0 || p.hasExcessivePower()) {
+				for(Building b : planet.getBuildings(this)) {
+					b.setEnoughPower(true);
+				}
+			} else {
+				int power = p.getPowerProduced();
+				for(Building b : planet.getBuildings(this)) {
+					if(b.getPower() < 0) {
+						if(-b.getPower() > power) {
+							b.setEnoughPower(false);
+						} else {
+							b.setEnoughPower(true);
+							if(b.isOpen()) power -= -b.getPower();
+						}
+					} else {
+						b.setEnoughPower(true);
+					}
+				}
+			}
+			
+			for(Building b : buildings) {
+				if(b.hasEnoughPower() && b.isOpen()) {
+					boolean u = true;
+					for(StaticResource r : b.getConsumed()) {
+						if(r.getAmount() > rm.getQuantity(r.getName())) u = false;
+					}
+					
+					if(u) {
+						b.setEnoughResources(true);
+						b.tick();
+					} else {
+						/*
+						 * TODO
+						 * Building lower level functionality
+						 */
+						b.setEnoughResources(false);
+					}
+				}
+			}
+		}
 	}
 	
 	/*
@@ -50,13 +100,14 @@ public abstract class Player implements Serializable {
 		pm.setPowerState(currPlanet, state);
 	}
 
-	public void buyBuilding(String building, Planet planet) {
-		double price = GameHandler.game.market.getBuildingCost(building);
+	public void buyBuilding(String b, Planet planet) {
+		double price = GameHandler.game.market.getBuildingCost(b);
 		
 		if(cash < price) return;
 		
 		addCash(-price);
-		planet.addBuilding(this, building);
+		buildings.add(new Building(this, planet, b));
+		planet.addBuilding(this, buildings.get(buildings.size() - 1));
 		if(pm.getPlanetPower(planet) == null) pm.addPlanet(planet);
 		calculatePower(planet);
 	}
@@ -94,10 +145,6 @@ public abstract class Player implements Serializable {
 	
 	public final Vector3f getColor() {
 		return color;
-	}
-
-	public OpinionManager getTheirOpinions() {
-		return theirOpinions;
 	}
 
 	public final void calculatePower(Planet planet) {

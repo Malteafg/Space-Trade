@@ -2,6 +2,7 @@ package com.simaflux.spacetrade.players.utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.space.Planet;
@@ -13,7 +14,7 @@ public class PowerManager implements Serializable {
 	
 	private Player player;
 	
-	private ArrayList<PlanetPower> planets;
+	private List<PlanetPower> planets;
 	
 	public PowerManager(Player player) {
 		this.player = player;
@@ -45,9 +46,10 @@ public class PowerManager implements Serializable {
 		power.resetPower();
 		
 		for(Building b : planet.getBuildings()) {
-			System.out.println(b.getPower());
-			if(b.getPower() < 0) power.addPowerConsumption(-b.getPower());
-			if(b.getPower() > 0) power.addPowerProduction(b.getPower());
+			if(b.isRunning()) {
+				if(b.getPower() < 0) power.addPowerConsumption(-b.getPower());
+				if(b.getPower() > 0) power.addPowerProduction(b.getPower());
+			}
 		}
 	}
 	
@@ -62,7 +64,7 @@ public class PowerManager implements Serializable {
 		return power;
 	}
 	
-	private class PlanetPower implements Serializable {
+	public class PlanetPower implements Serializable {
 		
 		private static final long serialVersionUID = -248640862020372513L;
 
@@ -110,6 +112,10 @@ public class PowerManager implements Serializable {
 			this.state = state;
 		}
 		
+		public boolean hasExcessivePower() {
+			return powerProduced >= powerConsumed;
+		}
+		
 	}
 
 	public int getPowerProductionOfPlanet(Planet planet) {
@@ -142,6 +148,10 @@ public class PowerManager implements Serializable {
 		}
 		
 		return false;
+	}
+	
+	public List<PlanetPower> getPlanets() {
+		return planets;
 	}
 	
 }

@@ -52,7 +52,8 @@ public abstract class Vars {
 	
 	// Standard UI background color
 	public static final Vector3f
-			STANDARD_BLUE = new Vector3f(0.1390625f, 0.29234375f, 0.39875f);
+			STANDARD_BLUE = new Vector3f(0.1390625f, 0.29234375f, 0.39875f),
+			NOT_POSSIBLE_RED = new Vector3f(0.812f, 0.03f, 0.2458f);
 	
 	// Planet types
 	public static final String 

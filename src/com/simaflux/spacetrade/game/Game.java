@@ -89,10 +89,6 @@ public class Game implements Serializable {
 			
 			dm.tick();
 			
-			for(Player p : players) {
-				p.tick();
-			}
-			
 			for(String system : systems.keySet()) {
 				SolarSystem s = systems.get(system);
 				for(String planet : s.getPlanets().keySet()) {
@@ -100,13 +96,20 @@ public class Game implements Serializable {
 					p.tick();
 				}
 			}
+			
+			for(Player p : players) {
+				p.tick();
+			}
 		}
 		
 		if((System.currentTimeMillis() - marketTime) > 400) {
 			marketTime = System.currentTimeMillis();
 			
 			market.tick();
-		}	
+		}
+		
+		camera.update();
+		MousePicker.update();	
 		
 		for(String s : systems.keySet()) {
 			systems.get(s).update();

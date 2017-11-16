@@ -16,8 +16,8 @@ public class Building {
 	
 	protected String name;
 	
-	protected boolean active;
-	
+	protected boolean open, enoughPower, enoughResources;
+
 	protected int power;
 	
 	public Building(Player player, Planet planet, String name) {
@@ -37,7 +37,7 @@ public class Building {
 			produced[i] = new StaticResource(t.getNproduced()[i], t.getVproduced()[i]);
 		}
 		
-		active = true;
+		open = enoughPower = enoughResources = true;
 		
 		power = t.getPower();
 		
@@ -45,16 +45,12 @@ public class Building {
 	}
 	
 	public void tick() {
-		active = true;
-		
-		if(active) {
-			if(player != null) {
-				for(StaticResource r : consumed) {
-					player.addQuantity(r.getName(), -r.getAmount());
-				}
-				for(StaticResource r : produced) {
-					player.addQuantity(r.getName(), r.getAmount());
-				}
+		if(player != null) {
+			for(StaticResource r : consumed) {
+				player.addQuantity(r.getName(), -r.getAmount());
+			}
+			for(StaticResource r : produced) {
+				player.addQuantity(r.getName(), r.getAmount());
 			}
 		}
 	}
@@ -67,6 +63,10 @@ public class Building {
 		return player;
 	}
 	
+	public Planet getPlanet() {
+		return planet;
+	}
+	
 	public int getPower() {
 		return power;
 	}
@@ -77,6 +77,42 @@ public class Building {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public boolean hasEnoughPower() {
+		return enoughPower;
+	}
+
+	public void setEnoughPower(boolean enoughPower) {
+		this.enoughPower = enoughPower;
+	}
+
+	public boolean hasEnoughResources() {
+		return enoughResources;
+	}
+
+	public void setEnoughResources(boolean enoughResources) {
+		this.enoughResources = enoughResources;
+	}
+
+	public boolean isOpen() {
+		return open;
+	}
+
+	public void setOpen(boolean open) {
+		this.open = open;
+	}
+	
+	public boolean isRunning() {
+		return open && enoughPower && enoughResources;
+	}
+
+	public StaticResource[] getConsumed() {
+		return consumed;
+	}
+
+	public StaticResource[] getProduced() {
+		return produced;
 	}
 
 }

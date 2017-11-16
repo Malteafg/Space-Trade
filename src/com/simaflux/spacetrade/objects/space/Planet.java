@@ -98,9 +98,6 @@ public class Planet extends AstronomicalObject {
 	}
 
 	public void tick() {
-		for(Building b : buildings) {
-			b.tick();
-		}
 		powerPrice *= (Math.random() * 0.01) + 1;
 	}
 	
@@ -123,7 +120,6 @@ public class Planet extends AstronomicalObject {
     			Maths.sin(posAngle) * posDist);
     	
     	position = position.scale(starDist).add(starPos);
-    	
 	}
 
 	@Override
@@ -166,8 +162,8 @@ public class Planet extends AstronomicalObject {
 		return r;
 	}
 	
-	public void addBuilding(Player p, String building) {
-		buildings.add(new Building(p, this, building));
+	public void addBuilding(Player p, Building building) {
+		buildings.add(building);
 		cm.addBuilding(p, buildings.get(buildings.size() - 1));
 	}
 
