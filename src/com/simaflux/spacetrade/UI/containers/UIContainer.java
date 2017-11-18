@@ -41,13 +41,4 @@ public class UIContainer extends UIComponent {
 	@Override
 	public void update() {}
 
-	@Override
-	public void click() {}	
-	@Override
-	public void release() {}
-	@Override
-	public void enter() {}
-	@Override
-	public void exit() {}
-
 }

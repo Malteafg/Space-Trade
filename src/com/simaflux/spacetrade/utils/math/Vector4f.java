@@ -38,6 +38,19 @@ public class Vector4f implements Serializable {
     }
 
     /**
+     * Creates a 4-tuple vector with specified values.
+     *
+     * @param Vector3f value
+     * @param w w value
+     */
+    public Vector4f(Vector3f v, float w) {
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
+        this.w = w;
+    }
+
+    /**
      * Calculates the squared length of the vector.
      *
      * @return Squared length of this vector

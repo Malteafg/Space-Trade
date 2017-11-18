@@ -48,17 +48,5 @@ public class AmountPicker extends UIComponent {
 	public int getAmount() {
 		return amount;
 	}
-	
-	@Override
-	public void click() {}
-
-	@Override
-	public void release() {}
-
-	@Override
-	public void enter() {}
-
-	@Override
-	public void exit() {}
 
 }

@@ -105,13 +105,4 @@ public class ResourceTab extends UIPanel {
 		
 	}
 
-	@Override
-	public void click() {}	
-	@Override
-	public void release() {}
-	@Override
-	public void enter() {}
-	@Override
-	public void exit() {}
-
 }

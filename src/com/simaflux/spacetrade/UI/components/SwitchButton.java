@@ -67,13 +67,4 @@ public class SwitchButton extends UIComponent {
 		return state;
 	}
 
-	@Override
-	public void click() {}
-	@Override
-	public void release() {}
-	@Override
-	public void enter() {}
-	@Override
-	public void exit() {}
-
 }

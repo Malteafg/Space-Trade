@@ -63,6 +63,10 @@ public class Layer {
 		return uibuttons;
 	}
 	
+	public List<RenderBox> getBoxes() {
+		return boxes;
+	}
+	
 	public void render() {
 		Memory.getShader("UIBox").start();
 		glBindVertexArray(LayerManager.box.getVaoID());

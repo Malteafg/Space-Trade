@@ -152,6 +152,10 @@ public class Vector2f implements Serializable {
     	return new Vector2f(x, y);
     }
     
+    public boolean equals(Vector2f other) {
+    	return other.x == this.x && other.y == this.y;
+    }
+    
     public void set(float x, float y) {
     	this.x = x;
     	this.y = y;

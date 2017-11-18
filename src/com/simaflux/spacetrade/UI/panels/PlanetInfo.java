@@ -117,13 +117,4 @@ public class PlanetInfo extends UIPanel {
 		powerConsumption.text().setText("Power Consumption: " + GameHandler.game.getUser().getPowerConsumptionOfPlanet(GameHandler.game.getSelectedPlanet()));
 	}
 
-	@Override
-	public void click() {}
-	@Override
-	public void release() {}
-	@Override
-	public void enter() {}
-	@Override
-	public void exit() {}
-
 }

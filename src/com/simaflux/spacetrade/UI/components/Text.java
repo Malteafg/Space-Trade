@@ -41,13 +41,4 @@ public class Text extends UIComponent {
 		return text;
 	}
 
-	@Override
-	public void click() {}
-	@Override
-	public void release() {}
-	@Override
-	public void enter() {}
-	@Override
-	public void exit() {}
-
 }

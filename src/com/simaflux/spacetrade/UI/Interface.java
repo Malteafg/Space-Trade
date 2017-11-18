@@ -5,15 +5,21 @@ import static org.lwjgl.opengl.GL11.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.simaflux.spacetrade.UI.tooltips.TooltipManager;
+
 public abstract class Interface {
 
 	public static UIScreen screen;
 	public static final List<UIComponent> components = new ArrayList<>();
+	
+	public static TooltipManager tm;
 
 	public static void init() {
 		LayerManager.init();
 
 		screen = new UIScreen();
+		
+		tm = new TooltipManager();
 	}
 
 	public static void enablePanel(String panel) {
@@ -59,6 +65,8 @@ public abstract class Interface {
 				c.update();
 			}
 		}
+		
+		tm.update();
 	}
 
 	public static void render() {
@@ -69,6 +77,8 @@ public abstract class Interface {
 		for (Layer layer : LayerManager.layers) {
 			layer.render();
 		}
+		
+		tm.render();
 
 		glDisable(GL_BLEND);
 		glEnable(GL_DEPTH_TEST);

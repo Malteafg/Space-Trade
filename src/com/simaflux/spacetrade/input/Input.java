@@ -13,6 +13,7 @@ import org.lwjgl.glfw.GLFWScrollCallback;
 import com.simaflux.spacetrade.UI.Interface;
 import com.simaflux.spacetrade.UI.LayerManager;
 import com.simaflux.spacetrade.UI.UIComponent;
+import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
 import com.simaflux.spacetrade.game.GameHandler;
 import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.math.Vector2f;
@@ -27,6 +28,8 @@ public class Input {
 	public static Vector2f mouseD = new Vector2f();
 	
 	public static int scroll, prevScroll, scrollD;
+	
+	private static RenderBox mousedComponent;
 	
 	public static void update() {
 		// keyboard input
@@ -74,7 +77,6 @@ public class Input {
 		// Mouse input
 		
 		mouseD = mousePos.subtract(prevMousePos);
-		prevMousePos = mousePos.copy();
 		
 		scrollD = scroll - prevScroll;
 		prevScroll = scroll;
@@ -110,6 +112,39 @@ public class Input {
 			}
 			prevButtons[i] = buttons[i];
 		}
+		
+		// component enter / exit
+		if(!mousePos.equals(prevMousePos)) {
+			boolean b = false;
+			
+			for(int j = LayerManager.layers.size() - 1; j >= 0; j--) {
+				List<RenderBox> boxes = LayerManager.layers.get(j).getBoxes();
+				
+				for(RenderBox box : boxes) {
+					if(box.isEnabled()) {
+						if(Maths.containsMouse(box.getPos(), box.getSize())) {
+							if(box.equals(mousedComponent)) {
+								b = true;
+								break;
+							}
+							if(mousedComponent != null) mousedComponent.getComponent().exit();
+							mousedComponent = box;
+							mousedComponent.getComponent().enter();
+							b = true;
+							break;
+						}
+					}
+				}
+				if(b) break;
+			}
+			
+			if(!b) {
+				if(mousedComponent != null) mousedComponent.getComponent().exit();
+				mousedComponent = null;
+				Interface.tm.deactivateTooltip();
+			}
+		}
+		prevMousePos = mousePos.copy();
 	}
 	
 	public static final class KeyInput extends GLFWKeyCallback {

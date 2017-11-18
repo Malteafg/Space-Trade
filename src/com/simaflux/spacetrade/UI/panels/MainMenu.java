@@ -5,6 +5,7 @@ import com.simaflux.spacetrade.UI.UIComponent;
 import com.simaflux.spacetrade.UI.UIPanel;
 import com.simaflux.spacetrade.UI.components.Button;
 import com.simaflux.spacetrade.UI.components.Text;
+import com.simaflux.spacetrade.UI.tooltips.Tooltip;
 import com.simaflux.spacetrade.game.GameHandler;
 import com.simaflux.spacetrade.utils.Vars;
 
@@ -21,6 +22,7 @@ public class MainMenu extends UIPanel {
 			}
 		};
 		newgame.addText(new Text(newgame, "New Game", newgame.getSize().x * 0.5f, newgame.getSize().y * 0.1f, 20, Vars.SERIF, 1, true, active));
+		newgame.addTooltip(new Tooltip(200, 100, 60));
 		
 		Button loadgame = new Button(this, 50, 150, 300, 50, active) {
 			@Override
@@ -49,29 +51,5 @@ public class MainMenu extends UIPanel {
 
 	@Override
 	public void update() {}
-
-	@Override
-	public void click() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void release() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exit() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

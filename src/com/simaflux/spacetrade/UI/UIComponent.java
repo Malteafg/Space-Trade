@@ -1,12 +1,12 @@
 package com.simaflux.spacetrade.UI;
 
 import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
-import com.simaflux.spacetrade.input.MouseListener;
+import com.simaflux.spacetrade.UI.tooltips.Tooltip;
 import com.simaflux.spacetrade.utils.Vars;
 import com.simaflux.spacetrade.utils.math.Vector2f;
 import com.simaflux.spacetrade.utils.math.Vector4f;
 
-public abstract class UIComponent implements MouseListener {
+public abstract class UIComponent {
 	
 	protected UIComponent parent;
 	protected boolean active;
@@ -15,6 +15,8 @@ public abstract class UIComponent implements MouseListener {
 	protected Vector2f pos, size;
 	
 	protected RenderBox box;
+	
+	protected Tooltip tooltip;
 
 	protected UIComponent(UIComponent parentComponent, float x, float y, float width, float height, boolean active) {
 		this.parent = parentComponent;
@@ -109,6 +111,22 @@ public abstract class UIComponent implements MouseListener {
 	
 	public void makeClickable() {
 		LayerManager.addButton(this);
+	}
+	
+	public void addTooltip(Tooltip t) {
+		tooltip = t;
+	}
+	
+	public void click() {}
+	
+	public void release() {}
+	
+	public void enter() {
+		if(tooltip != null) Interface.tm.activateTooltip(tooltip);
+	}
+	
+	public void exit() {
+		Interface.tm.deactivateTooltip();
 	}
 	
 }
