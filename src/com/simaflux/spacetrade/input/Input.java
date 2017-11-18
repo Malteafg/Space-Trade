@@ -114,35 +114,33 @@ public class Input {
 		}
 		
 		// component enter / exit
-		if(!mousePos.equals(prevMousePos)) {
-			boolean b = false;
+		boolean b = false;
+		
+		for(int j = LayerManager.layers.size() - 1; j >= 0; j--) {
+			List<RenderBox> boxes = LayerManager.layers.get(j).getBoxes();
 			
-			for(int j = LayerManager.layers.size() - 1; j >= 0; j--) {
-				List<RenderBox> boxes = LayerManager.layers.get(j).getBoxes();
-				
-				for(RenderBox box : boxes) {
-					if(box.isEnabled()) {
-						if(Maths.containsMouse(box.getPos(), box.getSize())) {
-							if(box.equals(mousedComponent)) {
-								b = true;
-								break;
-							}
-							if(mousedComponent != null) mousedComponent.getComponent().exit();
-							mousedComponent = box;
-							mousedComponent.getComponent().enter();
+			for(RenderBox box : boxes) {
+				if(box.isEnabled()) {
+					if(Maths.containsMouse(box.getPos(), box.getSize())) {
+						if(box.equals(mousedComponent)) {
 							b = true;
 							break;
 						}
+						if(mousedComponent != null) mousedComponent.getComponent().exit();
+						mousedComponent = box;
+						mousedComponent.getComponent().enter();
+						b = true;
+						break;
 					}
 				}
-				if(b) break;
 			}
-			
-			if(!b) {
-				if(mousedComponent != null) mousedComponent.getComponent().exit();
-				mousedComponent = null;
-				Interface.tm.deactivateTooltip();
-			}
+			if(b) break;
+		}
+		
+		if(!b) {
+			if(mousedComponent != null) mousedComponent.getComponent().exit();
+			mousedComponent = null;
+			Interface.tm.deactivateTooltip();
 		}
 		prevMousePos = mousePos.copy();
 	}
