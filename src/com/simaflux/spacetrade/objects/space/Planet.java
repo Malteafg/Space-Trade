@@ -3,10 +3,8 @@ package com.simaflux.spacetrade.objects.space;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.resources.StaticResource;
 import com.simaflux.spacetrade.objects.space.utils.ClaimManager;
-import com.simaflux.spacetrade.players.Player;
 import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.Vars;
 import com.simaflux.spacetrade.utils.math.Vector3f;
@@ -25,7 +23,6 @@ public class Planet extends AstronomicalObject {
 	private final int size;
 	
 	private List<StaticResource> resources;
-	private List<Building> buildings;
 	
 	private String type;
 	
@@ -43,7 +40,6 @@ public class Planet extends AstronomicalObject {
 		rotationNormal = rotationNormal.normalize();
 		
 		resources = new ArrayList<>();
-		buildings = new ArrayList<>();
 		
 		float typedice = Maths.random();
 		if(typedice > 0.9) {
@@ -147,25 +143,25 @@ public class Planet extends AstronomicalObject {
 	public double getPowerPrice() {
 		return powerPrice;
 	}
-	
-	public List<Building> getBuildings() {
-		return buildings;
-	}
-	
-	public List<Building> getBuildings(Player p) {
-		List<Building> r = new ArrayList<>();
-		for(Building b : buildings) {
-			if(b.owner().equals(p)) {
-				r.add(b);
-			}
-		}
-		return r;
-	}
-	
-	public void addBuilding(Player p, Building building) {
-		buildings.add(building);
-		cm.addBuilding(p, buildings.get(buildings.size() - 1));
-	}
+//	
+//	public List<Building> getBuildings() {
+//		return buildings;
+//	}
+//	
+//	public List<Building> getBuildings(Player p) {
+//		List<Building> r = new ArrayList<>();
+//		for(Building b : buildings) {
+//			if(b.owner().equals(p)) {
+//				r.add(b);
+//			}
+//		}
+//		return r;
+//	}
+//	
+//	public void addBuilding(Player p, Building building) {
+//		buildings.add(building);
+//		cm.addBuilding(p, buildings.get(buildings.size() - 1));
+//	}
 
 	public int getSize() {
 		return size;

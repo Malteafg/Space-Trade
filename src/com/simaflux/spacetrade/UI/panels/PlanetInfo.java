@@ -65,7 +65,7 @@ public class PlanetInfo extends UIPanel {
 	}
 	
 	private void initBuildingList() {
-		List<Building> userBuildings = GameHandler.game.getSelectedPlanet().getBuildings(GameHandler.game.getUser());
+		List<Building> userBuildings = GameHandler.game.getUser().getBuildings(GameHandler.game.getSelectedPlanet());
 		buildings = new UIContainer(this, 300, 10, 100, 300, true, 1, userBuildings.size(), 4);
 		
 		for(int i = 0; i < userBuildings.size(); i++) {

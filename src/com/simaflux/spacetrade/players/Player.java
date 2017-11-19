@@ -2,7 +2,9 @@ package com.simaflux.spacetrade.players;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.simaflux.spacetrade.game.GameHandler;
 import com.simaflux.spacetrade.objects.buildings.Building;
@@ -27,7 +29,7 @@ public abstract class Player implements Serializable {
 	protected String name;
 	protected Vector3f color;
 
-	private List<Building> buildings;
+	private Map<Planet, List<Building>> buildings;
 	
 	public Player(String name) {
 		color = new Vector3f(Maths.random(), Maths.random(), Maths.random());
@@ -35,7 +37,7 @@ public abstract class Player implements Serializable {
 		rm = new ResourceManager(this);
 		pm = new PowerManager(this);
 		
-		buildings = new ArrayList<>();
+		buildings = new HashMap<>();
 		
 		cash = 100000;
 	}
@@ -44,16 +46,16 @@ public abstract class Player implements Serializable {
 		rm.tick();
 		pm.tick();
 		
-		for(PlanetPower p : pm.getPlanets()) {
-			Planet planet = p.getPlanet();
+		for(PlanetPower pp : pm.getPlanets()) {
+			Planet planet = pp.getPlanet();
 			
-			if(p.getState() != 0 || p.hasExcessivePower()) {
-				for(Building b : planet.getBuildings(this)) {
+			if(pp.getState() != 0 || pp.hasExcessivePower()) {
+				for(Building b : buildings.get(planet)) {
 					b.setEnoughPower(true);
 				}
 			} else {
-				int power = p.getPowerProduced();
-				for(Building b : planet.getBuildings(this)) {
+				int power = pp.getPowerProduced();
+				for(Building b : buildings.get(planet)) {
 					if(b.getPower() < 0) {
 						if(-b.getPower() > power) {
 							b.setEnoughPower(false);
@@ -67,22 +69,24 @@ public abstract class Player implements Serializable {
 				}
 			}
 			
-			for(Building b : buildings) {
-				if(b.hasEnoughPower() && b.isOpen()) {
-					boolean u = true;
-					for(StaticResource r : b.getConsumed()) {
-						if(r.getAmount() > rm.getQuantity(r.getName())) u = false;
-					}
-					
-					if(u) {
-						b.setEnoughResources(true);
-						b.tick();
-					} else {
-						/*
-						 * TODO
-						 * Building lower level functionality
-						 */
-						b.setEnoughResources(false);
+			for(Planet p : buildings.keySet()) {
+				for(Building b : buildings.get(p)) {
+					if(b.hasEnoughPower() && b.isOpen()) {
+						boolean u = true;
+						for(StaticResource r : b.getConsumed()) {
+							if(r.getAmount() > rm.getQuantity(r.getName())) u = false;
+						}
+						
+						if(u) {
+							b.setEnoughResources(true);
+							b.tick();
+						} else {
+							/*
+							 * TODO
+							 * Building lower level functionality
+							 */
+							b.setEnoughResources(false);
+						}
 					}
 				}
 			}
@@ -100,19 +104,19 @@ public abstract class Player implements Serializable {
 		pm.setPowerState(currPlanet, state);
 	}
 
-	public void buyBuilding(String b, Planet planet) {
+	public final void buyBuilding(String b, Planet planet) {
 		double price = GameHandler.game.market.getBuildingCost(b);
 		
 		if(cash < price) return;
 		
 		addCash(-price);
-		buildings.add(new Building(this, planet, b));
-		planet.addBuilding(this, buildings.get(buildings.size() - 1));
+		if(!buildings.containsKey(planet)) buildings.put(planet, new ArrayList<>());
+		buildings.get(planet).add(new Building(this, planet, b));
 		if(pm.getPlanetPower(planet) == null) pm.addPlanet(planet);
 		calculatePower(planet);
 	}
 	
-	public void claimLand(int a) {
+	public final void claimLand(int a) {
 		GameHandler.game.getSelectedPlanet().cm.claimLand(this, a);
 	}
 	
@@ -159,8 +163,23 @@ public abstract class Player implements Serializable {
 		return pm.getPowerProductionOfPlanet(planet);
 	}
 
-	public boolean isImportingPower(Planet planet) {
+	public final boolean isImportingPower(Planet planet) {
 		return pm.isImportingPower(planet);
+	}
+	
+	public final List<Building> getBuildings(Planet planet) {
+		return buildings.get(planet);
+	}
+	
+	public final Building getBuilding(Planet planet, String name) {
+		Building r = null;
+		for(Building b : buildings.get(planet)) {
+			if(b.getName().equals(name)) {
+				r = b;
+				break;
+			}
+		}
+		return r;
 	}
 	
 }

@@ -45,7 +45,7 @@ public class PowerManager implements Serializable {
 		
 		power.resetPower();
 		
-		for(Building b : planet.getBuildings()) {
+		for(Building b : player.getBuildings(planet)) {
 			if(b.isRunning()) {
 				if(b.getPower() < 0) power.addPowerConsumption(-b.getPower());
 				if(b.getPower() > 0) power.addPowerProduction(b.getPower());

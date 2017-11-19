@@ -126,6 +126,7 @@ public class Game implements Serializable {
 				camera.moveTo(selectedSystem.getStar(), Vars.DEF_STAR_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
 				Interface.disablePanel("PlanetInfo");
 				Interface.disablePanel("BuildingStore");
+				Interface.disablePanel("BuildingInfo");
 			}
 		}
 	}

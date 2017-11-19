@@ -10,12 +10,16 @@ public class Text extends UIComponent {
 	
 	protected final RenderText text;
 
-	public Text(UIComponent parentComponent, String text, float x, float y, float fontSize, FontType font, float maxLineLength, boolean centered, boolean active) {
+	public Text(UIComponent parentComponent, String text, float x, float y, float fontSize, FontType font, float maxLineLength, boolean centered, boolean active, float width) {
 		super(parentComponent, x, y, 0, fontSize * 1.3f, active);
 		
 		this.text = new RenderText(this, text, fontSize, font, maxLineLength, centered);
 		
 		setPos(x, y);
+	}
+
+	public Text(UIComponent parentComponent, String text, float x, float y, float fontSize, FontType font, float maxLineLength, boolean centered, boolean active) {
+		this(parentComponent, text, x, y, fontSize, font, maxLineLength, centered, active, 0);
 	}
 	
 	@Override
