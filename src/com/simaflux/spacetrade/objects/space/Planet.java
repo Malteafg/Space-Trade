@@ -120,8 +120,23 @@ public class Planet extends AstronomicalObject {
 
 	@Override
 	public Vector3f getExpectedPos(int time) {
+		
 		float a = angle + speed * time;
-		return new Vector3f(Maths.cos(a) * starDist + starPos.x, starPos.y, Maths.sin(a) * starDist + starPos.z);
+		
+		Vector3f v = new Vector3f(
+				Maths.cos(a) * rotationNormal.y, 
+    			Maths.inverse(rotationNormal.y) * Maths.cos(a), 
+    			Maths.sin(a));
+    	
+    	float posAngle = (float) (Math.atan2(v.z, v.x) + Math.atan2(rotationNormal.z, rotationNormal.x));
+    	float posDist = Maths.sqrt(Maths.pow(v.z, 2) +  Maths.pow(v.x, 2));
+    	
+    	v.set(
+    			Maths.cos(posAngle) * posDist, 
+    			v.y, 
+    			Maths.sin(posAngle) * posDist);
+    	
+    	return v.scale(starDist).add(starPos);
 	}
 	
 	public Vector3f getColor() {
