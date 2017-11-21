@@ -182,4 +182,18 @@ public abstract class Player implements Serializable {
 		return r;
 	}
 	
+	public final boolean hasCash(double price) {
+		return cash >= price;
+	}
+	
+	public final boolean planetHasResource(String resource, Planet planet) {
+		if(resource != null ) {
+			for(StaticResource r : planet.getResources()) {
+				if(r.getName().equals(resource)) return true;
+			}
+			return false;
+		}
+		return true;
+	}
+	
 }

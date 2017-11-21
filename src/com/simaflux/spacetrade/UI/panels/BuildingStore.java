@@ -12,6 +12,7 @@ import com.simaflux.spacetrade.UI.containers.UIContainer;
 import com.simaflux.spacetrade.game.GameHandler;
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.utils.Vars;
+import com.simaflux.spacetrade.utils.math.Vector4f;
 
 public class BuildingStore extends UIPanel {
 	
@@ -48,6 +49,7 @@ public class BuildingStore extends UIPanel {
 		private Text[] process;
 		private Button[] resourceCost;
 		private Button buy;
+		private boolean locked;
 		
 		private String bname;
 
@@ -92,8 +94,10 @@ public class BuildingStore extends UIPanel {
 			buy = new Button(this, 100, 0, 85, 20, false) {
 				@Override
 				public void click() {
-					GameHandler.game.getUser().buyBuilding(bname, GameHandler.game.getSelectedPlanet());
-					Interface.sendMessage("PlanetInfo", "building");
+					if(!locked) {
+						GameHandler.game.getUser().buyBuilding(bname, GameHandler.game.getSelectedPlanet());
+						Interface.sendMessage("PlanetInfo", "building");
+					}
 				}
 			};
 			buy.addText(new Text(buy, "Buy", buy.getSize().x / 2, 1, 12, Vars.SERIF, 1, true, true));
@@ -115,7 +119,14 @@ public class BuildingStore extends UIPanel {
 		
 		@Override
 		public void update() {
-			cash.text().setText("Price: " + Vars.df2.format(GameHandler.game.market.getBuildingCost(bname)));
+			
+			double price = GameHandler.game.market.getBuildingCost(bname);
+			cash.text().setText(Vars.df2.format(price) + "$");
+			locked = !GameHandler.game.getUser().hasCash(price) || !GameHandler.game.getUser().planetHasResource(GameLoader.buildings.get(bname).getNaturalResource(), GameHandler.game.getSelectedPlanet());
+			
+			if(locked) buy.getBox().setColor(new Vector4f(Vars.NOT_POSSIBLE_RED, 0.75f));
+			else buy.getBox().setColor(new Vector4f(Vars.STANDARD_BLUE, 0.75f));
+			
 		}
 		
 		@Override
