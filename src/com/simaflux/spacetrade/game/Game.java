@@ -1,6 +1,7 @@
 package com.simaflux.spacetrade.game;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 
@@ -236,8 +237,19 @@ public class Game implements Serializable {
 		glBindVertexArray(0);
 
 		Memory.getShader("planet").stop();
+
+		Memory.getShader("skybox").start();
+		Memory.getShader("skybox").loadUniformMat4f("viewMatrix", camera.getViewMatrix().resetThirdColumn());
 		
-		skybox.render();
+		glBindVertexArray(skybox.getCube().getVaoID());
+		glEnableVertexAttribArray(0);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, skybox.getTexture());
+		glDrawArrays(GL_TRIANGLES, 0, skybox.getCube().getVertexCount());
+		glDisable(0);
+		glBindVertexArray(0);
+		
+		Memory.getShader("skybox").stop();
 	}
 
 	public Planet getSelectedPlanet() {

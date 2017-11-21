@@ -10,10 +10,11 @@ import com.simaflux.spacetrade.graphics.models.RawModel;
 import com.simaflux.spacetrade.loader.Memory;
 import com.simaflux.spacetrade.loader.ModelLoader;
 import com.simaflux.spacetrade.loader.TextureLoader;
+import com.simaflux.spacetrade.utils.Vars;
 
 public class Skybox {
 	
-	private static final float SIZE = 500f;
+	private static final float SIZE = 3000f;
 
 	private static final float[] VERTICES = {        
 	    -SIZE,  SIZE, -SIZE,
@@ -71,18 +72,14 @@ public class Skybox {
 	}
 	
 	public void render() {
-		Memory.getShader("skybox").start();
-		Memory.getShader("skybox").loadUniformMat4f("viewMatrix", GameHandler.game.camera.getViewMatrix());
-		
-		glBindVertexArray(cube.getVaoID());
-		glEnableVertexAttribArray(0);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
-		glDrawArrays(GL_TRIANGLES, 0, cube.getVertexCount());
-		glDisable(0);
-		glBindVertexArray(0);
-		
-		Memory.getShader("skybox").stop();
+	}
+
+	public RawModel getCube() {
+		return cube;
+	}
+
+	public int getTexture() {
+		return texture;
 	}
 	
 }
