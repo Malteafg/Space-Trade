@@ -227,6 +227,11 @@ public class Game implements Serializable {
 		glBindVertexArray(0);
 
 		Memory.getShader("planet").stop();
+<<<<<<< HEAD
+=======
+		
+		skybox.render();
+>>>>>>> parent of e7a2d8b... Merge branch 'master' of https://github.com/Malteafg/Space-Trade
 	}
 
 	public Planet getSelectedPlanet() {
