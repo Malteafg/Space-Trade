@@ -13,6 +13,7 @@ import java.util.Map;
 import com.simaflux.spacetrade.UI.Interface;
 import com.simaflux.spacetrade.game.date.DateManager;
 import com.simaflux.spacetrade.graphics.Camera;
+import com.simaflux.spacetrade.graphics.Skybox;
 import com.simaflux.spacetrade.input.MousePicker;
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.loader.Memory;
@@ -44,6 +45,8 @@ public class Game implements Serializable {
 	
 	private Player[] players;
 	
+	private Skybox skybox;
+	
 	public Game() {
 		market = new Market();
 		
@@ -58,6 +61,9 @@ public class Game implements Serializable {
 		camera = new Camera();
 		
 		systems = new HashMap<>();
+		
+		skybox = new Skybox();
+		
 		generateSystems(5, 25);
 		
 		camera.moveTo(new Galaxy(new Vector3f(0, 0, 0)), Vars.DEF_CAM_POS, Vars.DEF_CAM_ROT);
@@ -227,6 +233,8 @@ public class Game implements Serializable {
 		glBindVertexArray(0);
 
 		Memory.getShader("planet").stop();
+		
+		skybox.render();
 	}
 
 	public Planet getSelectedPlanet() {

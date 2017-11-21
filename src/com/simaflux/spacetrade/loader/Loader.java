@@ -30,6 +30,11 @@ public class Loader {
 		Memory.shaders.put("font", new Shader("ui/font.vert", "ui/font.frag", new int[] {0, 1}));
 
 		Memory.shaders.put("icon", new Shader("ui/icon.vert", "ui/icon.frag", new int[] {0}));
+		
+		Memory.shaders.put("skybox", new Shader("skybox/skybox.vert", "skybox/skybox.frag", new int[] {0, 2}));
+		Memory.shaders.get("skybox").start();
+		Memory.shaders.get("skybox").loadUniformMat4f("projectionMatrix", Vars.perspectiveProjection);
+		Memory.shaders.get("skybox").stop();
 	}
 	
 	public static void loadAllModels() {
