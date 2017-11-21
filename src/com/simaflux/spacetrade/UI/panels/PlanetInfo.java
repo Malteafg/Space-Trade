@@ -15,7 +15,7 @@ import com.simaflux.spacetrade.utils.Vars;
 
 public class PlanetInfo extends UIPanel {
 	
-	private UIContainer container, buildings;
+	private UIContainer container;
 	
 	private Text name, powerConsumption, powerProduction, planetSize;
 	
@@ -23,6 +23,8 @@ public class PlanetInfo extends UIPanel {
 	private Button claim;
 	
 	private Text[] resources;
+	
+	private Button[] buildings;
 	
 	public PlanetInfo(UIComponent parentComponent, boolean active) {
 		super(parentComponent, 5, 775, 450, 300, active);
@@ -52,7 +54,19 @@ public class PlanetInfo extends UIPanel {
 		for(int i = 0; i < resources.length; i++) {
 			resources[i] = new Text(container, "", 5, 0, 15, Vars.SERIF, 1, false, false);
 			container.addComponent(resources[i], 0, i + 3);
-		}		
+		}
+		
+		buildings = new Button[10];
+		for(int i = 0; i < buildings.length; i++) {
+			buildings[i] = new Button(this, 300, 30 + 30 * i, 90, 25, false) {
+				@Override
+				public void click() {
+					GameHandler.game.setSelectedBuilding(GameHandler.game.getUser().getBuilding(GameHandler.game.getSelectedPlanet(), text().getTextString()));
+					Interface.enablePanel("BuildingInfo");
+				}
+			};
+			buildings[i].addText(new Text(buildings[i], "", buildings[i].getSize().x / 2, 1, 14, Vars.SERIF, 1, true, true));
+		}
 	}
 	
 	@Override
@@ -65,21 +79,17 @@ public class PlanetInfo extends UIPanel {
 	}
 	
 	private void initBuildingList() {
-		List<Building> userBuildings = GameHandler.game.getUser().getBuildings(GameHandler.game.getSelectedPlanet());
-		buildings = new UIContainer(this, 300, 10, 100, 300, true, 1, userBuildings.size(), 4);
+		for(Button b : buildings) {
+			b.disable();
+		}
 		
-		for(int i = 0; i < userBuildings.size(); i++) {
-			String s = userBuildings.get(i).getName();
-			Button button = new Button(buildings, 0, 0, 90, 25, true) {
-				@Override
-				public void click() {
-					Interface.enablePanel("BuildingInfo");
-					Interface.sendMessage("BuildingInfo", s);
-				}
-			};
-			button.addText(new Text(button, userBuildings.get(i).getName(), button.getSize().x / 2, 1, 14, Vars.SERIF, 1, true, active));
-			
-			buildings.addComponent(button, 0, i);
+		List<Building> userBuildings = GameHandler.game.getUser().getBuildings(GameHandler.game.getSelectedPlanet());
+		if(userBuildings != null) {
+			for(int i = 0; i < userBuildings.size(); i++) {
+				String s = userBuildings.get(i).getName();
+				buildings[i].enable();
+				buildings[i].text().setText(s);
+			}
 		}
 	}
 	
@@ -96,6 +106,8 @@ public class PlanetInfo extends UIPanel {
 		}
 		
 		container.pack();
+		
+		initBuildingList();
 	}
 	
 	private void updateSize() {

@@ -59,7 +59,7 @@ public class BuildingStore extends UIPanel {
 			this.bname = bname;
 			
 			name = new Text(this, bname, 5, 0, 12, Vars.SERIF, 1, false, true);
-			cash = new Text(this, "Cash", 95, 0, 12, Vars.SERIF, 1, false, true);
+			cash = new Text(this, "Cash", 125, 0, 12, Vars.SERIF, 1, false, true);
 			
 			addComponent(name, 0, 0);
 			addComponent(cash, 1, 0);
@@ -119,14 +119,12 @@ public class BuildingStore extends UIPanel {
 		
 		@Override
 		public void update() {
-			
 			double price = GameHandler.game.market.getBuildingCost(bname);
 			cash.text().setText(Vars.df2.format(price) + "$");
 			locked = !GameHandler.game.getUser().hasCash(price) || !GameHandler.game.getUser().planetHasResource(GameLoader.buildings.get(bname).getNaturalResource(), GameHandler.game.getSelectedPlanet());
 			
 			if(locked) buy.getBox().setColor(new Vector4f(Vars.NOT_POSSIBLE_RED, 0.75f));
 			else buy.getBox().setColor(new Vector4f(Vars.STANDARD_BLUE, 0.75f));
-			
 		}
 		
 		@Override

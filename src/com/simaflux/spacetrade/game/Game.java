@@ -16,6 +16,7 @@ import com.simaflux.spacetrade.graphics.Camera;
 import com.simaflux.spacetrade.input.MousePicker;
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.loader.Memory;
+import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.space.AstronomicalObject;
 import com.simaflux.spacetrade.objects.space.Galaxy;
 import com.simaflux.spacetrade.objects.space.Planet;
@@ -41,6 +42,7 @@ public class Game implements Serializable {
 	private Map<String, SolarSystem> systems;
 	private SolarSystem selectedSystem;
 	private Planet selectedPlanet;
+	private Building selectedBuilding;
 	
 	private Player[] players;
 	
@@ -123,6 +125,7 @@ public class Game implements Serializable {
 				camera.moveTo(new Galaxy(new Vector3f()), Vars.DEF_CAM_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
 			} else {
 				selectedPlanet = null;
+				selectedBuilding = null;
 				camera.moveTo(selectedSystem.getStar(), Vars.DEF_STAR_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
 				Interface.disablePanel("PlanetInfo");
 				Interface.disablePanel("BuildingStore");
@@ -235,6 +238,14 @@ public class Game implements Serializable {
 	
 	public Player getUser() {
 		return players[0];
+	}
+	
+	public Building getSelectedBuilding() {
+		return selectedBuilding;
+	}
+
+	public void setSelectedBuilding(Building selectedBuilding) {
+		this.selectedBuilding = selectedBuilding;
 	}
 	
 }
