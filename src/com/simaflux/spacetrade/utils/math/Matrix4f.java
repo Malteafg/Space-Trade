@@ -581,6 +581,32 @@ public class Matrix4f implements Serializable {
 		
 	}
 	
+	public Matrix4f resetThirdColumn() {
+		Matrix4f result = new Matrix4f();
+
+        result.m00 = this.m00;
+        result.m10 = this.m01;
+        result.m20 = this.m02;
+        result.m30 = 0;
+
+        result.m01 = this.m10;
+        result.m11 = this.m11;
+        result.m21 = this.m12;
+        result.m31 = 0;
+
+        result.m02 = this.m20;
+        result.m12 = this.m21;
+        result.m22 = this.m22;
+        result.m32 = 0;
+
+        result.m03 = this.m30;
+        result.m13 = this.m31;
+        result.m23 = this.m32;
+        result.m33 = this.m33;
+        
+        return result;
+	}
+	
     public static Matrix4f createViewMatrix(Camera camera) {
     	Matrix4f viewMatrix = new Matrix4f();
     	viewMatrix = viewMatrix
