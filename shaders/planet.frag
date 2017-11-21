@@ -14,6 +14,6 @@ uniform vec3 lightColor;
 
 void main() {
 
-	color = vec4((max(dot(normalize(fs_in.surfaceNormal), normalize(fs_in.toLightVector)), - 0.1) + 0.2) * lightColor, 1.0) * vec4(fs_in.color.xyz, 1.0);
+	color = vec4((max(dot(normalize(fs_in.surfaceNormal), normalize(fs_in.toLightVector)), - 0.2) + 0.3) * lightColor, 1.0) * vec4(fs_in.color.xyz, 1.0);
 
 }
