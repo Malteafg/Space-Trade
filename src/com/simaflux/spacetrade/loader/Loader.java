@@ -15,11 +15,6 @@ public class Loader {
 	}
 	
 	private static void loadAllShaders() {
-		Memory.shaders.put("skybox", new Shader("skybox.vert", "skybox.frag", new int[] {0}));
-		Memory.shaders.get("skybox").start();
-		Memory.shaders.get("skybox").loadUniformMat4f("projectionMatrix", Vars.perspectiveProjection);
-		Memory.shaders.get("skybox").stop();
-		
 		Memory.shaders.put("UIBox", new Shader("ui/uibox.vert", "ui/uibox.frag", new int[] {0}));
 		
 		Memory.shaders.put("planet", new Shader("planet.vert", "planet.frag", new int[] {0, 2}));

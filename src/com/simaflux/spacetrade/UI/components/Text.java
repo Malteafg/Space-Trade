@@ -14,6 +14,7 @@ public class Text extends UIComponent {
 		super(parentComponent, x, y, 0, fontSize * 1.3f, active);
 		
 		this.text = new RenderText(this, text, fontSize, font, maxLineLength, centered);
+		
 		setPos(x, y);
 	}
 

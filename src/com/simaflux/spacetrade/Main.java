@@ -132,6 +132,8 @@ public class Main implements Runnable {
 	private void gameRender() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
+		//TextMaster.render();
+		
 		GameHandler.render();
 		Interface.render();
 		

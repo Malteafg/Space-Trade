@@ -1,7 +1,6 @@
 package com.simaflux.spacetrade.game;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 
@@ -14,11 +13,9 @@ import java.util.Map;
 import com.simaflux.spacetrade.UI.Interface;
 import com.simaflux.spacetrade.game.date.DateManager;
 import com.simaflux.spacetrade.graphics.Camera;
-import com.simaflux.spacetrade.graphics.Skybox;
 import com.simaflux.spacetrade.input.MousePicker;
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.loader.Memory;
-import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.space.AstronomicalObject;
 import com.simaflux.spacetrade.objects.space.Galaxy;
 import com.simaflux.spacetrade.objects.space.Planet;
@@ -44,11 +41,8 @@ public class Game implements Serializable {
 	private Map<String, SolarSystem> systems;
 	private SolarSystem selectedSystem;
 	private Planet selectedPlanet;
-	private Building selectedBuilding;
 	
 	private Player[] players;
-	
-	private Skybox skybox;
 	
 	public Game() {
 		market = new Market();
@@ -64,9 +58,6 @@ public class Game implements Serializable {
 		camera = new Camera();
 		
 		systems = new HashMap<>();
-		
-		skybox = new Skybox();
-		
 		generateSystems(5, 25);
 		
 		camera.moveTo(new Galaxy(new Vector3f(0, 0, 0)), Vars.DEF_CAM_POS, Vars.DEF_CAM_ROT);
@@ -132,7 +123,6 @@ public class Game implements Serializable {
 				camera.moveTo(new Galaxy(new Vector3f()), Vars.DEF_CAM_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
 			} else {
 				selectedPlanet = null;
-				selectedBuilding = null;
 				camera.moveTo(selectedSystem.getStar(), Vars.DEF_STAR_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
 				Interface.disablePanel("PlanetInfo");
 				Interface.disablePanel("BuildingStore");
@@ -237,19 +227,6 @@ public class Game implements Serializable {
 		glBindVertexArray(0);
 
 		Memory.getShader("planet").stop();
-
-		Memory.getShader("skybox").start();
-		Memory.getShader("skybox").loadUniformMat4f("viewMatrix", camera.getViewMatrix().resetThirdColumn());
-		
-		glBindVertexArray(skybox.getCube().getVaoID());
-		glEnableVertexAttribArray(0);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, skybox.getTexture());
-		glDrawArrays(GL_TRIANGLES, 0, skybox.getCube().getVertexCount());
-		glDisable(0);
-		glBindVertexArray(0);
-		
-		Memory.getShader("skybox").stop();
 	}
 
 	public Planet getSelectedPlanet() {
@@ -258,14 +235,6 @@ public class Game implements Serializable {
 	
 	public Player getUser() {
 		return players[0];
-	}
-	
-	public Building getSelectedBuilding() {
-		return selectedBuilding;
-	}
-
-	public void setSelectedBuilding(Building selectedBuilding) {
-		this.selectedBuilding = selectedBuilding;
 	}
 	
 }

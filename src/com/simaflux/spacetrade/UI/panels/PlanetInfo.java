@@ -73,7 +73,6 @@ public class PlanetInfo extends UIPanel {
 			Button button = new Button(buildings, 0, 0, 90, 25, true) {
 				@Override
 				public void click() {
-					GameHandler.game.setSelectedBuilding(GameHandler.game.getUser().getBuilding(GameHandler.game.getSelectedPlanet(), s));
 					Interface.enablePanel("BuildingInfo");
 					Interface.sendMessage("BuildingInfo", s);
 				}
