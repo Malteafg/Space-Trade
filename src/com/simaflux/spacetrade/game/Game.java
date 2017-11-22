@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.simaflux.spacetrade.UI.Interface;
+import com.simaflux.spacetrade.empires.Empire;
 import com.simaflux.spacetrade.game.date.DateManager;
 import com.simaflux.spacetrade.graphics.Camera;
 import com.simaflux.spacetrade.input.MousePicker;
@@ -46,6 +47,8 @@ public class Game implements Serializable {
 	
 	private Player[] players;
 	
+	private List<Empire> empires;
+	
 	public Game() {
 		market = new Market();
 		
@@ -61,6 +64,7 @@ public class Game implements Serializable {
 		
 		systems = new HashMap<>();
 		generateSystems(5, 25);
+		generateEmpires();
 		
 		camera.moveTo(new Galaxy(new Vector3f(0, 0, 0)), Vars.DEF_CAM_POS, Vars.DEF_CAM_ROT);
 	}
@@ -85,6 +89,10 @@ public class Game implements Serializable {
 		}
 	}
 
+	private void generateEmpires() {
+		empires = new ArrayList<>();
+	}
+	
 	public void update() {
 		if((System.currentTimeMillis() - time) > 2000) {
 			time = System.currentTimeMillis();
