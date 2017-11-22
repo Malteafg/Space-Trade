@@ -91,6 +91,28 @@ public class Game implements Serializable {
 
 	private void generateEmpires() {
 		empires = new ArrayList<>();
+		int amount = systems.size() / 3;
+		int range = 50;
+		
+		
+		for(int i = 0; i < amount; i++) {
+			SolarSystem system;
+			
+			do {
+				system = systems.get(systems.keySet().toArray()[(int) (Maths.random() * (systems.size() - 1))]);
+			} while(system.getEmpire() != null);
+			
+			empires.add(new Empire(system.getPlanets().get(system.getPlanets().keySet().toArray()[(int) (Maths.random() * system.getPlanets().size())])));
+			system.setEmpire(empires.get(i));
+			
+			for(int s = 0; s < systems.size(); s++) {
+				SolarSystem system2 = systems.get(systems.keySet().toArray()[s]);
+				
+				if(system2.getEmpire() == null) {
+					system2.setEmpire(system2.getStar().getPosition().subtract(system.getStar().getPosition()).length() * Maths.random() < range ? empires.get(i) : null);
+				}
+			}
+		}
 	}
 	
 	public void update() {
