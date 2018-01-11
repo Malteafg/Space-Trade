@@ -94,7 +94,6 @@ public class Game implements Serializable {
 		int amount = systems.size() / 3;
 		int range = 50;
 		
-		
 		for(int i = 0; i < amount; i++) {
 			SolarSystem system;
 			
@@ -153,6 +152,7 @@ public class Game implements Serializable {
 			if(selectedPlanet == null) {
 				selectedSystem = null;
 				camera.moveTo(new Galaxy(new Vector3f()), Vars.DEF_CAM_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
+				Interface.disablePanel("SystemInfo");
 			} else {
 				selectedPlanet = null;
 				selectedBuilding = null;
@@ -160,6 +160,7 @@ public class Game implements Serializable {
 				Interface.disablePanel("PlanetInfo");
 				Interface.disablePanel("BuildingStore");
 				Interface.disablePanel("BuildingInfo");
+				Interface.enablePanel("SystemInfo");
 			}
 		}
 	}
@@ -186,11 +187,13 @@ public class Game implements Serializable {
 			if(selectedSystem == null) {
 				selectedSystem = s.getSystem();
 				camera.moveTo(s, Vars.DEF_STAR_SCROLL, Vars.CAM_MOVETIME);
+				Interface.enablePanel("SystemInfo");
 			} else {
 				selectedPlanet = selectedSystem.getPlanets().get(s.getName());
 				camera.moveTo(s, Vars.DEF_PLANET_SCROLL, Vars.CAM_MOVETIME);
 				Interface.enablePanel("PlanetInfo");
 				Interface.enablePanel("BuildingStore");
+				Interface.disablePanel("SystemInfo");
 			}
 		}	
 	}
@@ -276,6 +279,10 @@ public class Game implements Serializable {
 
 	public void setSelectedBuilding(Building selectedBuilding) {
 		this.selectedBuilding = selectedBuilding;
+	}
+
+	public SolarSystem getSelectedSystem() {
+		return selectedSystem;
 	}
 	
 }
