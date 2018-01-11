@@ -24,6 +24,7 @@ import com.simaflux.spacetrade.objects.space.Planet;
 import com.simaflux.spacetrade.objects.space.SolarSystem;
 import com.simaflux.spacetrade.players.Player;
 import com.simaflux.spacetrade.players.User;
+import com.simaflux.spacetrade.relations.RelationManager;
 import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.Vars;
 import com.simaflux.spacetrade.utils.math.Matrix4f;
@@ -37,6 +38,7 @@ public class Game implements Serializable {
 	
 	public DateManager dm;
 	public Market market;
+	public RelationManager rm;
 	
 	public Camera camera;
 	
@@ -59,12 +61,14 @@ public class Game implements Serializable {
 		players[0] = new User("Bob Johnson");
 		
 		dm = new DateManager();
+		rm = new RelationManager();
 		
 		camera = new Camera();
 		
 		systems = new HashMap<>();
 		generateSystems(5, 25);
 		generateEmpires();
+		generateRelations();
 		
 		camera.moveTo(new Galaxy(new Vector3f(0, 0, 0)), Vars.DEF_CAM_POS, Vars.DEF_CAM_ROT);
 	}
@@ -112,6 +116,12 @@ public class Game implements Serializable {
 				}
 			}
 		}
+	}
+	
+	private void generateRelations() {
+		rm.createEmpireRelations(empires);
+		rm.createPlayerRelations(players);
+		rm.createPlayerEmpireRelations(players, empires);
 	}
 	
 	public void update() {

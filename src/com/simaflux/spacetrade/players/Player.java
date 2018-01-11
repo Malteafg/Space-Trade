@@ -14,6 +14,8 @@ import com.simaflux.spacetrade.objects.space.Planet;
 import com.simaflux.spacetrade.players.utils.PowerManager;
 import com.simaflux.spacetrade.players.utils.PowerManager.PlanetPower;
 import com.simaflux.spacetrade.players.utils.ResourceManager;
+import com.simaflux.spacetrade.relations.PlayerEmpireRelation;
+import com.simaflux.spacetrade.relations.PlayerRelation;
 import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.math.Vector3f;
 
@@ -31,6 +33,9 @@ public abstract class Player implements Serializable {
 
 	private Map<Planet, List<Building>> buildings;
 	
+	private List<PlayerRelation> playerRelations;
+	private List<PlayerEmpireRelation> empireRelations;
+	
 	public Player(String name) {
 		color = new Vector3f(Maths.random(), Maths.random(), Maths.random());
 		
@@ -40,6 +45,9 @@ public abstract class Player implements Serializable {
 		buildings = new HashMap<>();
 		
 		cash = 100000;
+
+		playerRelations = new ArrayList<>();
+		empireRelations = new ArrayList<>();
 	}
 	
 	public void tick() {
@@ -194,6 +202,14 @@ public abstract class Player implements Serializable {
 			return false;
 		}
 		return true;
+	}
+	
+	public void addEmpireRelation(PlayerEmpireRelation r) {
+		empireRelations.add(r);
+	}
+	
+	public void addPlayerRelation(PlayerRelation r) {
+		playerRelations.add(r);
 	}
 	
 }
