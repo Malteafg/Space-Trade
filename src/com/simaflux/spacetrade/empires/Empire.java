@@ -1,11 +1,14 @@
 package com.simaflux.spacetrade.empires;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.objects.space.Planet;
 import com.simaflux.spacetrade.objects.space.SolarSystem;
+import com.simaflux.spacetrade.players.Player;
 import com.simaflux.spacetrade.relations.EmpireRelation;
 import com.simaflux.spacetrade.relations.PlayerEmpireRelation;
 import com.simaflux.spacetrade.utils.Maths;
@@ -19,8 +22,8 @@ public class Empire {
 	private List<SolarSystem> systems;
 	private Planet capital;
 	
-	private List<EmpireRelation> empireRelations;
-	private List<PlayerEmpireRelation> playerRelations;
+	private Map<Empire, EmpireRelation> empireRelations;
+	private Map<Player, PlayerEmpireRelation> playerRelations;
 	
 	public Empire(Planet capital) {
 		this.capital = capital;
@@ -29,8 +32,8 @@ public class Empire {
 		
 		systems = new ArrayList<>();
 		
-		empireRelations = new ArrayList<>();
-		playerRelations = new ArrayList<>();
+		empireRelations = new HashMap<>();
+		playerRelations = new HashMap<>();
 	}
 	
 	public String getName() {
@@ -41,12 +44,20 @@ public class Empire {
 		return color;
 	}
 	
-	public void addEmpireRelation(EmpireRelation r) {
-		empireRelations.add(r);
+	public void addEmpireRelation(EmpireRelation r, Empire e) {
+		empireRelations.put(e, r);
 	}
 	
-	public void addPlayerRelation(PlayerEmpireRelation r) {
-		playerRelations.add(r);
+	public void addPlayerRelation(PlayerEmpireRelation r, Player p) {
+		playerRelations.put(p, r);
+	}
+	
+	public EmpireRelation getRelationshipWith(Empire e) {
+		return empireRelations.get(e);
+	}
+	
+	public PlayerEmpireRelation getRelationshipWith(Player p) {
+		return playerRelations.get(p);
 	}
 
 }

@@ -18,9 +18,9 @@ public class RelationManager {
 		for(int i = 0; i < players.length; i++) {
 			for(int j = i + 1; j < empires.size(); j++) {
 				PlayerEmpireRelation r = new PlayerEmpireRelation(players[i], empires.get(i));
-
-				players[i].addEmpireRelation(r);
-				empires.get(j).addPlayerRelation(r);
+				
+				players[i].addEmpireRelation(r, empires.get(j));
+				empires.get(j).addPlayerRelation(r, players[i]);
 				
 				relations.add(r);
 			}			
@@ -32,8 +32,8 @@ public class RelationManager {
 			for(int j = i + 1; j < players.length; j++) {
 				PlayerRelation r = new PlayerRelation(players[i], players[j]);
 				
-				players[i].addPlayerRelation(r);
-				players[j].addPlayerRelation(r);
+				players[i].addPlayerRelation(r, players[j]);
+				players[j].addPlayerRelation(r, players[i]);
 
 				relations.add(r);
 			}
@@ -45,8 +45,8 @@ public class RelationManager {
 			for(int j = i + 1; j < empires.size(); j++) {
 				EmpireRelation r = new EmpireRelation(empires.get(i), empires.get(j));
 				
-				empires.get(i).addEmpireRelation(r);
-				empires.get(j).addEmpireRelation(r);
+				empires.get(i).addEmpireRelation(r, empires.get(j));
+				empires.get(j).addEmpireRelation(r, empires.get(i));
 
 				relations.add(r);
 			}

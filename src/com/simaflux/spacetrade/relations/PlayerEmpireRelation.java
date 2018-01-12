@@ -9,6 +9,7 @@ public class PlayerEmpireRelation extends Relation {
 	private Empire empire;
 	
 	public PlayerEmpireRelation(Player player, Empire empire) {
+		super(player.getName());
 		this.player = player;
 		this.empire = empire;
 	}

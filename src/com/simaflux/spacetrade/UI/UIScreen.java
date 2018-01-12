@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.simaflux.spacetrade.UI.panels.BuildingInfo;
 import com.simaflux.spacetrade.UI.panels.BuildingStore;
+import com.simaflux.spacetrade.UI.panels.EmpirePanel;
 import com.simaflux.spacetrade.UI.panels.MainMenu;
 import com.simaflux.spacetrade.UI.panels.PauseMenu;
 import com.simaflux.spacetrade.UI.panels.PlanetInfo;
@@ -33,6 +34,8 @@ public class UIScreen extends UIComponent {
 		
 		panels.put("MainMenu", new MainMenu(this, true));
 		panels.put("PauseMenu", new PauseMenu(this, false));
+
+		panels.put("EmpirePanel", new EmpirePanel(this, false));
 	}
 	
 	public void enablePanel(String panel) {

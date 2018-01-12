@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.simaflux.spacetrade.empires.Empire;
 import com.simaflux.spacetrade.game.GameHandler;
 import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.resources.PlayerResource;
@@ -33,8 +34,8 @@ public abstract class Player implements Serializable {
 
 	private Map<Planet, List<Building>> buildings;
 	
-	private List<PlayerRelation> playerRelations;
-	private List<PlayerEmpireRelation> empireRelations;
+	private Map<Player, PlayerRelation> playerRelations;
+	private Map<Empire, PlayerEmpireRelation> empireRelations;
 	
 	public Player(String name) {
 		color = new Vector3f(Maths.random(), Maths.random(), Maths.random());
@@ -46,8 +47,8 @@ public abstract class Player implements Serializable {
 		
 		cash = 100000;
 
-		playerRelations = new ArrayList<>();
-		empireRelations = new ArrayList<>();
+		playerRelations = new HashMap<>();
+		empireRelations = new HashMap<>();
 	}
 	
 	public void tick() {
@@ -204,12 +205,20 @@ public abstract class Player implements Serializable {
 		return true;
 	}
 	
-	public void addEmpireRelation(PlayerEmpireRelation r) {
-		empireRelations.add(r);
+	public void addEmpireRelation(PlayerEmpireRelation r, Empire e) {
+		empireRelations.put(e, r);
 	}
 	
-	public void addPlayerRelation(PlayerRelation r) {
-		playerRelations.add(r);
+	public void addPlayerRelation(PlayerRelation r, Player p) {
+		playerRelations.put(p, r);
+	}
+	
+	public PlayerRelation getRelationshipWith(Player p) {
+		return playerRelations.get(p);
+	}
+	
+	public PlayerEmpireRelation getRelationshipWith(Empire e) {
+		return empireRelations.get(e);
 	}
 	
 }

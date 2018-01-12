@@ -295,4 +295,14 @@ public class Game implements Serializable {
 		return selectedSystem;
 	}
 	
+	public Empire getEmpire(String name) {
+		for(Empire e : empires) {
+			if(name.equals(e.getName())) return e;
+		}
+		
+		System.err.println(name + " not found");
+		
+		return null;
+	}
+	
 }

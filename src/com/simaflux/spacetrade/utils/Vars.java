@@ -82,4 +82,6 @@ public abstract class Vars {
 			STEEL_FACTORY = "Steel Factory", OIL_REFINERY = "Oil Refinery", ELECTRONICS_FACTORY = "Electronics Factory", COMPUTER_FACTORY = "Computer Factory", SPACESHIP_FACTORY = "Spaceship Factory", FUEL_FACTORY = "Fuel Factory", 
 			SOLAR_POWER_PLANT = "Solar Power Plant", OIL_POWER_PLANT = "Oil Power Plant", NUCLEAR_POWER_PLANT = "Nuclear Power Plant";
 	
+	// Opinion Modifiers
+	
 }
