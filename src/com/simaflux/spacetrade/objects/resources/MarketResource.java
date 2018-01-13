@@ -12,7 +12,7 @@ public class MarketResource implements Serializable {
 	private double price;
 	private double growthFactor;
 	
-	private int exportTo, importFrom;
+	private int inMarket, exportTo, importFrom;
 	
 	private ArrayList<Double> prices;
 	
@@ -31,6 +31,8 @@ public class MarketResource implements Serializable {
 	public void tick() {
 		prices.add(price);
 		
+		System.out.println(exportTo + " " + importFrom + " " + name);
+		
 		price *= growthFactor;
 	}
 	
@@ -42,11 +44,6 @@ public class MarketResource implements Serializable {
         return growthFactor;
     }
 	
-	public void add(int a) {
-		if(a > 0) exportTo += a;
-		if(a < 0) importFrom -= a;
-	}
-	
 	public String getName() {
 		return name;
 	}
@@ -55,4 +52,20 @@ public class MarketResource implements Serializable {
 		return prices;
 	}
 
+	public int getExportTo() {
+		return exportTo;
+	}
+
+	public void setExportTo(int exportTo) {
+		this.exportTo = exportTo;
+	}
+
+	public int getImportFrom() {
+		return importFrom;
+	}
+
+	public void setImportFrom(int importFrom) {
+		this.importFrom = importFrom;
+	}
+	
 }

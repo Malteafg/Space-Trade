@@ -36,14 +36,6 @@ public class Market implements Serializable {
         return getResource(tag).getGrowthFactor();
     }
 	
-	public void addQuantity(String tag, int a) {
-		for(MarketResource r : resources) {
-			if(r.getName().equals(tag)) {
-				r.add(a);
-			}
-		}
-	}
-	
 	public MarketResource getResource(String tag) {
 		for(MarketResource r : resources) {
 			if(r.getName().equals(tag)) {
