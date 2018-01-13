@@ -23,14 +23,12 @@ public class ResourceManager implements Serializable {
 	public void tick() {
 		for(PlayerResource r : resources) {
 			if(r.isExporting()) {
-				player.addCash(5 * GameHandler.game.market.getResource(r.getName()).getPrice());
-				GameHandler.game.market.getResource(r.getName()).add(5);
+				player.addCash(r.getDelta() * GameHandler.game.market.getResource(r.getName()).getPrice());
 				r.add(r.getDelta());
 			}
 			
 			if(r.isImporting()) {
-				player.addCash(-5 * GameHandler.game.market.getResource(r.getName()).getPrice());
-				GameHandler.game.market.getResource(r.getName()).add(-5);
+				player.addCash(-r.getDelta() * GameHandler.game.market.getResource(r.getName()).getPrice());
 				r.add(r.getDelta());
 			}
 		}

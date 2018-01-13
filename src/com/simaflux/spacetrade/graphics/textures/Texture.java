@@ -1,5 +1,7 @@
 package com.simaflux.spacetrade.graphics.textures;
 
+import static org.lwjgl.opengl.GL11.*;
+
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,8 +10,6 @@ import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 
 import javax.imageio.ImageIO;
-
-import static org.lwjgl.opengl.GL11.*;
 
 public class Texture {
 

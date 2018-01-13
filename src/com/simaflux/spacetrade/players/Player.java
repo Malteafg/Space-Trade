@@ -106,6 +106,16 @@ public abstract class Player implements Serializable {
 	 * Actions
 	 */
 	public final void setResourceState(String tag, int s, int a) {
+		if(rm.getResource(tag).getDelta() < 0) 
+			GameHandler.game.market.getResource(tag).setImportFrom(GameHandler.game.market.getResource(tag).getImportFrom() - rm.getResource(tag).getDelta()); 
+		else
+			GameHandler.game.market.getResource(tag).setExportTo(GameHandler.game.market.getResource(tag).getExportTo() - rm.getResource(tag).getDelta());
+		
+		if(s > 0) 
+			GameHandler.game.market.getResource(tag).setImportFrom(GameHandler.game.market.getResource(tag).getImportFrom() + a); 
+		else
+			GameHandler.game.market.getResource(tag).setExportTo(GameHandler.game.market.getResource(tag).getExportTo() + a);
+		
 		rm.getResource(tag).setResourceState(s, a);
 	}
 
