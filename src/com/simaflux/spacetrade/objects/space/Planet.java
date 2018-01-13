@@ -3,6 +3,7 @@ package com.simaflux.spacetrade.objects.space;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.simaflux.spacetrade.empires.Empire;
 import com.simaflux.spacetrade.objects.resources.StaticResource;
 import com.simaflux.spacetrade.objects.space.utils.ClaimManager;
 import com.simaflux.spacetrade.utils.Maths;
@@ -30,6 +31,8 @@ public class Planet extends AstronomicalObject {
 	
 	public ClaimManager cm;
 	
+	private Empire empire;
+	
 	public Planet(SolarSystem system, String name, Vector3f starPos, float starDist) {
 		super(system, name, new Vector3f(0, 0, 0), 1);
 		this.starDist = starDist;
@@ -40,6 +43,8 @@ public class Planet extends AstronomicalObject {
 		rotationNormal = rotationNormal.normalize();
 		
 		resources = new ArrayList<>();
+		
+		setEmpire(null);
 		
 		float typedice = Maths.random();
 		if(typedice > 0.9) {
@@ -180,6 +185,14 @@ public class Planet extends AstronomicalObject {
 
 	public int getSize() {
 		return size;
+	}
+
+	public Empire getEmpire() {
+		return empire;
+	}
+
+	public void setEmpire(Empire empire) {
+		this.empire = empire;
 	}
 
 }

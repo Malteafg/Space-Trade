@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.simaflux.spacetrade.empires.Empire;
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.math.Vector3f;
@@ -15,22 +14,19 @@ public class SolarSystem implements Serializable {
 
 	private Star star;
 	private Map<String, Planet> planets;
-	private Empire empire;
 
 	private String name;
 
-	public SolarSystem(String name, Vector3f starPos, float scale) {
+	public SolarSystem(String name, Vector3f starPos, float scale, int num) {
 		star = new Star(this, name, starPos, scale);
 		planets = new HashMap<>();
 
 		this.name = star.getName() + " System";
 
-		generatePlanets(starPos);
+		generatePlanets(starPos, num);
 	}
 
-	private void generatePlanets(Vector3f starPos) {
-		final int num = (int) (Math.pow(Maths.random(), 2) * 4 + 3);
-
+	private void generatePlanets(Vector3f starPos, int num) {
 		for (int i = 0; i < num; i++) {
 			String name = GameLoader.getName(GameLoader.planetNames);
 			planets.put(name, new Planet(this, name, star.getPosition(),
@@ -54,15 +50,6 @@ public class SolarSystem implements Serializable {
 
 	public String getName() {
 		return name;
-	}
-
-	public Empire getEmpire() {
-		return empire;
-	}
-	
-
-	public void setEmpire(Empire empire) {
-		this.empire = empire;
 	}
 
 }

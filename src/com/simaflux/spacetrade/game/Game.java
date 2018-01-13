@@ -6,9 +6,7 @@ import static org.lwjgl.opengl.GL30.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.simaflux.spacetrade.UI.Interface;
 import com.simaflux.spacetrade.empires.Empire;
@@ -19,7 +17,6 @@ import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.loader.Memory;
 import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.space.AstronomicalObject;
-import com.simaflux.spacetrade.objects.space.Galaxy;
 import com.simaflux.spacetrade.objects.space.Planet;
 import com.simaflux.spacetrade.objects.space.SolarSystem;
 import com.simaflux.spacetrade.players.Player;
@@ -42,8 +39,7 @@ public class Game implements Serializable {
 	
 	public Camera camera;
 	
-	private Map<String, SolarSystem> systems;
-	private SolarSystem selectedSystem;
+	private SolarSystem system;
 	private Planet selectedPlanet;
 	private Building selectedBuilding;
 	
@@ -65,56 +61,25 @@ public class Game implements Serializable {
 		
 		camera = new Camera();
 		
-		systems = new HashMap<>();
-		generateSystems(5, 25);
+		system = new SolarSystem(GameLoader.getName(GameLoader.starNames), new Vector3f(0, 0, 0), Maths.random() * 12 + 8, 8);
 		generateEmpires();
 		generateRelations();
 		
-		camera.moveTo(new Galaxy(new Vector3f(0, 0, 0)), Vars.DEF_CAM_POS, Vars.DEF_CAM_ROT);
-	}
-	
-	private void generateSystems(int arms, int stars) {
-		float a = 0.3f;
-		float f = 80;
-		int dist = 300;
-		int cDist = 300;
-		
-		for(int i = 0; i < stars / arms; i++) {
-			for(int s = 0; s < arms; s++) {
-				float angle = Maths.PI * 2.0f / arms * s + a * i;
-
-				String name = GameLoader.getName(GameLoader.starNames);
-				systems.put(name + " System", new SolarSystem(name, new Vector3f(
-						Maths.cos(angle) * (i * dist + cDist) + (Maths.random() * f - f / 2), 
-						Maths.random() * 200 - 100f,
-						Maths.sin(angle) * (i * dist + cDist) + (Maths.random() * f - f / 2)), 
-						Maths.random() * 12 + 8));
-			}
-		}
+		camera.moveTo(system.getStar(), Vars.DEF_CAM_POS, Vars.DEF_CAM_ROT);
 	}
 
 	private void generateEmpires() {
 		empires = new ArrayList<>();
-		int amount = systems.size() / 3;
-		int range = 50;
+		int amount = system.getPlanets().size() / 2;
 		
 		for(int i = 0; i < amount; i++) {
-			SolarSystem system;
+			Planet planet;
 			
 			do {
-				system = systems.get(systems.keySet().toArray()[(int) (Maths.random() * (systems.size() - 1))]);
-			} while(system.getEmpire() != null);
+				planet = system.getPlanets().get(system.getPlanets().keySet().toArray()[(int) (Maths.random() * (system.getPlanets().size() - 1))]);
+			} while(planet.getEmpire() != null);
 			
 			empires.add(new Empire(system.getPlanets().get(system.getPlanets().keySet().toArray()[(int) (Maths.random() * system.getPlanets().size())])));
-			system.setEmpire(empires.get(i));
-			
-			for(int s = 0; s < systems.size(); s++) {
-				SolarSystem system2 = systems.get(systems.keySet().toArray()[s]);
-				
-				if(system2.getEmpire() == null) {
-					system2.setEmpire(system2.getStar().getPosition().subtract(system.getStar().getPosition()).length() * Maths.random() < range ? empires.get(i) : null);
-				}
-			}
 		}
 	}
 	
@@ -130,12 +95,9 @@ public class Game implements Serializable {
 			
 			dm.tick();
 			
-			for(String system : systems.keySet()) {
-				SolarSystem s = systems.get(system);
-				for(String planet : s.getPlanets().keySet()) {
-					Planet p = s.getPlanets().get(planet);
-					p.tick();
-				}
+			for(String planet : system.getPlanets().keySet()) {
+				Planet p = system.getPlanets().get(planet);
+				p.tick();
 			}
 			
 			for(Player p : players) {
@@ -150,61 +112,37 @@ public class Game implements Serializable {
 		}
 		
 		camera.update();
-		MousePicker.update();	
+		MousePicker.update();
 		
-		for(String s : systems.keySet()) {
-			systems.get(s).update();
-		}
+		system.update();
 	}
 	
 	public void goBack() {
-		if(selectedSystem != null) {
-			if(selectedPlanet == null) {
-				selectedSystem = null;
-				camera.moveTo(new Galaxy(new Vector3f()), Vars.DEF_CAM_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
-				Interface.disablePanel("SystemInfo");
-			} else {
-				selectedPlanet = null;
-				selectedBuilding = null;
-				camera.moveTo(selectedSystem.getStar(), Vars.DEF_STAR_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
-				Interface.disablePanel("PlanetInfo");
-				Interface.disablePanel("BuildingStore");
-				Interface.disablePanel("BuildingInfo");
-				Interface.enablePanel("SystemInfo");
-			}
-		}
+		selectedPlanet = null;
+		selectedBuilding = null;
+		camera.moveTo(system.getStar(), Vars.DEF_STAR_SCROLL, (int) (Vars.CAM_MOVETIME * 0.9f));
+		Interface.disablePanel("PlanetInfo");
+		Interface.disablePanel("BuildingStore");
+		Interface.disablePanel("BuildingInfo");
 	}
 	
 	public void castRay() {
 		MousePicker.update();
 		List<AstronomicalObject> objects = new ArrayList<>();
 		
-		if(selectedSystem == null) {
-			for(String s : systems.keySet()) {
-				objects.add(systems.get(s).getStar());
-			}
-		} else {
-			if(selectedPlanet == null) {
-				for(String s : selectedSystem.getPlanets().keySet()) {
-					objects.add(selectedSystem.getPlanets().get(s));
-				}
+		if(selectedPlanet == null) {
+			for(String s : system.getPlanets().keySet()) {
+				objects.add(system.getPlanets().get(s));
 			}
 		}
 		
 		AstronomicalObject s = MousePicker.checkIntersection(objects, new Vector3f(camera.getPosition().x, camera.getPosition().y, camera.getPosition().z));
 		
 		if(s != null) {
-			if(selectedSystem == null) {
-				selectedSystem = s.getSystem();
-				camera.moveTo(s, Vars.DEF_STAR_SCROLL, Vars.CAM_MOVETIME);
-				Interface.enablePanel("SystemInfo");
-			} else {
-				selectedPlanet = selectedSystem.getPlanets().get(s.getName());
-				camera.moveTo(s, Vars.DEF_PLANET_SCROLL, Vars.CAM_MOVETIME);
-				Interface.enablePanel("PlanetInfo");
-				Interface.enablePanel("BuildingStore");
-				Interface.disablePanel("SystemInfo");
-			}
+			selectedPlanet = system.getPlanets().get(s.getName());
+			camera.moveTo(s, Vars.DEF_PLANET_SCROLL, Vars.CAM_MOVETIME);
+			Interface.enablePanel("PlanetInfo");
+			Interface.enablePanel("BuildingStore");
 		}	
 	}
 	
@@ -216,56 +154,49 @@ public class Game implements Serializable {
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(2);
 		
+		// star rendering
 		Memory.getShader("star").start();
 		Memory.getShader("star").loadUniformMat4f("viewMatrix", camera.getViewMatrix());
 		Memory.getShader("star").loadUniformVec3f("camPos", camera.getPosition());
-		
-		for(String s : systems.keySet()) {
-			SolarSystem system = systems.get(s);
-			Memory.getShader("star").loadUniformMat4f("transformationMatrix",
-					Matrix4f.translate(
-							system.getStar().getPosition().x, 
-							system.getStar().getPosition().y, 
-							system.getStar().getPosition().z)
-					.multiply(Matrix4f.rotate(system.getStar().getRotation().x, 1, 0, 0))
-					.multiply(Matrix4f.rotate(system.getStar().getRotation().y, 0, 1, 0))
-					.multiply(Matrix4f.rotate(system.getStar().getRotation().z, 0, 0, 1))
-					.multiply(Matrix4f.scale(system.getStar().getScale(), 
-							system.getStar().getScale(), 
-							system.getStar().getScale())));
-	
-			glDrawElements(GL_TRIANGLES, Memory.getModel("sphere").getVertexCount(), GL_UNSIGNED_INT, 0);
-		}
+		Memory.getShader("star").loadUniformMat4f("transformationMatrix",
+				Matrix4f.translate(
+						system.getStar().getPosition().x, 
+						system.getStar().getPosition().y, 
+						system.getStar().getPosition().z)
+				.multiply(Matrix4f.rotate(system.getStar().getRotation().x, 1, 0, 0))
+				.multiply(Matrix4f.rotate(system.getStar().getRotation().y, 0, 1, 0))
+				.multiply(Matrix4f.rotate(system.getStar().getRotation().z, 0, 0, 1))
+				.multiply(Matrix4f.scale(system.getStar().getScale(), 
+						system.getStar().getScale(), 
+						system.getStar().getScale())));
+
+		glDrawElements(GL_TRIANGLES, Memory.getModel("sphere").getVertexCount(), GL_UNSIGNED_INT, 0);
 		Memory.getShader("star").stop();
 
+		// planet rendering
 		Memory.getShader("planet").start();
 		Memory.getShader("planet").loadUniformMat4f("viewMatrix", camera.getViewMatrix());
+		Memory.getShader("planet").loadUniformVec3f("lightPos", system.getStar().getLight().getPosition());
+		Memory.getShader("planet").loadUniformVec3f("lightColor", system.getStar().getLight().getColor());
+		
+		for(String p : system.getPlanets().keySet()) {
+			Planet planet = system.getPlanets().get(p);
+			
+			Memory.getShader("planet").loadUniformMat4f("transformationMatrix",
+					Matrix4f.translate(
+							planet.getPosition().x, 
+							planet.getPosition().y, 
+							planet.getPosition().z)
+					.multiply(Matrix4f.rotate(planet.getRotation().x, 1, 0, 0))
+					.multiply(Matrix4f.rotate(planet.getRotation().y, 0, 1, 0))
+					.multiply(Matrix4f.rotate(planet.getRotation().z, 0, 0, 1))
+					.multiply(Matrix4f.scale(
+							planet.getScale(), 
+							planet.getScale(), 
+							planet.getScale())));
+			Memory.getShader("planet").loadUniformVec3f("color", planet.getColor());
 
-		for(String s : systems.keySet()) {
-			SolarSystem system = systems.get(s);
-			
-			Memory.getShader("planet").loadUniformVec3f("lightPos", system.getStar().getLight().getPosition());
-			Memory.getShader("planet").loadUniformVec3f("lightColor", system.getStar().getLight().getColor());
-			
-			for(String p : system.getPlanets().keySet()) {
-				Planet planet = system.getPlanets().get(p);
-				
-				Memory.getShader("planet").loadUniformMat4f("transformationMatrix",
-						Matrix4f.translate(
-								planet.getPosition().x, 
-								planet.getPosition().y, 
-								planet.getPosition().z)
-						.multiply(Matrix4f.rotate(planet.getRotation().x, 1, 0, 0))
-						.multiply(Matrix4f.rotate(planet.getRotation().y, 0, 1, 0))
-						.multiply(Matrix4f.rotate(planet.getRotation().z, 0, 0, 1))
-						.multiply(Matrix4f.scale(
-								planet.getScale(), 
-								planet.getScale(), 
-								planet.getScale())));
-				Memory.getShader("planet").loadUniformVec3f("color", planet.getColor());
-	
-				glDrawElements(GL_TRIANGLES, Memory.getModel("sphere").getVertexCount(), GL_UNSIGNED_INT, 0);
-			}
+			glDrawElements(GL_TRIANGLES, Memory.getModel("sphere").getVertexCount(), GL_UNSIGNED_INT, 0);
 		}
 		
 		glDisableVertexAttribArray(0);
@@ -289,10 +220,6 @@ public class Game implements Serializable {
 
 	public void setSelectedBuilding(Building selectedBuilding) {
 		this.selectedBuilding = selectedBuilding;
-	}
-
-	public SolarSystem getSelectedSystem() {
-		return selectedSystem;
 	}
 	
 	public Empire getEmpire(String name) {
