@@ -1,12 +1,14 @@
 package com.simaflux.spacetrade.game;
 
 import com.simaflux.spacetrade.UI.Interface;
+import com.simaflux.spacetrade.graphics.Skybox;
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.utils.FileHandler;
 
 public abstract class GameHandler {
 	
 	public static Game game = null;
+	private static final Skybox skybox = new Skybox();
 	
 	public static boolean paused;
 	
@@ -15,7 +17,11 @@ public abstract class GameHandler {
 	}
 	
 	public static void render() {
-		if(game != null) game.render();
+		if(game != null) {
+			game.render();
+			skybox.render(game.camera.getViewMatrix());
+		}
+		
 	}
 	
 	public static void pause() {
