@@ -219,9 +219,9 @@ public class Game implements Serializable {
 								pos.x, 
 								pos.y, 
 								pos.z)
-						.multiply(Matrix4f.rotate(b.getPosition().x, 1, 0, 0))
-						.multiply(Matrix4f.rotate(b.getPosition().y, 0, 1, 0))
-						.multiply(Matrix4f.rotate(b.getPosition().z, 0, 0, 1))
+						.multiply(Matrix4f.rotate(b.getRotation().x, 1, 0, 0))
+						.multiply(Matrix4f.rotate(b.getRotation().y, 0, 1, 0))
+						.multiply(Matrix4f.rotate(b.getRotation().z, 0, 0, 1))
 						.multiply(Matrix4f.scale(
 								1, 
 								1, 

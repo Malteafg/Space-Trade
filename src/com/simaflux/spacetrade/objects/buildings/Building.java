@@ -22,7 +22,7 @@ public class Building {
 
 	protected int power;
 	
-	protected Vector3f position;
+	protected Vector3f position, rotation;
 	
 	public Building(Player player, Planet planet, String name) {
 		this.name = name;
@@ -49,6 +49,9 @@ public class Building {
 		
 		position = new Vector3f(Maths.random(), Maths.random(), Maths.random());
 		position = position.normalize();
+		
+		rotation = new Vector3f(Maths.atan(position.y, position.z), Maths.atan(position.z, position.x) - Maths.PI / 2,0);
+		
 	}
 	
 	public void tick() {
@@ -124,6 +127,10 @@ public class Building {
 	
 	public Vector3f getPosition() {
 		return position;
+	}
+
+	public Vector3f getRotation() {
+		return rotation;
 	}
 
 }
