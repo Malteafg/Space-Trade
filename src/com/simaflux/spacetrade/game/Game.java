@@ -198,12 +198,45 @@ public class Game implements Serializable {
 
 			glDrawElements(GL_TRIANGLES, Memory.getModel("sphere").getVertexCount(), GL_UNSIGNED_INT, 0);
 		}
+
+		Memory.getShader("planet").stop();
+		
+		// building rendering
+		glBindVertexArray(Memory.getModel("factory").getVaoID());
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(2);
+		
+		Memory.getShader("building").start();
+		Memory.getShader("building").loadUniformMat4f("viewMatrix", camera.getViewMatrix());
+		Memory.getShader("building").loadUniformVec3f("lightPos", system.getStar().getLight().getPosition());
+		Memory.getShader("building").loadUniformVec3f("lightColor", system.getStar().getLight().getColor());
+		for(Player p : players) {
+			for(Building b : p.getAllBuildings()) {
+				Vector3f pos = b.getPlanet().getPosition().add(b.getPosition().scale(b.getPlanet().getScale()));
+				
+				Memory.getShader("planet").loadUniformMat4f("transformationMatrix",
+						Matrix4f.translate(
+								pos.x, 
+								pos.y, 
+								pos.z)
+						.multiply(Matrix4f.rotate(b.getPosition().x, 1, 0, 0))
+						.multiply(Matrix4f.rotate(b.getPosition().y, 0, 1, 0))
+						.multiply(Matrix4f.rotate(b.getPosition().z, 0, 0, 1))
+						.multiply(Matrix4f.scale(
+								1, 
+								1, 
+								1)));
+				Memory.getShader("building").loadUniformVec3f("color", new Vector3f(0.2f, 0.3f, 0.4f));
+
+				glDrawElements(GL_TRIANGLES, Memory.getModel("factory").getVertexCount(), GL_UNSIGNED_INT, 0);
+			}			
+		}
+
+		Memory.getShader("building").stop();
 		
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(2);
 		glBindVertexArray(0);
-
-		Memory.getShader("planet").stop();
 	}
 
 	public Planet getSelectedPlanet() {

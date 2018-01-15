@@ -26,6 +26,11 @@ public class Loader {
 		Memory.shaders.get("star").start();
 		Memory.shaders.get("star").loadUniformMat4f("projectionMatrix", Vars.perspectiveProjection);
 		Memory.shaders.get("star").stop();
+		
+		Memory.shaders.put("building", new Shader("building.vert", "building.frag", new int[] {0, 2}));
+		Memory.shaders.get("building").start();
+		Memory.shaders.get("building").loadUniformMat4f("projectionMatrix", Vars.perspectiveProjection);
+		Memory.shaders.get("building").stop();
 
 		Memory.shaders.put("font", new Shader("ui/font.vert", "ui/font.frag", new int[] {0, 1}));
 
@@ -33,7 +38,8 @@ public class Loader {
 	}
 	
 	public static void loadAllModels() {
-		OBJLoader.loadObjModel("sphere");
+		OBJLoader.loadObjModel("models", "sphere");
+		OBJLoader.loadObjModel("models", "factory");
 	}
 	
 	public static void loadAllTextures() {

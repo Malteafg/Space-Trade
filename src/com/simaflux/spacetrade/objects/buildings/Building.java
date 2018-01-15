@@ -4,6 +4,8 @@ import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.objects.resources.StaticResource;
 import com.simaflux.spacetrade.objects.space.Planet;
 import com.simaflux.spacetrade.players.Player;
+import com.simaflux.spacetrade.utils.Maths;
+import com.simaflux.spacetrade.utils.math.Vector3f;
 
 public class Building {
 	
@@ -19,6 +21,8 @@ public class Building {
 	protected boolean open, enoughPower, enoughResources;
 
 	protected int power;
+	
+	protected Vector3f position;
 	
 	public Building(Player player, Planet planet, String name) {
 		this.name = name;
@@ -42,6 +46,9 @@ public class Building {
 		power = t.getPower();
 		
 		level = 1;
+		
+		position = new Vector3f(Maths.random(), Maths.random(), Maths.random());
+		position = position.normalize();
 	}
 	
 	public void tick() {
@@ -113,6 +120,10 @@ public class Building {
 
 	public StaticResource[] getProduced() {
 		return produced;
+	}
+	
+	public Vector3f getPosition() {
+		return position;
 	}
 
 }

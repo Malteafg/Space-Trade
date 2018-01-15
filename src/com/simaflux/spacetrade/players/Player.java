@@ -190,6 +190,16 @@ public abstract class Player implements Serializable {
 		return buildings.get(planet);
 	}
 	
+	public final List<Building> getAllBuildings() {
+		List<Building> b = new ArrayList<>();
+		
+		for(Planet p : buildings.keySet()) {
+			b.addAll(getBuildings(p));
+		}
+		
+		return b;
+	}
+	
 	public final Building getBuilding(Planet planet, String name) {
 		Building r = null;
 		for(Building b : buildings.get(planet)) {

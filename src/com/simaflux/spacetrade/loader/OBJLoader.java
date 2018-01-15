@@ -101,10 +101,10 @@ public class OBJLoader {
         normalsArray[currentVertexPointer * 3 + 2] = currentNorm.z;
     }
     
-    public static void loadObjModel(String name) {
+    public static void loadObjModel(String folder, String name) {
         FileReader fr = null;
         try {
-            fr = new FileReader(new File("resources/" + name + ".obj"));
+            fr = new FileReader(new File("resources/" + folder + "/" + name + ".obj"));
         } catch(FileNotFoundException e) {
             System.err.println("Couldn't load file!");
             e.printStackTrace();
