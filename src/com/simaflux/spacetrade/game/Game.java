@@ -12,6 +12,7 @@ import com.simaflux.spacetrade.UI.Interface;
 import com.simaflux.spacetrade.empires.Empire;
 import com.simaflux.spacetrade.game.date.DateManager;
 import com.simaflux.spacetrade.graphics.Camera;
+import com.simaflux.spacetrade.graphics.Skybox;
 import com.simaflux.spacetrade.input.MousePicker;
 import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.loader.Memory;
@@ -47,6 +48,8 @@ public class Game implements Serializable {
 	
 	private List<Empire> empires;
 	
+	private Skybox skybox;
+	
 	public Game() {
 		market = new Market();
 		
@@ -66,6 +69,8 @@ public class Game implements Serializable {
 		generateRelations();
 		
 		camera.moveTo(system.getStar(), Vars.DEF_CAM_POS, Vars.DEF_CAM_ROT);
+		
+		skybox = new Skybox();
 	}
 
 	private void generateEmpires() {
@@ -237,6 +242,8 @@ public class Game implements Serializable {
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(2);
 		glBindVertexArray(0);
+		
+		skybox.render(camera.getViewMatrix());
 	}
 
 	public Planet getSelectedPlanet() {

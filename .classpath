@@ -11,5 +11,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="E:/Simaflux/libs/lwjgl-3.1.4"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="E:/Simaflux/libs/PNGDecoder.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -31,6 +31,11 @@ public class Loader {
 		Memory.shaders.get("building").start();
 		Memory.shaders.get("building").loadUniformMat4f("projectionMatrix", Vars.perspectiveProjection);
 		Memory.shaders.get("building").stop();
+		
+		Memory.shaders.put("skybox", new Shader("skybox.vert", "skybox.frag", new int[] {0}));
+		Memory.shaders.get("skybox").start();
+		Memory.shaders.get("skybox").loadUniformMat4f("projectionMatrix", Vars.perspectiveProjection);
+		Memory.shaders.get("skybox").stop();
 
 		Memory.shaders.put("font", new Shader("ui/font.vert", "ui/font.frag", new int[] {0, 1}));
 

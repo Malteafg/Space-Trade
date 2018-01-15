@@ -47,11 +47,10 @@ public class Building {
 		
 		level = 1;
 		
-		position = new Vector3f(Maths.random(), Maths.random(), Maths.random());
+		position = new Vector3f(0.5f - Maths.random(), 0.5f - Maths.random(), 0.5f - Maths.random());
 		position = position.normalize();
 		
-		rotation = new Vector3f(Maths.atan(position.y, position.z), Maths.atan(position.z, position.x) - Maths.PI / 2,0);
-		
+		rotation = new Vector3f(Maths.atan(position.y, position.z), Maths.atan(position.z, position.x), 0);
 	}
 	
 	public void tick() {
