@@ -1,4 +1,4 @@
-package com.simaflux.spacetrade.relations;
+package com.simaflux.spacetrade.relations.opinions;
 
 import java.util.HashMap;
 import java.util.Map;

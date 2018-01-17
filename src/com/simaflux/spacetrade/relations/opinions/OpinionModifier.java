@@ -1,4 +1,4 @@
-package com.simaflux.spacetrade.relations;
+package com.simaflux.spacetrade.relations.opinions;
 
 import com.simaflux.spacetrade.game.date.Date;
 

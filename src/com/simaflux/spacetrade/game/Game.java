@@ -78,8 +78,8 @@ public class Game implements Serializable {
 			do {
 				planet = system.getPlanets().get(system.getPlanets().keySet().toArray()[(int) (Maths.random() * (system.getPlanets().size() - 1))]);
 			} while(planet.getEmpire() != null);
-			
 			empires.add(new Empire(system.getPlanets().get(system.getPlanets().keySet().toArray()[(int) (Maths.random() * system.getPlanets().size())])));
+			planet.setEmpire(empires.get(empires.size() - 1));
 		}
 	}
 	

@@ -2,6 +2,9 @@ package com.simaflux.spacetrade.relations;
 
 import java.util.Map;
 
+import com.simaflux.spacetrade.relations.opinions.OpinionManager;
+import com.simaflux.spacetrade.relations.opinions.OpinionModifier;
+
 public abstract class Relation {
 	
 	protected OpinionManager om;

@@ -40,6 +40,7 @@ public class ResourceManager implements Serializable {
 				return r.getAmount();
 			}
 		}
+		System.err.println("Resource " + tag + " doesn't exist");
 		return -1;
 	}
 	

@@ -9,6 +9,7 @@ import com.simaflux.spacetrade.UI.components.AmountPicker;
 import com.simaflux.spacetrade.UI.components.Button;
 import com.simaflux.spacetrade.UI.components.Text;
 import com.simaflux.spacetrade.UI.containers.UIContainer;
+import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
 import com.simaflux.spacetrade.game.GameHandler;
 import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.utils.Vars;
@@ -25,6 +26,7 @@ public class PlanetInfo extends UIPanel {
 	private Text[] resources;
 	
 	private Button[] buildings;
+	private Button empire;
 	
 	public PlanetInfo(UIComponent parentComponent, boolean active) {
 		super(parentComponent, 5, 775, 450, 300, active);
@@ -67,6 +69,14 @@ public class PlanetInfo extends UIPanel {
 			};
 			buildings[i].addText(new Text(buildings[i], "", buildings[i].getSize().x / 2, 1, 14, Vars.SERIF, 1, true, true));
 		}
+		
+		empire = new Button(this, 370, 220, 70, 70, true) {
+			@Override
+			public void click() {
+				Interface.enablePanel("EmpirePanel");
+				Interface.sendMessage("EmpirePanel", GameHandler.game.getSelectedPlanet().getEmpire().getName());
+			}
+		};
 	}
 	
 	@Override
@@ -108,6 +118,10 @@ public class PlanetInfo extends UIPanel {
 		container.pack();
 		
 		initBuildingList();
+		
+		if(GameHandler.game.getSelectedPlanet().getEmpire() != null) {
+			empire.enable();
+		} else empire.disable();
 	}
 	
 	private void updateSize() {

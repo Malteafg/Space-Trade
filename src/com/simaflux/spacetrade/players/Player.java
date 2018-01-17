@@ -224,6 +224,10 @@ public abstract class Player implements Serializable {
 		}
 		return true;
 	}
+
+	public boolean hasResource(String name, int amount) {
+		return rm.getQuantity(name) >= amount;
+	}
 	
 	public void addEmpireRelation(PlayerEmpireRelation r, Empire e) {
 		empireRelations.put(e, r);
