@@ -1,31 +1,6 @@
-Anthrakian Empire
-Empire 1
-Empire 2
-Empire 3
-Empire 4
-Empire 5
-Empire 6
-Empire 7
-Empire 8
-Empire 9
-Empire 10
-Empire 11
-Empire 12
-Empire 13
-Empire 14
-Empire 15
-Empire 16
-Empire 17
-Empire 18
-Empire 19
-Empire 20
-Empire 21
-Empire 22
-Empire 23
-Empire 24
-Empire 25
-Empire 26
-Empire 27
-Empire 28
-Empire 29
-Empire 30
+1 Confederation
+1 Union
+Unified 0
+1 Empire
+Federation of 0
+United Nations of 0

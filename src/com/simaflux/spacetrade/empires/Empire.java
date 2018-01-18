@@ -3,7 +3,6 @@ package com.simaflux.spacetrade.empires;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.objects.space.Planet;
 import com.simaflux.spacetrade.players.Player;
 import com.simaflux.spacetrade.relations.EmpireRelation;
@@ -12,8 +11,6 @@ import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.math.Vector3f;
 
 public class Empire {
-	
-	private String name;
 	private Vector3f color;
 	
 	private Planet capital;
@@ -21,9 +18,12 @@ public class Empire {
 	private Map<Empire, EmpireRelation> empireRelations;
 	private Map<Player, PlayerEmpireRelation> playerRelations;
 	
-	public Empire(Planet capital) {
+	private EmpireName naming;
+	
+	public Empire(Planet capital, EmpireName naming) {
 		this.capital = capital;
-		name = GameLoader.getName(GameLoader.empireNames);
+		this.naming = naming;
+		
 		color = new Vector3f(Maths.random(), Maths.random(), Maths.random());
 		
 		empireRelations = new HashMap<>();
@@ -31,7 +31,7 @@ public class Empire {
 	}
 	
 	public String getName() {
-		return name;
+		return naming.getName();
 	}
 	
 	public Vector3f getColor() {
@@ -52,6 +52,18 @@ public class Empire {
 	
 	public PlayerEmpireRelation getRelationshipWith(Player p) {
 		return playerRelations.get(p);
+	}
+	
+	public Planet getCapital() {
+		return capital;
+	}
+	
+	public String getPeople() {
+		return naming.getPeople();
+	}
+	
+	public String getAdjective() {
+		return naming.getAdjective();
 	}
 
 }

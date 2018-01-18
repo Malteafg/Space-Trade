@@ -18,7 +18,6 @@ public class Market implements Serializable {
 	}
 	
 	public void tick() {
-		if(resources == null) System.out.println("r");
 		for(MarketResource r : resources) {
 			r.tick();
 		}

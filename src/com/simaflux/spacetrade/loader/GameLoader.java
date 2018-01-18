@@ -3,40 +3,15 @@ package com.simaflux.spacetrade.loader;
 import static com.simaflux.spacetrade.utils.Vars.*;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.simaflux.spacetrade.objects.buildings.BuildingTemplate;
 import com.simaflux.spacetrade.objects.resources.MarketResource;
 import com.simaflux.spacetrade.objects.resources.PlayerResource;
-import com.simaflux.spacetrade.utils.ArrayUtils;
 import com.simaflux.spacetrade.utils.FileHandler;
 
 public class GameLoader {
-	
-	/*
-	 * NAME LOADING
-	 */
-	public static ArrayList<String> planetNames;
-	public static ArrayList<String> starNames;
-	public static ArrayList<String> empireNames;
-	
-	public static void loadNames() {
-		planetNames = ArrayUtils.convertToArrayList(FileHandler.read(new File("data/names/planets.txt")));
-		starNames = ArrayUtils.convertToArrayList(FileHandler.read(new File("data/names/stars.txt")));
-		empireNames = ArrayUtils.convertToArrayList(FileHandler.read(new File("data/names/empires.txt")));
-	}
-	
-	public static String getName(ArrayList<String> s) {
-		String r = "";
-		
-		int p = (int) (Math.random() * s.size());
-		r = s.get(p);
-		s.remove(p);
-		
-		return r;
-	}
 	
 	/*
 	 * RESOURCE LOADING

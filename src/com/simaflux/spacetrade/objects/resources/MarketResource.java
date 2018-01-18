@@ -31,7 +31,7 @@ public class MarketResource implements Serializable {
 	public void tick() {
 		prices.add(price);
 		
-		System.out.println(exportTo + " " + importFrom + " " + name);
+//		System.out.println(exportTo + " " + importFrom + " " + name);
 		
 		price *= growthFactor;
 	}

@@ -10,7 +10,7 @@ import com.simaflux.spacetrade.utils.Vars;
 public class EmpirePanel extends UIPanel {
 	
 	private Empire empire;
-	private Text name;
+	private Text name, people;
 
 	public EmpirePanel(UIComponent parentComponent, boolean active) {
 		super(parentComponent, Vars.WIDTH / 4, Vars.HEIGHT / 4 - 100, Vars.WIDTH / 2, Vars.HEIGHT / 2 + 200, active);
@@ -19,7 +19,8 @@ public class EmpirePanel extends UIPanel {
 		
 		addCross(40);
 		
-		name = new Text(this, "", 10, 10, 50, Vars.SERIF, 1, false, true);
+		name = new Text(this, "", 10, 10, 40, Vars.SERIF, 1, false, true);
+		people = new Text(this, "People", 10, 70, 18, Vars.SERIF, 1, false, true);
 	}
 
 	@Override
@@ -31,6 +32,7 @@ public class EmpirePanel extends UIPanel {
 	public void receive(String message) {
 		empire = GameHandler.game.getEmpire(message);
 		name.text().setText(message);
+		people.text().setText("People: " + empire.getPeople());
 	}
 	
 }

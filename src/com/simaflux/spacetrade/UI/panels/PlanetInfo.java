@@ -9,7 +9,6 @@ import com.simaflux.spacetrade.UI.components.AmountPicker;
 import com.simaflux.spacetrade.UI.components.Button;
 import com.simaflux.spacetrade.UI.components.Text;
 import com.simaflux.spacetrade.UI.containers.UIContainer;
-import com.simaflux.spacetrade.UI.renderComponents.RenderBox;
 import com.simaflux.spacetrade.game.GameHandler;
 import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.utils.Vars;

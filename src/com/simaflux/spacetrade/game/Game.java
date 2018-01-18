@@ -13,7 +13,6 @@ import com.simaflux.spacetrade.empires.Empire;
 import com.simaflux.spacetrade.game.date.DateManager;
 import com.simaflux.spacetrade.graphics.Camera;
 import com.simaflux.spacetrade.input.MousePicker;
-import com.simaflux.spacetrade.loader.GameLoader;
 import com.simaflux.spacetrade.loader.Memory;
 import com.simaflux.spacetrade.objects.buildings.Building;
 import com.simaflux.spacetrade.objects.space.AstronomicalObject;
@@ -36,6 +35,7 @@ public class Game implements Serializable {
 	public DateManager dm;
 	public Market market;
 	public RelationManager rm;
+	public NameManager nm;
 	
 	public Camera camera;
 	
@@ -48,6 +48,9 @@ public class Game implements Serializable {
 	private List<Empire> empires;
 	
 	public Game() {
+		int empireNum = 7;
+		int planetNum = 10;
+		
 		market = new Market();
 		
 		time = System.currentTimeMillis();
@@ -58,27 +61,26 @@ public class Game implements Serializable {
 		
 		dm = new DateManager();
 		rm = new RelationManager();
+		nm = new NameManager(planetNum);
 		
 		camera = new Camera();
 		
-		system = new SolarSystem(GameLoader.getName(GameLoader.starNames), new Vector3f(0, 0, 0), Maths.random() * 12 + 8, 8);
-		generateEmpires();
+		system = new SolarSystem(nm.getStarName(), new Vector3f(0, 0, 0), Maths.random() * 12 + 8, planetNum, nm);
+		generateEmpires(empireNum);
 		generateRelations();
 		
 		camera.moveTo(system.getStar(), Vars.DEF_CAM_POS, Vars.DEF_CAM_ROT);
 	}
 
-	private void generateEmpires() {
+	private void generateEmpires(int amount) {
 		empires = new ArrayList<>();
-		int amount = system.getPlanets().size() / 2;
 		
 		for(int i = 0; i < amount; i++) {
 			Planet planet;
-			
 			do {
 				planet = system.getPlanets().get(system.getPlanets().keySet().toArray()[(int) (Maths.random() * (system.getPlanets().size() - 1))]);
 			} while(planet.getEmpire() != null);
-			empires.add(new Empire(system.getPlanets().get(system.getPlanets().keySet().toArray()[(int) (Maths.random() * system.getPlanets().size())])));
+			empires.add(new Empire(planet, nm.getEmpireNaming(nm.getEmpireName(planet.getName()))));
 			planet.setEmpire(empires.get(empires.size() - 1));
 		}
 	}
