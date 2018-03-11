@@ -59,7 +59,7 @@ public class Main implements Runnable {
 		
 		GL.createCapabilities();
 
-		// initting vars
+		// initializing vars
 		Vars.init();
 		
 		// setting graphics
@@ -135,10 +135,6 @@ public class Main implements Runnable {
 		GameHandler.render();
 		Interface.render();
 		
-//		int i = glfwGetError();
-//		if(i != GL_NO_ERROR) {
-//			System.out.println(i);
-//		}
 		glfwSwapBuffers(window);
 	}
 	
