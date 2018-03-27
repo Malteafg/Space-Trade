@@ -26,13 +26,15 @@ public class MarketResource implements Serializable {
 		prices.add(p);
 		
 		growthFactor = 1;
+		
+		exportTo = (int) (9950 + Math.random() * 100);
+		importFrom = (int) (9950 + Math.random() * 100);
 	}
 
 	public void tick() {
 		prices.add(price);
-		
-//		System.out.println(exportTo + " " + importFrom + " " + name);
-		
+		growthFactor = 1.0 * exportTo / importFrom;
+//		if(name.equals("Iron")) System.out.println(exportTo + " " + importFrom + " " + name + " " + price);
 		price *= growthFactor;
 	}
 	
