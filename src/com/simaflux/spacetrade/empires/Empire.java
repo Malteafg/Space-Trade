@@ -11,6 +11,7 @@ import com.simaflux.spacetrade.utils.Maths;
 import com.simaflux.spacetrade.utils.math.Vector3f;
 
 public class Empire {
+	
 	private Vector3f color;
 	
 	private Planet capital;

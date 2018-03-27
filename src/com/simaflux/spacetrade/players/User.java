@@ -8,9 +8,4 @@ public class User extends Player {
 		super(name);
 	}
 
-	@Override
-	public void tick() {
-		super.tick();
-	}
-
 }

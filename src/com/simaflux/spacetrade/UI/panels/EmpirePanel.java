@@ -30,6 +30,7 @@ public class EmpirePanel extends UIPanel {
 				
 			}
 		};
+		contract.addText(new Text(contract, "Contract", 5, 5, 20, Vars.SERIF, 1, false, true));
 	}
 
 	@Override
