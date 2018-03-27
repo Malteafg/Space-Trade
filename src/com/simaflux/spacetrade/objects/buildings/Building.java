@@ -50,7 +50,8 @@ public class Building {
 		position = new Vector3f(0.5f - Maths.random(), 0.5f - Maths.random(), 0.5f - Maths.random());
 		position = position.normalize();
 		
-		rotation = new Vector3f(Maths.atan(position.y, position.z), Maths.atan(position.z, position.x), 0);
+		rotation = new Vector3f(- Maths.atan(position.y, position.z) + Maths.PI / 2, 0, + Maths.atan(Maths.sqrt(Maths.pow(position.y, 2) + Maths.pow(position.z, 2)), position.x) - Maths.PI / 2);
+		
 	}
 	
 	public void tick() {

@@ -16,7 +16,6 @@ public class ResourceManager implements Serializable {
 	
 	public ResourceManager(Player player) {
 		this.player = player;
-		
 		resources = GameLoader.playerResources;
 	}
 	
