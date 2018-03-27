@@ -42,6 +42,23 @@ public class BuildingStore extends UIPanel {
 			container.addComponent(buildings.get(i), 0, i);
 		}
 	}
+
+	@Override
+	public void enable() {
+		super.enable();
+		setContainers();
+	}
+	
+	private void setContainers() {
+		for(int i = 0; i < buildings.size(); i++) {
+			if(GameHandler.game.getUser().hasBuildingOnPlanet(buildings.get(i).getName(), GameHandler.game.getSelectedPlanet())) {
+				buildings.get(i).disable();
+			} else {
+				buildings.get(i).enable();
+			}
+		}
+		container.pack();
+	}
 	
 	private class BuildingContainer extends UIContainer {
 		
@@ -97,6 +114,7 @@ public class BuildingStore extends UIPanel {
 					if(!locked) {
 						GameHandler.game.getUser().buyBuilding(bname, GameHandler.game.getSelectedPlanet());
 						Interface.sendMessage("PlanetInfo", "building");
+						setContainers();
 					}
 				}
 			};
@@ -150,6 +168,10 @@ public class BuildingStore extends UIPanel {
 			}
 			pack();
 			container.pack();
+		}
+
+		public String getName() {
+			return bname;
 		}
 		
 	}

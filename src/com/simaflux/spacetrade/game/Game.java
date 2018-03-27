@@ -145,6 +145,7 @@ public class Game implements Serializable {
 			camera.moveTo(s, Vars.DEF_PLANET_SCROLL, Vars.CAM_MOVETIME);
 			Interface.enablePanel("PlanetInfo");
 			Interface.enablePanel("BuildingStore");
+			
 		}	
 	}
 	

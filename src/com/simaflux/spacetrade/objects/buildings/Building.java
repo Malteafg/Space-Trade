@@ -42,7 +42,6 @@ public class Building {
 		}
 		
 		open = enoughPower = enoughResources = true;
-		
 		power = t.getPower();
 		
 		level = 1;
@@ -51,7 +50,6 @@ public class Building {
 		position = position.normalize();
 		
 		rotation = new Vector3f(- Maths.atan(position.y, position.z) + Maths.PI / 2, 0, + Maths.atan(Maths.sqrt(Maths.pow(position.y, 2) + Maths.pow(position.z, 2)), position.x) - Maths.PI / 2);
-		
 	}
 	
 	public void tick() {

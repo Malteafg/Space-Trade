@@ -143,6 +143,13 @@ public abstract class Player implements Serializable {
 	/*
 	 * Getters and setters
 	 */	
+	public final boolean hasBuildingOnPlanet(String building, Planet planet) {
+		if(buildings.containsKey(planet))
+			for(int i = 0; i < buildings.get(planet).size(); i++) 
+				if(buildings.get(planet).get(i).getName().equals(building)) return true;
+		return false;
+	}
+	
 	public final void addQuantity(String tag, int a) {
 		rm.addQuantity(tag, a);
 	}
