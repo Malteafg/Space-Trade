@@ -15,22 +15,22 @@ public class EmpirePanel extends UIPanel {
 	private Button contract;
 
 	public EmpirePanel(UIComponent parentComponent, boolean active) {
-		super(parentComponent, Vars.WIDTH / 4, Vars.HEIGHT / 4 - 100, Vars.WIDTH / 2, Vars.HEIGHT / 2 + 200, active);
+		super(parentComponent, 5, 40, 300, Vars.HEIGHT - 350, active);
 		
 		empire = null;
 		
 		addCross(40);
 		
-		name = new Text(this, "", 10, 10, 40, Vars.SERIF, 1, false, true);
-		people = new Text(this, "People", 10, 70, 18, Vars.SERIF, 1, false, true);
+		name = new Text(this, "", 10, 10, 20, Vars.SERIF, 1, false, true);
+		people = new Text(this, "People", 10, 70, 16, Vars.SERIF, 1, false, true);
 		
-		contract = new Button(this, this.pos.x - 200, 150, 180, 50, true) {
+		contract = new Button(this, 20, 150, 180, 50, true) {
 			@Override
 			public void click() {
 				
 			}
 		};
-		contract.addText(new Text(contract, "Contract", 5, 5, 20, Vars.SERIF, 1, false, true));
+		contract.addText(new Text(contract, "Propose Contract", 5, 5, 14, Vars.SERIF, 1, false, true));
 	}
 
 	@Override

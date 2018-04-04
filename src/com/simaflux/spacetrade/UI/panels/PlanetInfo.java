@@ -74,6 +74,7 @@ public class PlanetInfo extends UIPanel {
 			public void click() {
 				Interface.enablePanel("EmpirePanel");
 				Interface.sendMessage("EmpirePanel", GameHandler.game.getSelectedPlanet().getEmpire().getName());
+				Interface.disablePanel("ResourceTab");
 			}
 		};
 	}
