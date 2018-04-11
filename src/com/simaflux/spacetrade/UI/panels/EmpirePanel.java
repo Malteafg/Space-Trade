@@ -1,5 +1,6 @@
 package com.simaflux.spacetrade.UI.panels;
 
+import com.simaflux.spacetrade.UI.Interface;
 import com.simaflux.spacetrade.UI.UIComponent;
 import com.simaflux.spacetrade.UI.UIPanel;
 import com.simaflux.spacetrade.UI.components.Button;
@@ -18,8 +19,8 @@ public class EmpirePanel extends UIPanel {
 		super(parentComponent, 5, 40, 300, Vars.HEIGHT - 350, active);
 		
 		empire = null;
-		
-		addCross(40);
+		Runnable r;
+		addCross(40, () -> {Interface.enablePanel("ResourceTab");});
 		
 		name = new Text(this, "", 10, 10, 20, Vars.SERIF, 1, false, true);
 		people = new Text(this, "People", 10, 70, 16, Vars.SERIF, 1, false, true);

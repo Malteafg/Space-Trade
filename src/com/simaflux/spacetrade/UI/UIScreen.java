@@ -36,14 +36,6 @@ public class UIScreen extends UIComponent {
 		panels.put("EmpirePanel", new EmpirePanel(this, false));
 	}
 	
-	public void enablePanel(String panel) {
-		panels.get(panel).enable();
-	}
-	
-	public void disablePanel(String panel) {
-		panels.get(panel).disable();
-	}
-	
 	public UIPanel getPanel(String panel) {
 		return panels.get(panel);
 	}

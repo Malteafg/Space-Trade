@@ -14,11 +14,16 @@ public abstract class UIPanel extends UIComponent {
 	}
 	
 	protected void addCross(int s) {
+		addCross(s, null);
+	}
+	
+	protected void addCross(int s, Runnable r) {
 		UIPanel p = this;
 		Button b = new Button(p, this.size.x - s - 5, 5, s, s, true) {
 			@Override
 			public void click() {
 				Interface.disablePanel(p);
+				if(r != null) r.run();
 			}
 		};
 		b.addText(new Text(b, "X", s / 2, 0, s * 0.7f, Vars.SERIF, 1, true, true));

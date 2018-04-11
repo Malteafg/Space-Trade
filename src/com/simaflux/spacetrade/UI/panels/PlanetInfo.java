@@ -72,9 +72,9 @@ public class PlanetInfo extends UIPanel {
 		empire = new Button(this, 370, 220, 70, 70, true) {
 			@Override
 			public void click() {
+				Interface.disablePanel("ResourceTab");
 				Interface.enablePanel("EmpirePanel");
 				Interface.sendMessage("EmpirePanel", GameHandler.game.getSelectedPlanet().getEmpire().getName());
-				Interface.disablePanel("ResourceTab");
 			}
 		};
 	}
@@ -104,7 +104,7 @@ public class PlanetInfo extends UIPanel {
 	}
 	
 	@Override
-	public void enable() {
+	public void enable(Runnable r) {
 		super.enable();
 		
 		name.text().setText(GameHandler.game.getSelectedPlanet().getName() + " (" + GameHandler.game.getSelectedPlanet().getPlanetType() + ")");

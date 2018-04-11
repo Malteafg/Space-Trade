@@ -19,7 +19,7 @@ public class RenderBox extends RenderComponent {
 	}
 
 	public Vector4f getColor() {
-		if(darker) return new Vector4f(color.x * 0.6f, color.y * 0.6f, color.z * 0.6f, color.z);
+		if(darker) return new Vector4f(color.x * 0.6f, color.y * 0.6f, color.z * 0.6f, color.w);
 		return color;
 	}
 

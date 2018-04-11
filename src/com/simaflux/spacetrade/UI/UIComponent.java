@@ -42,6 +42,10 @@ public abstract class UIComponent {
 		return active;
 	}
 
+	public void enable(Runnable r) {
+		active = true;
+	}
+	
 	public void enable() {
 		active = true;
 	}

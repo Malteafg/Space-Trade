@@ -25,10 +25,10 @@ public abstract class Vars {
 	// Standard camera scroll
 	public static final float
 			DEF_CAM_SCROLL = 3000,
-			DEF_STAR_SCROLL = 250,
+			DEF_STAR_SCROLL = 500,
 			DEF_PLANET_SCROLL = 50,
 			MIN_SCROLL = 5f,
-			MAX_SCROLL = 30f;
+			MAX_SCROLL = 50f;
 	
 	// Standard camera positions
 	public static final Vector3f 

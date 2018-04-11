@@ -56,8 +56,11 @@ public class Game implements Serializable {
 		time = System.currentTimeMillis();
 		marketTime = System.currentTimeMillis();
 		
-		players = new Player[1];
+		players = new Player[4];
 		players[0] = new User("Bob Johnson");
+		players[1] = new User("Clyde Dover");
+		players[2] = new User("Russ Hanneman");
+		players[3] = new User("Tom Hanks");
 		
 		dm = new DateManager();
 		rm = new RelationManager();

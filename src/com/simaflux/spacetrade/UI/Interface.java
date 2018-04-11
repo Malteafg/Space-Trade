@@ -22,16 +22,24 @@ public abstract class Interface {
 		tm = new TooltipManager();
 	}
 
+	public static void enablePanel(String panel, Runnable r) {
+		screen.panels.get(panel).enable(r);
+	}
+
 	public static void enablePanel(String panel) {
-		screen.panels.get(panel).enable();
+		enablePanel(panel, null);
+	}
+
+	public static void enablePanel(UIPanel panel, Runnable r) {
+		for(String s : screen.panels.keySet()) {
+			if(screen.panels.get(s).equals(panel)) {
+				screen.panels.get(s).enable(r);
+			}
+		}
 	}
 
 	public static void enablePanel(UIPanel panel) {
-		for(String s : screen.panels.keySet()) {
-			if(screen.panels.get(s).equals(panel)) {
-				screen.panels.get(s).enable();
-			}
-		}
+		enablePanel(panel, null);
 	}
 
 	public static void disablePanel(String panel) {
